@@ -22,14 +22,7 @@ class Client_Controller extends Website_Controller {
 	public function search()
 	{
 		$term = $this->input->get('term');
-		$where = array('company_name' => $term,
-		               'contact_first_name' => $term,
-		               'contact_last_name' => $term,
-		               'mailing_city' => $term,
-		               'mailing_zip_code' => $term,
-		               'email_address' => $term);
-
-		$results = Auto_Modeler_ORM::factory('client')->fetch_some($where, 'company_name', 'ASC', 'or');
+		$results = Auto_Modeler_ORM::factory('client')->search($term);
 		$this->template->body = new View('client/search');
 		$this->template->body->results = $results;
 	}

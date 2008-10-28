@@ -1,4 +1,4 @@
-<h2>Add Client</h2>
+<h2>Edit Client</h2>
 <?=$errors?>
 <?=form::open()?>
 <ul>
@@ -12,6 +12,6 @@
 	<li><label for="email_address">Email Address:</label> <?=form::input('email_address', isset($email_address) ? $email_address : $client->email_address)?></li>
 	<li><label for="phone_number">Phone Number:</label> <?=form::input('phone_number', isset($phone_number) ? $phone_number : $client->phone_number)?></li>
 	<li><label for="tax_exempt">Tax Expemt:</label> <?=form::checkbox('tax_exempt', TRUE, isset($tax_exempt) ? $tax_exempt : $client->tax_exempt)?></li>
-	<li><?=form::submit('submit', 'Add New Client')?></li>
+	<li><?=form::submit('submit', 'Update This Client')?></li>
 </ul>
 <?form::close()?>

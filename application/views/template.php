@@ -15,8 +15,9 @@
 		<div id="header">
 			<ul id="nav">
 				<li><?=html::anchor('', 'Home')?></li>
-				<li><?=html::anchor('projects', 'Projects')?></li>
-				<li><?=html::anchor('invoices', 'Invoices')?></li>
+				<li><?=html::anchor('client', 'Clients')?></li>
+				<li><?=html::anchor('project', 'Projects')?></li>
+				<li><?=html::anchor('invoice', 'Invoices')?></li>
 				<li><?=html::anchor('user/logout', 'Logout')?></li>
 			</ul>
 		</div>
