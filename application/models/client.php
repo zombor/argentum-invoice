@@ -31,7 +31,7 @@ class Client_Model extends Auto_Modeler_ORM
 		if ($id != NULL)
 		{
 			// try and get a row with this ID
-			$data = $this->db->from($this->table_name)->orwhere(array('id' => $id, 'short_name' => $id))->result(FALSE);
+			$data = $this->db->from($this->table_name)->orwhere(array('id' => $id, 'short_name' => $id))->get()->result(FALSE);
 
 			// try and assign the data
 			if (count($data) == 1 AND $data = $data->current())
