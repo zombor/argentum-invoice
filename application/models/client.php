@@ -48,7 +48,7 @@ class Client_Model extends Auto_Modeler_ORM
 		$this->data['short_name'] = url::title($this->data['company_name']);
 		return parent::save($extra_data, $extra_validation_methods);
 	}
-	
+
 	public function search($term)
 	{
 		$like = array('company_name' => $term,
