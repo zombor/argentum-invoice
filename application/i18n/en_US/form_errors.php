@@ -8,3 +8,6 @@ $lang['email_address']['email'] = 'Email Address must be a valid email address';
 
 $lang['name']['required'] = 'Name is required';
 $lang['description']['required'] = 'Description is required';
+
+$lang['start_time']['required'] = 'Start Time is required';
+$lang['end_time']['required'] = 'End Time is required';
