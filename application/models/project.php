@@ -9,6 +9,10 @@ class Project_Model extends Auto_Modeler_ORM
 	                        'client_id' => '',
 	                        'notes' => '');
 
+	protected $rules = array('name' => array('required', 'standard_text'),
+	                         'client_id' => array('required', 'numeric'),
+	                         'notes' => array('standard_text'));
+
 	public function search($term)
 	{
 		$like = array('name' => $term,
