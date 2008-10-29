@@ -11,7 +11,7 @@ class Project_Model extends Auto_Modeler_ORM
 
 	protected $rules = array('name' => array('required', 'standard_text'),
 	                         'client_id' => array('required', 'numeric'),
-	                         'notes' => array('standard_text'));
+	                         'notes' => array());
 
 	public function search($term)
 	{
