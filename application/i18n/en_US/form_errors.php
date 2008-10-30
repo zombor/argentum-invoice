@@ -11,3 +11,9 @@ $lang['description']['required'] = 'Description is required';
 
 $lang['start_time']['required'] = 'Start Time is required';
 $lang['end_time']['required'] = 'End Time is required';
+
+$lang['quantity']['required'] = 'Quantity is required';
+$lang['quantity']['numeric'] = 'Quantity must be numeric';
+
+$lang['cost']['required'] = 'Cost is required';
+$lang['cost']['numeric'] = 'Cost must be numeric';

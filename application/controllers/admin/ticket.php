@@ -32,7 +32,7 @@ class Ticket_Controller extends Website_Controller {
 			}
 		}
 	}
-	
+
 	public function edit($id)
 	{
 		$ticket = new Ticket_Model($id);
