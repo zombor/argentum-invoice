@@ -6,5 +6,6 @@ class Non_hourly_Controller extends Website_Controller {
 	{
 		$this->template->body = new View('non_hourly/view_project');
 		$this->template->body->non_hourlies = Auto_Modeler_ORM::factory('non_hourly')->fetch_some(array('project_id' => $project_id));
+		$this->template->body->project = new Project_Model($project_id);
 	}
 }
