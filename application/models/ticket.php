@@ -13,7 +13,8 @@ class Ticket_Model extends Auto_Modeler_ORM
 	                        'complete' => FALSE,
 	                        'billable' => TRUE,
 	                        'invoiced' => FALSE,
-	                        'invoice_id' => NULL);
+	                        'invoice_id' => NULL,
+	                        'operation_type_id' => 1);
 
 	protected $rules = array('project_id' => array('required', 'numeric'),
 	                         'user_id' => array('required', 'numeric'),
