@@ -26,7 +26,7 @@
 	
 	<li>
 		<?=form::label('password', 'Password')?>
-		<?=form::password('password', $user->password)?>
+		<?=form::password('password')?>
 	</li>
 	
 	<li>

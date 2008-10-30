@@ -26,6 +26,7 @@ class User_Controller extends Website_Controller
 		if (request::method() == 'post')
 		{
 			$user->set_fields($this->input->post());
+			$user->password = $this->input->post('password');
 			$user->active = $this->input->post('active', FALSE);
 			try 
 			{
@@ -43,7 +44,7 @@ class User_Controller extends Website_Controller
 			}
 		}
 	}
-	
+
 	/**
 	 * Edit user
 	 * expects GET id as url param
@@ -69,6 +70,7 @@ class User_Controller extends Website_Controller
 		if (request::method() == 'post')
 		{
 			$user->set_fields($this->input->post());
+			$user->password = $this->input->post('password');
 			$user->active = $this->input->post('active', FALSE);
 
 			try

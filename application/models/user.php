@@ -5,15 +5,15 @@ class User_Model extends Auto_Modeler_ORM {
 	protected $table_name = 'users';
 
 	protected $data = array('id' => '',
-				'username' => '',
-				'password' => '',
-				'email' => '',
-				'last_login' => '',
-				'logins' => '');
+	                        'username' => '',
+	                        'password' => '',
+	                        'email' => '',
+	                        'last_login' => '',
+	                        'logins' => '');
 
 	protected $rules = array('username' => array('required'),
-				 'email' => array('required', 'email'));
-							 
+	                         'email' => array('required', 'email'));
+
 	protected $callbacks = array('username' => 'check_username');
 	
 	// Relationships
@@ -102,8 +102,6 @@ class User_Model extends Auto_Modeler_ORM {
 	{
 		if ( ! $this->data['id'] AND count($this->db->from('users')->where('username', $validation[$input])->get()))
 			$validation->add_error($input, 'duplicate_username');
-		else if (strlen($validation[$input]) < 8)
-			$validation->add_error($input, 'short_username');
 	}
 	
 	

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 29, 2008 at 10:09 PM
+-- Generation Time: Oct 30, 2008 at 07:13 PM
 -- Server version: 5.0.54
 -- PHP Version: 5.2.6-pl2-gentoo
 
@@ -19,6 +19,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `clients`
 --
 
+DROP TABLE IF EXISTS `clients`;
 CREATE TABLE IF NOT EXISTS `clients` (
   `id` mediumint(9) NOT NULL auto_increment,
   `company_name` varchar(75) NOT NULL,
@@ -36,12 +37,21 @@ CREATE TABLE IF NOT EXISTS `clients` (
   UNIQUE KEY `short_name` (`short_name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`id`, `company_name`, `short_name`, `contact_first_name`, `contact_last_name`, `mailing_address`, `mailing_city`, `mailing_state`, `mailing_zip_code`, `email_address`, `phone_number`, `tax_exempt`) VALUES
+(1, 'test', '', 'test', '', '', '', '', '', '', '', '\0'),
+(2, 'Image Management LLC', 'image-management-llc', 'Jeremy', 'Bush', '610 Main St\nSuite 200', '', '', '', 'jeremy@zombor.net', '', '0');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `invoices`
 --
 
+DROP TABLE IF EXISTS `invoices`;
 CREATE TABLE IF NOT EXISTS `invoices` (
   `id` mediumint(9) NOT NULL auto_increment,
   `title` varchar(100) NOT NULL,
@@ -52,12 +62,18 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   KEY `client_id` (`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `invoices`
+--
+
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `invoice_payments`
 --
 
+DROP TABLE IF EXISTS `invoice_payments`;
 CREATE TABLE IF NOT EXISTS `invoice_payments` (
   `id` mediumint(9) NOT NULL auto_increment,
   `invoice_id` mediumint(9) NOT NULL,
@@ -67,12 +83,18 @@ CREATE TABLE IF NOT EXISTS `invoice_payments` (
   KEY `invoice_id` (`invoice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `invoice_payments`
+--
+
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `non_hourly`
 --
 
+DROP TABLE IF EXISTS `non_hourly`;
 CREATE TABLE IF NOT EXISTS `non_hourly` (
   `id` mediumint(9) NOT NULL auto_increment,
   `project_id` mediumint(9) NOT NULL,
@@ -87,12 +109,20 @@ CREATE TABLE IF NOT EXISTS `non_hourly` (
   KEY `invoice_id` (`invoice_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
+--
+-- Dumping data for table `non_hourly`
+--
+
+INSERT INTO `non_hourly` (`id`, `project_id`, `quantity`, `description`, `cost`, `billed`, `invoice_id`, `creation_date`) VALUES
+(1, 2, 2, 'Hosting for two months', '11.49', '0', 0, 1225334860);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `operation_types`
 --
 
+DROP TABLE IF EXISTS `operation_types`;
 CREATE TABLE IF NOT EXISTS `operation_types` (
   `id` mediumint(9) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
@@ -100,12 +130,21 @@ CREATE TABLE IF NOT EXISTS `operation_types` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+--
+-- Dumping data for table `operation_types`
+--
+
+INSERT INTO `operation_types` (`id`, `name`, `rate`) VALUES
+(1, 'Project Management', '75.00'),
+(2, 'Programming', '85.00');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `projects`
 --
 
+DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` mediumint(9) NOT NULL auto_increment,
   `name` varchar(200) NOT NULL,
@@ -115,17 +154,34 @@ CREATE TABLE IF NOT EXISTS `projects` (
   KEY `client_id` (`client_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `name`, `client_id`, `notes`) VALUES
+(1, 'My First Project', 2, 'This is my first test project!!!'),
+(2, 'Test Project 2', 2, 'This is my second');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `roles`
 --
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` mediumint(9) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'Login'),
+(2, 'Admin');
 
 -- --------------------------------------------------------
 
@@ -133,6 +189,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 -- Table structure for table `sessions`
 --
 
+DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
   `session_id` varchar(127) NOT NULL,
   `last_activity` int(10) unsigned NOT NULL,
@@ -140,12 +197,18 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   PRIMARY KEY  (`session_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `sessions`
+--
+
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tickets`
 --
 
+DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE IF NOT EXISTS `tickets` (
   `id` mediumint(9) NOT NULL auto_increment,
   `user_id` mediumint(9) NOT NULL,
@@ -163,7 +226,12 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   KEY `project_id` (`project_id`),
   KEY `invoice_id` (`invoice_id`),
   KEY `operation_type_id` (`operation_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tickets`
+--
+
 
 -- --------------------------------------------------------
 
@@ -171,6 +239,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- Table structure for table `time`
 --
 
+DROP TABLE IF EXISTS `time`;
 CREATE TABLE IF NOT EXISTS `time` (
   `id` mediumint(9) NOT NULL auto_increment,
   `ticket_id` mediumint(9) NOT NULL,
@@ -178,7 +247,12 @@ CREATE TABLE IF NOT EXISTS `time` (
   `end_time` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `ticket_id` (`ticket_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `time`
+--
+
 
 -- --------------------------------------------------------
 
@@ -186,6 +260,7 @@ CREATE TABLE IF NOT EXISTS `time` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` mediumint(9) NOT NULL auto_increment,
   `username` varchar(50) NOT NULL,
@@ -195,7 +270,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `logins` mediumint(9) NOT NULL,
   `active` binary(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 PACK_KEYS=0 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 PACK_KEYS=0 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_login`, `logins`, `active`) VALUES
+(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', '', 0, 0, '1');
 
 -- --------------------------------------------------------
 
@@ -203,6 +285,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Table structure for table `users_roles`
 --
 
+DROP TABLE IF EXISTS `users_roles`;
 CREATE TABLE IF NOT EXISTS `users_roles` (
   `id` mediumint(9) NOT NULL auto_increment,
   `user_id` mediumint(9) NOT NULL,
@@ -210,7 +293,15 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`),
   KEY `role_id` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `users_roles`
+--
+
+INSERT INTO `users_roles` (`id`, `user_id`, `role_id`) VALUES
+(11, 1, 2),
+(12, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -218,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
 -- Table structure for table `user_tokens`
 --
 
+DROP TABLE IF EXISTS `user_tokens`;
 CREATE TABLE IF NOT EXISTS `user_tokens` (
   `id` mediumint(9) NOT NULL auto_increment,
   `user_id` mediumint(9) NOT NULL,
@@ -228,6 +320,11 @@ CREATE TABLE IF NOT EXISTS `user_tokens` (
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `user_tokens`
+--
+
 
 --
 -- Constraints for dumped tables
@@ -256,12 +353,6 @@ ALTER TABLE `non_hourly`
 --
 ALTER TABLE `projects`
   ADD CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`);
-
---
--- Constraints for table `roles`
---
-ALTER TABLE `roles`
-  ADD CONSTRAINT `roles_ibfk_1` FOREIGN KEY (`id`) REFERENCES `roles` (`id`);
 
 --
 -- Constraints for table `tickets`
