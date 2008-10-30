@@ -5,15 +5,17 @@ class User_Model extends Auto_Modeler_ORM {
 	protected $table_name = 'users';
 
 	protected $data = array('id' => '',
-	                        'username' => '',
-	                        'password' => '',
-	                        'email' => '',
-	                        'last_login' => '',
-	                        'logins' => '');
+				'username' => '',
+				'password' => '',
+				'email' => '',
+				'last_login' => '',
+				'logins' => '');
 
-	protected $rules = array('username' => 'required',
-	                         'email' => 'email');
-
+	protected $rules = array('username' => array('required'),
+				 'email' => array('required', 'email'));
+							 
+	protected $callbacks = array('username' => 'check_username');
+	
 	// Relationships
 	protected $has_many = array('tokens', 'roles');
 	protected $belongs_to = array();
@@ -85,11 +87,31 @@ class User_Model extends Auto_Modeler_ORM {
 	/**
 	 * Tests if a username exists in the database.
 	 *
-	 * @param   string   username to check
-	 * @return  bool
+	 * @param	string	 username to check
+	 * @return	bool
 	 */
 	public function username_exists($name)
 	{
 		return (bool) $this->db->where('username', $name)->count_records('users');
+	}
+	
+	/**
+	 * validation callback for checking uniqueness of username
+	 */
+	public function check_username(Validation $validation, $input)
+	{
+		if ( ! $this->data['id'] AND count($this->db->from('users')->where('username', $validation[$input])->get()))
+			$validation->add_error($input, 'duplicate_username');
+		else if (strlen($validation[$input]) < 8)
+			$validation->add_error($input, 'short_username');
+	}
+	
+	
+	/**
+	 * validation callback for checking roles
+	 */
+	protected function check_roles(Validation &$validation)
+	{
+		$validation->add_rules('role', 'required');
 	}
 } // End User_Model
