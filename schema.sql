@@ -3,14 +3,14 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 28, 2008 at 11:05 PM
+-- Generation Time: Oct 29, 2008 at 10:09 PM
 -- Server version: 5.0.54
 -- PHP Version: 5.2.6-pl2-gentoo
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Database: `argentum`
+-- Database: `invocing`
 --
 
 -- --------------------------------------------------------
@@ -19,7 +19,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `clients`
 --
 
-DROP TABLE IF EXISTS `clients`;
 CREATE TABLE IF NOT EXISTS `clients` (
   `id` mediumint(9) NOT NULL auto_increment,
   `company_name` varchar(75) NOT NULL,
@@ -43,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `clients` (
 -- Table structure for table `invoices`
 --
 
-DROP TABLE IF EXISTS `invoices`;
 CREATE TABLE IF NOT EXISTS `invoices` (
   `id` mediumint(9) NOT NULL auto_increment,
   `title` varchar(100) NOT NULL,
@@ -60,7 +58,6 @@ CREATE TABLE IF NOT EXISTS `invoices` (
 -- Table structure for table `invoice_payments`
 --
 
-DROP TABLE IF EXISTS `invoice_payments`;
 CREATE TABLE IF NOT EXISTS `invoice_payments` (
   `id` mediumint(9) NOT NULL auto_increment,
   `invoice_id` mediumint(9) NOT NULL,
@@ -76,16 +73,19 @@ CREATE TABLE IF NOT EXISTS `invoice_payments` (
 -- Table structure for table `non_hourly`
 --
 
-DROP TABLE IF EXISTS `non_hourly`;
 CREATE TABLE IF NOT EXISTS `non_hourly` (
   `id` mediumint(9) NOT NULL auto_increment,
   `project_id` mediumint(9) NOT NULL,
-  `amount` mediumint(9) NOT NULL,
+  `quantity` mediumint(9) NOT NULL,
   `description` text NOT NULL,
   `cost` decimal(10,2) NOT NULL,
+  `billed` binary(1) NOT NULL default '0',
+  `invoice_id` mediumint(9) NOT NULL,
+  `creation_date` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
-  KEY `project_id` (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `project_id` (`project_id`),
+  KEY `invoice_id` (`invoice_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,6 @@ CREATE TABLE IF NOT EXISTS `non_hourly` (
 -- Table structure for table `operation_types`
 --
 
-DROP TABLE IF EXISTS `operation_types`;
 CREATE TABLE IF NOT EXISTS `operation_types` (
   `id` mediumint(9) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
@@ -107,7 +106,6 @@ CREATE TABLE IF NOT EXISTS `operation_types` (
 -- Table structure for table `projects`
 --
 
-DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` mediumint(9) NOT NULL auto_increment,
   `name` varchar(200) NOT NULL,
@@ -123,7 +121,6 @@ CREATE TABLE IF NOT EXISTS `projects` (
 -- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` mediumint(9) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
@@ -136,7 +133,6 @@ CREATE TABLE IF NOT EXISTS `roles` (
 -- Table structure for table `sessions`
 --
 
-DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
   `session_id` varchar(127) NOT NULL,
   `last_activity` int(10) unsigned NOT NULL,
@@ -150,7 +146,6 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 -- Table structure for table `tickets`
 --
 
-DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE IF NOT EXISTS `tickets` (
   `id` mediumint(9) NOT NULL auto_increment,
   `user_id` mediumint(9) NOT NULL,
@@ -176,7 +171,6 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- Table structure for table `time`
 --
 
-DROP TABLE IF EXISTS `time`;
 CREATE TABLE IF NOT EXISTS `time` (
   `id` mediumint(9) NOT NULL auto_increment,
   `ticket_id` mediumint(9) NOT NULL,
@@ -184,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `time` (
   `end_time` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `ticket_id` (`ticket_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -192,7 +186,6 @@ CREATE TABLE IF NOT EXISTS `time` (
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` mediumint(9) NOT NULL auto_increment,
   `username` varchar(50) NOT NULL,
@@ -210,7 +203,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Table structure for table `users_roles`
 --
 
-DROP TABLE IF EXISTS `users_roles`;
 CREATE TABLE IF NOT EXISTS `users_roles` (
   `id` mediumint(9) NOT NULL auto_increment,
   `user_id` mediumint(9) NOT NULL,
@@ -226,7 +218,6 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
 -- Table structure for table `user_tokens`
 --
 
-DROP TABLE IF EXISTS `user_tokens`;
 CREATE TABLE IF NOT EXISTS `user_tokens` (
   `id` mediumint(9) NOT NULL auto_increment,
   `user_id` mediumint(9) NOT NULL,
