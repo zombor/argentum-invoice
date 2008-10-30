@@ -18,7 +18,7 @@
 			<td><?=$ticket->description?></td>
 			<td><?=$ticket->operation_type->name?></td>
 			<td><?=number_format($ticket->total_time, 2)?> Hours</td>
-			<td><?=html::anchor('admin/time/add/'.$ticket->id, html::image(array('src' => 'images/icons/plus.png', 'alt' => 'Add Time')))?> <?=html::anchor('admin/ticket/edit/'.$ticket->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Ticket')))?></td>
+			<td><?=html::anchor('admin/time/add/'.$ticket->id, html::image(array('src' => 'images/icons/time_add.png', 'alt' => 'Add Time')))?> <?=html::anchor('admin/ticket/edit/'.$ticket->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Ticket')))?></td>
 	</tr><?php endforeach;?>
 	</tbody>
 </table>
