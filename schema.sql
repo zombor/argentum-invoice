@@ -3,15 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 30, 2008 at 07:13 PM
+-- Generation Time: Oct 31, 2008 at 06:07 PM
 -- Server version: 5.0.54
 -- PHP Version: 5.2.6-pl2-gentoo
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
---
--- Database: `invocing`
---
 
 -- --------------------------------------------------------
 
@@ -43,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
 
 INSERT INTO `clients` (`id`, `company_name`, `short_name`, `contact_first_name`, `contact_last_name`, `mailing_address`, `mailing_city`, `mailing_state`, `mailing_zip_code`, `email_address`, `phone_number`, `tax_exempt`) VALUES
 (1, 'test', '', 'test', '', '', '', '', '', '', '', '\0'),
-(2, 'Image Management LLC', 'image-management-llc', 'Jeremy', 'Bush', '610 Main St\nSuite 200', '', '', '', 'jeremy@zombor.net', '', '0');
+(2, 'Image Management LLC', 'image-management-llc', 'Jeremy', 'Bush', '610 Main St\nSuite 200', 'Racine', 'WI', '53402', 'jeremy@zombor.net', '262-898-91', '0');
 
 -- --------------------------------------------------------
 
@@ -101,20 +97,18 @@ CREATE TABLE IF NOT EXISTS `non_hourly` (
   `quantity` mediumint(9) NOT NULL,
   `description` text NOT NULL,
   `cost` decimal(10,2) NOT NULL,
-  `billed` binary(1) NOT NULL default '0',
+  `invoiced` binary(1) NOT NULL default '0',
   `invoice_id` mediumint(9) NOT NULL,
   `creation_date` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`),
   KEY `invoice_id` (`invoice_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `non_hourly`
 --
 
-INSERT INTO `non_hourly` (`id`, `project_id`, `quantity`, `description`, `cost`, `billed`, `invoice_id`, `creation_date`) VALUES
-(1, 2, 2, 'Hosting for two months', '11.49', '0', 0, 1225334860);
 
 -- --------------------------------------------------------
 
@@ -150,17 +144,15 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `name` varchar(200) NOT NULL,
   `client_id` mediumint(9) NOT NULL,
   `notes` text NOT NULL,
+  `complete` binary(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`id`, `name`, `client_id`, `notes`) VALUES
-(1, 'My First Project', 2, 'This is my first test project!!!'),
-(2, 'Test Project 2', 2, 'This is my second');
 
 -- --------------------------------------------------------
 
@@ -277,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_login`, `logins`, `active`) VALUES
-(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'change@me.com', 0, 0, '1');
+(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1225494105, 4, '1');
 
 -- --------------------------------------------------------
 
