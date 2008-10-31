@@ -17,7 +17,7 @@
 			<td><?=date('m/d/Y', $ticket->creation_date)?></td>
 			<td><?=date('m/d/Y', $ticket->close_date)?></td>
 			<td><?=$ticket->description?></td>
-			<td></td>
+			<td><?=number_format($ticket->total_time, 2)?> Hours</td>
 			<td><?=html::anchor('admin/ticket/edit/'.$ticket->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Ticket')))?></td>
 	</tr><?php endforeach;?>
 	</tbody>
