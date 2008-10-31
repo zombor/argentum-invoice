@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_login`, `logins`, `active`) VALUES
-(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', '', 0, 0, '1');
+(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'change@me.com', 0, 0, '1');
 
 -- --------------------------------------------------------
 
