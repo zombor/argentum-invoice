@@ -9,7 +9,8 @@ class Non_hourly_Model extends Auto_Modeler_ORM
 	                        'quantity' => '',
 	                        'description' => '',
 	                        'cost' => '',
-	                        'billed' => FALSE,
+	                        'invoiced' => FALSE,
+	                        'invoice_id' => FALSE,
 	                        'creation_date' => '');
 
 	protected $rules = array('project_id' => array('required'),

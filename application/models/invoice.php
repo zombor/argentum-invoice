@@ -32,4 +32,24 @@ class Invoice_Model extends Auto_Modeler_ORM
 
 		return $total_paid;
 	}
+
+	public function find_operation_types()
+	{
+		if ( ! $this->data['id'])
+			return array('name' => '', 'rate' => 0, 'time' => 0);
+
+		$return = array();
+
+		foreach ($this->find_related('tickets') as $ticket)
+		{
+			if ( ! isset($return[$ticket->operation_type->id]))
+				$return[$ticket->operation_type->id] = array('name' => $ticket->operation_type->name,
+				                                             'rate' => $ticket->operation_type->rate,
+				                                             'time' => $ticket->total_time);
+			else
+				$return[$ticket->operation_type->id]['time']+=$ticket->total_time;
+		}
+
+		return $return;
+	}
 }

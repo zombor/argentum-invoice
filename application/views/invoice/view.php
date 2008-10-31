@@ -1,5 +1,5 @@
 <?php 
-	$total_cost = 0;
+	$subtotal = 0;
 ?>
 <h1>Invoice</h1>
 <p>Attn: <?=$invoice->client->contact_first_name?> <?=$invoice->client->contact_last_name?><br />
@@ -9,21 +9,29 @@
 <table>
 	<tbody>
 		<tr>
-			<th>Hours</th>
-			<th>Operation</th>
+			<th>Hours/Quantity</th>
+			<th>Operation/Description</th>
 			<th>Hourly Rate</th>
 			<th>Total Cost</th>
 		</tr>
-		<?php foreach ($invoice->find_related('tickets') as $ticket):?><tr>
-		<?php $total_cost+=($ticket->operation_type->rate*$ticket->total_time)?>
-			<td><?=number_format($ticket->total_time, 2)?></td>
-			<td><?=$ticket->operation_type->name?></td>
-			<td>$<?=number_format($ticket->operation_type->rate, 2)?></td>
-			<td>$<?=number_format($ticket->operation_type->rate*$ticket->total_time, 2)?></td>
+		<?php foreach ($invoice->find_operation_types() as $operation_type_id => $operation_type):?><tr>
+		<?php $subtotal+=($operation_type['rate']*$operation_type['time'])?>
+			<td><?=number_format($operation_type['time'], 2)?></td>
+			<td><?=$operation_type['name']?></td>
+			<td>$<?=number_format($operation_type['rate'], 2)?></td>
+			<td>$<?=number_format(($operation_type['rate']*$operation_type['time']), 2)?></td>
+		<?php endforeach;?></tr>
+		<?php foreach ($invoice->find_related('non_hourly') as $non_hourly):?><tr>
+		<?php $subtotal+=$non_hourly->cost?>
+			<td><?=$non_hourly->quantity?></td>
+			<td><?=$non_hourly->description?></td>
+			<td>N/A</td>
+			<td>$<?=number_format($non_hourly->cost, 2)?></td>
 		<?php endforeach;?></tr>
 		<tr>
-			<td colspan="3"></td>
-			<td>$<?=number_format($total_cost, 2)?></td>
+			<td colspan="2"></td>
+			<td>Subtotal</td>
+			<td>$<?=number_format($subtotal, 2)?></td>
 		</tr>
 	</tbody>
 </table>
