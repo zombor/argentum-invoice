@@ -1,4 +1,8 @@
 <h1>Invoices</h1>
+<ul>
+	<li><?=html::anchor('invoice/list_all', 'View All Invoices')?></li>
+</ul>
+
 <h2>Create Invoice</h2>
 <?=form::open('invoice/create', array('method' => 'get'))?>
 <p>Choose a client to create an invoice for:</p>

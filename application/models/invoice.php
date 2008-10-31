@@ -10,4 +10,26 @@ class Invoice_Model extends Auto_Modeler_ORM
 	                        'comments' => '',
 	                        'client_id' => '');
 
+	public function total_income()
+	{
+		if ( ! $this->data['id'])
+			return 0;
+
+		$total_income = 0;
+		// Find all the tickets and get the total cost of them
+		foreach ($this->find_related('tickets') as $ticket)
+			$total_income+=$ticket->operation_type->rate*$ticket->total_time;
+
+		return $total_income;
+	}
+
+	public function total_paid()
+	{
+		$total_paid = 0;
+
+		foreach (Auto_Modeler_ORM::factory('invoice_payment')->fetch_some(array('invoice_id' => $this->data['id'])) as $payment)
+			$total_paid+=$payment->amount;
+
+		return $total_paid;
+	}
 }

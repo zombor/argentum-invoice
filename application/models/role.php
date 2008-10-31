@@ -5,7 +5,7 @@ class Role_Model extends Auto_Modeler_ORM {
 	protected $table_name = 'roles';
 
 	protected $data = array('id' => '',
-				'name' => '');
+	                        'name' => '');
 
 	protected $belongs_to = array('users');
 

@@ -40,6 +40,12 @@ class Invoice_Controller extends Website_Controller {
 		}
 	}
 
+	public function list_all()
+	{
+		$this->template->body = new View('invoice/list_all');
+		$this->template->body->invoices = Auto_Modeler_ORM::factory('invoice')->fetch_all();
+	}
+
 	public function view($invoice_id)
 	{
 		$this->template->body = new View('invoice/view');
