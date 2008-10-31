@@ -1,5 +1,5 @@
 <h1>Create Invoice For <?=$client->company_name?></h1>
-<?=form::open('')?>
+<?=form::open('invoice/create')?>
 <?=form::hidden('client_id', $client->id)?>
 <h2>Invoice Comments:</h2>
 <p><?=form::textarea('comments')?></p>
@@ -19,7 +19,7 @@
 			<th colspan="7"><?=Auto_Modeler_ORM::factory('project', $project_id)->name?></th>
 		</tr>
 		<?php foreach ($tickets as $ticket):?><tr>
-			<td><?=form::checkbox('tickets['.$ticket->id.']', TRUE, TRUE)?></td>
+			<td><?=form::checkbox('tickets['.$ticket->id.']', $ticket->id, TRUE)?></td>
 			<td><?=$ticket->id?></td>
 			<td><?=$ticket->user->username?></td>
 			<td><?=$ticket->description?></td>
