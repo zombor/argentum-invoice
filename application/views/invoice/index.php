@@ -1,4 +1,4 @@
-<h1>Invoices</h1>
+<h2>Invoices</h2>
 <ul>
 	<li><?=html::anchor('invoice/list_all', 'View All Invoices')?></li>
 </ul>

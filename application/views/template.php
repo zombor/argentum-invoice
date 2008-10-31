@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="content-language" content="en" />
 		<title><?=$title?></title>
-		<?=html::stylesheet('css/layout')?>
+		<?=html::stylesheet('css/reset')?>
 		<?=html::stylesheet('css/style')?>
 
 		<?=html::script('js/jquery')?>
@@ -12,22 +12,30 @@
 		<?=html::script('js/effects')?>
 	</head>
 	<body>
-		<div id="header">
-			<ul id="nav">
-				<li><?=html::anchor('', 'Home')?></li>
-				<li><?=html::anchor('client', 'Clients')?></li>
-				<li><?=html::anchor('project', 'Projects')?></li>
-				<li><?=html::anchor('invoice', 'Invoices')?></li>
-				<li><?=html::anchor('admin/user/all', 'List All Users')?></li>
-				<li><?=html::anchor('user/logout', 'Logout')?></li>
-			</ul>
-		</div>
-		<div id="body">
-			<?=$body?>
-			<div style="clear: both; padding-top: 35px;"></div>
-		</div>
-		<div id="footer">
-			<div id="copyright">&copy; 2008 zombor.net</div>
+		<div id="wrapper">
+			<div id="header" class="clear">
+				<ul id="nav">
+					<li><?=html::anchor('', 'Home')?></li>
+					<li><?=html::anchor('client', 'Clients')?></li>
+					<li><?=html::anchor('project', 'Projects')?></li>
+					<li><?=html::anchor('invoice', 'Invoices')?></li>
+					<li><?=html::anchor('admin/user/all', 'Users')?></li>
+					<li class="small"><?=html::anchor('#', 'Settings')?></li>
+					<li class="small"><?=html::anchor('user/logout', 'Logout')?></li>
+				</ul>
+				<div id="quicksearch">
+				<?=form::open('client/search', array('method' => 'get'))?>
+					<p><?=form::input('term')?> <?=form::submit('submit', 'Search')?></p>
+				<?=form::close()?>
+				</div>
+			</div>
+			<div id="body">
+				<?=$body?>
+				<div style="clear: both; padding-top: 35px;"></div>
+			</div>
+			<div id="footer">
+				<div id="copyright">&copy; 2008 zombor.net</div>
+			</div>
 		</div>
 	</body>
 </html>

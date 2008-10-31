@@ -1,0 +1,13 @@
+body {  background: #4A5357; font: 14px 'Helvetica'; line-height: 1.5;}
+a, a:link, a:active { color: #2E98C4; text-decoration: none; border-bottom: 1px dotted #3A4145;}
+#wrapper { width: 960px; background: #FFF; padding: 20px; margin: 0 auto;}
+
+#header ul#nav {clear: both;}
+#header ul#nav li { float: left;  width: 100px;  text-align: left;}
+#header ul#nav li a { text-decoration: none; border: none; font-weight: bold; color: #3A4145;}
+#header ul#nav li.small { text-align: right; width: 70px;}
+#header ul#nav li.small a { font-size: 12px; color: #2E98C4;}
+#header #quicksearch { float: right;}
+#body { height: 400px; overflow: auto; margin-top: 1em;}
+
+h2 { font-size: 1.8em; border-bottom: 1px dotted #4A5357; color: #4A5357; margin-bottom: 1em;}
