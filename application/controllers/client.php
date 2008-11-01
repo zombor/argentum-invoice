@@ -6,13 +6,13 @@ class Client_Controller extends Website_Controller {
 	{
 		$this->template->body = new View('client/index');
 	}
-	
+
 	public function show_all()
 	{
 		$this->template->body = new View('client/show_all');
 		$this->template->body->clients = Auto_Modeler_ORM::factory('client')->fetch_all('company_name');
 	}
-	
+
 	public function view($short_name)
 	{
 		$this->template->body = new View('client/view');

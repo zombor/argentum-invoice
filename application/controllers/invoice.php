@@ -37,6 +37,7 @@ class Invoice_Controller extends Website_Controller {
 				$non_hourly->save();
 			}
 
+			// Redirect to the invoice
 			url::redirect('invoice/view/'.$invoice->id);
 		}
 		else
@@ -44,6 +45,8 @@ class Invoice_Controller extends Website_Controller {
 			$client = new Client_Model($this->input->get('client_id'));
 
 			$this->template->body = new View('invoice/create');
+
+			// Load all the unbill items for this client
 			$this->template->body->projects = Auto_Modeler_ORM::factory('project')->find_unbilled($client->id);
 			$this->template->body->client = $client;
 		}
@@ -58,8 +61,7 @@ class Invoice_Controller extends Website_Controller {
 	public function view($invoice_id)
 	{
 		$invoice = new Invoice_Model($invoice_id);
-		foreach ($invoice->find_related('non_hourly') as $non_hourly)
-		{}
+
 		$this->template->body = new View('invoice/view');
 		$this->template->body->invoice = new Invoice_Model($invoice_id);
 	}
