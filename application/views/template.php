@@ -24,8 +24,8 @@
 					<li class="small"><?=html::anchor('user/logout', 'Logout')?></li>
 				</ul>
 				<div id="quicksearch">
-				<?=form::open('client/search', array('method' => 'get'))?>
-					<p><?=form::input('term')?> <?=form::submit('submit', 'Search')?></p>
+				<?=form::open('project/search', array('method' => 'get'))?>
+					<p><?=form::input('term')?> <?=form::submit('submit', 'Search Projects')?></p>
 				<?=form::close()?>
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 				<div style="clear: both; padding-top: 35px;"></div>
 			</div>
 			<div id="footer">
-				<div id="copyright">&copy; 2008 zombor.net</div>
+				<div id="copyright">&copy; 2008 Argentum Team</div>
 			</div>
 		</div>
 	</body>
