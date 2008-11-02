@@ -7,9 +7,10 @@ class Client_Controller extends Website_Controller {
 		$client = new Client_Model();
 		if ( ! $_POST) // Display the form
 		{
-			$this->template->body = new View('admin/client/add');
+			$this->template->body = new View('admin/client/form');
 			$this->template->body->errors = '';
 			$this->template->body->client = $client;
+			$this->template->body->title = 'Add';
 		}
 		else
 		{
@@ -22,10 +23,10 @@ class Client_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/client/add');
+				$this->template->body = new View('admin/client/form');
 				$this->template->body->client = $client;
 				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
+				$this->template->body->title = 'Add';
 			}
 		}
 	}
@@ -35,9 +36,10 @@ class Client_Controller extends Website_Controller {
 		$client = new Client_Model($short_name);
 		if ( ! $_POST) // Display the form
 		{
-			$this->template->body = new View('admin/client/edit');
+			$this->template->body = new View('admin/client/form');
 			$this->template->body->errors = '';
 			$this->template->body->client = $client;
+			$this->template->body->title = 'Update';
 		}
 		else
 		{
@@ -51,10 +53,10 @@ class Client_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/client/edit');
+				$this->template->body = new View('admin/client/form');
 				$this->template->body->client = $client;
 				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
+				$this->template->body->title = 'Update';
 			}
 		}
 	}
