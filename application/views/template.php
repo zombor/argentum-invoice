@@ -21,6 +21,7 @@
 					<li><?=html::anchor('invoice', 'Invoices')?></li><?php if (Auth::instance()->logged_in('admin')):?>
 					<li><?=html::anchor('admin/user/all', 'Users')?></li>
 					<li><?=html::anchor('admin/operation_type/all', 'Operation Types')?></li><?php endif; ?>
+					<li class="small"><?=html::anchor('user/index', 'My Account')?></li>
 					<li class="small"><?=html::anchor('#', 'Settings')?></li>
 					<li class="small"><?=html::anchor('user/logout', 'Logout')?></li>
 				</ul>

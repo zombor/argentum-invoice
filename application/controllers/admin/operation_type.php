@@ -1,13 +1,27 @@
 <?php
 
+/*
+*  class:       Operation_type_Controller
+*  description: Provides application support for creating and editing operation types
+*/
 class Operation_type_Controller extends Website_Controller {
 
+	/*
+	*  function:     all
+	*  description:  Displays all operation types
+	*  parameters:   None expected.
+	*/
 	public function all()
 	{
 		$this->template->body = new View('admin/operation_type/all');
 		$this->template->body->operation_types = Auto_Modeler_ORM::factory('operation_type')->fetch_all('name');
 	}
 
+	/*
+	*  function:     add
+	*  description:  Creates a new Operation Type
+	*  parameters:   $_POST: Contains the post data to create the project
+	*/
 	public function add()
 	{
 		$operation_type = new Operation_type_Model();
@@ -36,7 +50,13 @@ class Operation_type_Controller extends Website_Controller {
 			}
 		}
 	}
-	
+
+	/*
+	*  function:     edit
+	*  description:  Updates an existing operation type
+	*  parameters:   $id: ID of the operation type to edit
+	                 $_POST: Contains the post data to create the project
+	*/
 	public function edit($id)
 	{
 		$operation_type = new Operation_type_Model($id);
@@ -65,7 +85,12 @@ class Operation_type_Controller extends Website_Controller {
 			}
 		}
 	}
-	
+
+	/*
+	*  function:     delete
+	*  description:  Deletes an operation type
+	*  parameters:   $_POST['id']: ID of the operation type to delete
+	*/
 	public function delete()
 	{
 		Auto_Modeler_ORM::factory('operation_type', $this->input->post('id'))->delete();

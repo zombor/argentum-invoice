@@ -1,5 +1,9 @@
 <?php
 
+/*
+*  class:       Invoice_Controller
+*  description: Provides application support for viewing invoices
+*/
 class Invoice_Controller extends Website_Controller {
 
 	public function index()
@@ -7,53 +11,13 @@ class Invoice_Controller extends Website_Controller {
 		$this->template->body = new View('invoice/index');
 	}
 
-	public function create()
-	{
-		if (request::method() == 'post' AND ($this->input->post('tickets')) OR $this->input->post('non_hourly'))
-		{
-			$invoice = new Invoice_Model();
-
-			// Save the new invoice
-			$invoice->comments = $this->input->post('comments');
-			$invoice->date = time();
-			$invoice->client_id = $this->input->post('client_id');
-			$invoice_id = $invoice->save();
-
-			// Assign all the tickets to this invoice
-			if ($this->input->post('tickets'))
-				foreach ($this->input->post('tickets') as $ticket_id)
-				{
-					$ticket = new Ticket_Model($ticket_id);
-					$ticket->invoiced = TRUE;
-					$ticket->invoice_id = $invoice->id;
-					$ticket->save();
-				}
-
-			// Assign all the tickets to this invoice
-			if ($this->input->post('non_hourly'))
-				foreach ($this->input->post('non_hourly') as $non_hourly_id)
-				{
-					$non_hourly = new Non_hourly_Model($non_hourly_id);
-					$non_hourly->invoiced = TRUE;
-					$non_hourly->invoice_id = $invoice->id;
-					$non_hourly->save();
-				}
-
-			// Redirect to the invoice
-			url::redirect('invoice/view/'.$invoice->id);
-		}
-		else
-		{
-			$client = new Client_Model($this->input->get('client_id'));
-
-			$this->template->body = new View('invoice/create');
-
-			// Load all the unbill items for this client
-			$this->template->body->projects = Auto_Modeler_ORM::factory('project')->find_unbilled($client->id);
-			$this->template->body->client = $client;
-		}
-	}
-
+	/*
+	*  function:     list_all
+	*  description:  Displays all invoices for a requested time period.
+	                 By default, it displays all invoices for the current year.
+	*  parameters:   $year:  Year to view
+	*                $month: Month to view
+	*/
 	public function list_all($year = NULL, $month = NULL)
 	{
 		if ($year == NULL AND $month == NULL)
@@ -68,6 +32,11 @@ class Invoice_Controller extends Website_Controller {
 		$this->template->body->invoices = Auto_Modeler_ORM::factory('invoice')->find_invoices_by_date($start_date, $end_date);
 	}
 
+	/*
+	*  function:     view
+	*  description:  Displays the requested invoice
+	*  parameters:   $invoice_id: The invoice id to view
+	*/
 	public function view($invoice_id = NULL)
 	{
 		$invoice = new Invoice_Model($invoice_id);

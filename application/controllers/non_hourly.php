@@ -1,7 +1,16 @@
 <?php
 
+/*
+*  class:       Non_hourly_Controller
+*  description: Provides application support for viewing non-hourly items for projects
+*/
 class Non_hourly_Controller extends Website_Controller {
 
+	/*
+	*  function:     view_project
+	*  description:  Displays all non-hourly items for a project
+	*  parameters:   $project_id: The project the view
+	*/
 	public function view_project($project_id)
 	{
 		$this->template->body = new View('non_hourly/view_project');

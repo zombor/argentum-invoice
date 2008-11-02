@@ -1,5 +1,9 @@
 <?php
 
+/*
+*  class:       Client_Controller
+*  description: Provides application support for viewing and searching for clients
+*/
 class Client_Controller extends Website_Controller {
 
 	public function index()
@@ -7,12 +11,22 @@ class Client_Controller extends Website_Controller {
 		$this->template->body = new View('client/index');
 	}
 
+	/*
+	*  function:     show_all
+	*  description:  Displays all the clients in the application
+	*  parameters:   None expected.
+	*/
 	public function show_all()
 	{
 		$this->template->body = new View('client/show_all');
 		$this->template->body->clients = Auto_Modeler_ORM::factory('client')->fetch_all('company_name');
 	}
 
+	/*
+	*  function:     view
+	*  description:  Displays the information for the requested client
+	*  parameters:   $short_name: The short name of the client to view
+	*/
 	public function view($short_name = NULL)
 	{
 		$client = new Client_Model($short_name);
@@ -24,6 +38,12 @@ class Client_Controller extends Website_Controller {
 		$this->template->body->client = $client;
 	}
 
+	/*
+	*  function:     search
+	*  description:  Searches for clients
+	*  parameters:   $_GET['term']: The search term to query the database with.
+	*                               Searches the company name, contact name and address.
+	*/
 	public function search()
 	{
 		$term = $this->input->get('term');

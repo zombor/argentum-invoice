@@ -1,7 +1,16 @@
 <?php
 
+/*
+*  class:       Time_Controller
+*  description: Provides application support for time including adding, editing and deleting
+*/
 class Time_Controller extends Website_Controller {
 
+	/*
+	*  function:     add
+	*  description:  Creates a new time netry
+	*  parameters:   $_POST: Contains the post data to create the time entry
+	*/
 	public function add($ticket_id)
 	{
 		$time = new Time_Model();
@@ -41,6 +50,11 @@ class Time_Controller extends Website_Controller {
 		}
 	}
 
+	/*
+	*  function:     delete
+	*  description:  Deletes an existing time entry
+	*  parameters:   $_POST['id']: ID of the time entry to delete
+	*/
 	public function delete()
 	{
 		$time = new Time_Model($this->input->post('id'));

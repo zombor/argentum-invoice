@@ -1,7 +1,16 @@
 <?php
 
+/*
+*  class:       Client_Controller
+*  description: Provides application support for adding and editing clients
+*/
 class Client_Controller extends Website_Controller {
 
+	/*
+	*  function:     add
+	*  description:  Creates a new client
+	*  parameters:   $_POST: Contains the post data to create the project
+	*/
 	public function add()
 	{
 		$client = new Client_Model();
@@ -30,7 +39,13 @@ class Client_Controller extends Website_Controller {
 			}
 		}
 	}
-	
+
+	/*
+	*  function:     edit
+	*  description:  Modifies an existing client
+	*  parameters:   $short_name: The name of the client to edit
+	*                $_POST: Contains the post data to create the project
+	*/
 	public function edit($short_name)
 	{
 		$client = new Client_Model($short_name);
@@ -60,7 +75,12 @@ class Client_Controller extends Website_Controller {
 			}
 		}
 	}
-	
+
+	/*
+	*  function:     delete
+	*  description:  Deletes a client.
+	*  parameters:   $_POST['id]: The ID of the client to delete.
+	*/
 	public function delete()
 	{
 		Auto_Modeler_ORM::factory('client', $this->input->post('id'))->delete();

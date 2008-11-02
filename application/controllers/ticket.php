@@ -1,7 +1,16 @@
 <?php
 
+/*
+*  class:       Ticket_Controller
+*  description: Provides application support for viewing tickets for projects
+*/
 class Ticket_Controller extends Website_Controller {
 
+	/*
+	*  function:     active
+	*  description:  Displays the active tickets for the requested project
+	*  parameters:   $project_id: The ID number of the project to view
+	*/
 	public function active($project_id)
 	{
 		$this->template->body = new View('ticket/active');
@@ -9,6 +18,11 @@ class Ticket_Controller extends Website_Controller {
 		$this->template->body->project = new Project_Model($project_id);
 	}
 
+	/*
+	*  function:     closed
+	*  description:  Displays the closed tickets for the requested project
+	*  parameters:   $project_id: The ID number of the project to view
+	*/
 	public function closed($project_id)
 	{
 		$this->template->body = new View('ticket/closed');
@@ -16,6 +30,11 @@ class Ticket_Controller extends Website_Controller {
 		$this->template->body->project = new Project_Model($project_id);
 	}
 
+	/*
+	*  function:     invoiced
+	*  description:  Displays the invoiced tickets for the requested project
+	*  parameters:   $project_id: The ID number of the project to view
+	*/
 	public function invoiced($project_id)
 	{
 		$this->template->body = new View('ticket/invoiced');

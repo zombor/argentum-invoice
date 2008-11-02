@@ -1,5 +1,9 @@
 <?php
 
+/*
+*  class:       User_Controller
+*  description: Provides application support for users inclusing adding, editing, and deleting
+*/
 class User_Controller extends Website_Controller
 {
 	/**

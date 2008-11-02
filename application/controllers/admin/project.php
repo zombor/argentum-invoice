@@ -1,7 +1,16 @@
 <?php
 
+/*
+*  class:       Project_Controller
+*  description: Provides application support for projects including adding, editing and deleting
+*/
 class Project_Controller extends Website_Controller {
 
+	/*
+	*  function:     add
+	*  description:  Creates a new project
+	*  parameters:   $_POST: Contains the post data to create the project
+	*/
 	public function add()
 	{
 		$project = new Project_Model();
@@ -39,7 +48,13 @@ class Project_Controller extends Website_Controller {
 			}
 		}
 	}
-	
+
+	/*
+	*  function:     edit
+	*  description:  Updates an existing project
+	*  parameters:   $id:    The ID of the project to update.
+	*                $_POST: Contains the post data to update with
+	*/
 	public function edit($id)
 	{
 		$project = new Project_Model($id);
@@ -77,7 +92,12 @@ class Project_Controller extends Website_Controller {
 			}
 		}
 	}
-	
+
+	/*
+	*  function:     delete
+	*  description:  Deletes an existing project
+	*  parameters:   $_POST['id']: ID of the project to delete
+	*/
 	public function delete()
 	{
 		Auto_Modeler_ORM::factory('project', $this->input->post('id'))->delete();
