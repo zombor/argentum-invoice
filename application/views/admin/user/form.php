@@ -13,7 +13,6 @@
 
 ?>
 
-
 <h2><?=$title?></h2>
 <?=$errors?>
 <?=form::open()?>
@@ -38,10 +37,9 @@
 		<fieldset>
 		<legend>User can:</legend>
 		<ul>
-			<? foreach ($roles as $role): ?>
+			<?php foreach ($roles as $role): ?>
 			<li>
-				<?=form::checkbox(array('id' => 'role_'.$role->name, 'name' => 'roles[]'), $role->id, 
-										in_array($role->id, $user_roles))?>
+				<?=form::checkbox(array('id' => 'role_'.$role->name, 'name' => 'roles[]'), $role->id, in_array($role->id, $user_roles))?>
 				<?=form::label('role_'.$role->name, $role->name)?>
 			</li>
 			<? endforeach; ?>

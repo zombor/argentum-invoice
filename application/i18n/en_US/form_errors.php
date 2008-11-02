@@ -6,6 +6,8 @@ $lang['contact_first_name']['standard_text'] = 'Contact First Name must be valid
 $lang['contact_last_name']['required'] = 'Contact Last Name is required';
 $lang['email_address']['required'] = 'Email Address is required';
 $lang['email_address']['email'] = 'Email Address must be a valid email address';
+$lang['email']['required'] = 'Email Address is required';
+$lang['email']['email'] = 'Email Address must be a valid email address';
 
 $lang['name']['required'] = 'Name is required';
 $lang['description']['required'] = 'Description is required';
