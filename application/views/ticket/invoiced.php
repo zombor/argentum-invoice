@@ -8,13 +8,15 @@
 			<th>Creation Date</th>
 			<th>Description</th>
 			<th>Total Time</th>
+			<th>Invoice ID</th>
 		</tr>
 		<?php foreach ($tickets as $ticket):?><tr>
 			<td><?=$ticket->id?></td>
 			<td><?=$ticket->user->username?></td>
 			<td><?=date('m/d/Y', $ticket->creation_date)?></td>
 			<td><?=$ticket->description?></td>
-			<td></td>
+			<td><?=number_format($ticket->total_time, 2)?> Hours</td>
+			<th><?=html::anchor('invoice/view/'.$ticket->invoice_id, $ticket->invoice_id)?>
 	</tr><?php endforeach;?>
 	</tbody>
 </table>

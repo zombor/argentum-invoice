@@ -11,3 +11,5 @@ a, a:link, a:active { color: #2E98C4; text-decoration: none; border-bottom: 1px 
 #body { height: 400px; overflow: auto; margin-top: 1em;}
 
 h2 { font-size: 1.8em; border-bottom: 1px dotted #4A5357; color: #4A5357; margin-bottom: 1em;}
+
+td, th { padding-left: 1.5em; padding-right: 1.5em; }
