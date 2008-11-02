@@ -13,10 +13,15 @@ class Client_Controller extends Website_Controller {
 		$this->template->body->clients = Auto_Modeler_ORM::factory('client')->fetch_all('company_name');
 	}
 
-	public function view($short_name)
+	public function view($short_name = NULL)
 	{
+		$client = new Client_Model($short_name);
+		
+		if ( ! $client->id)
+			Event::run('system.404');
+
 		$this->template->body = new View('client/view');
-		$this->template->body->client = new Client_Model($short_name);
+		$this->template->body->client = $client;
 	}
 
 	public function search()

@@ -58,9 +58,12 @@ class Invoice_Controller extends Website_Controller {
 		$this->template->body->invoices = Auto_Modeler_ORM::factory('invoice')->fetch_all();
 	}
 
-	public function view($invoice_id)
+	public function view($invoice_id = NULL)
 	{
 		$invoice = new Invoice_Model($invoice_id);
+
+		if ( ! $invoice->id)
+			Event::run('system.404');
 
 		$this->template->body = new View('invoice/view');
 		$this->template->body->invoice = new Invoice_Model($invoice_id);
