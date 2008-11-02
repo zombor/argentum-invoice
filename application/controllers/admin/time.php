@@ -20,6 +20,15 @@ class Time_Controller extends Website_Controller {
 			try
 			{
 				$time->save();
+
+				if ($this->input->post('ticket_complete'))
+				{
+					$ticket = new Ticket_Model($time->ticket_id);
+					$ticket->complete= TRUE;
+					$ticket->close_date = time();
+					$ticket->save();
+				}
+
 				url::redirect('ticket/'.($time->ticket->complete ? 'closed' : 'active').'/'.$time->ticket->project->id);
 			}
 			catch (Kohana_User_Exception $e)

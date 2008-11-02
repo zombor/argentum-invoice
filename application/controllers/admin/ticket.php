@@ -28,7 +28,6 @@ class Ticket_Controller extends Website_Controller {
 				$this->template->body = new View('admin/ticket/add');
 				$this->template->body->ticket = $ticket;
 				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
 			}
 		}
 	}
@@ -60,7 +59,6 @@ class Ticket_Controller extends Website_Controller {
 				$this->template->body = new View('admin/ticket/edit');
 				$this->template->body->ticket = $ticket;
 				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
 			}
 		}
 	}
