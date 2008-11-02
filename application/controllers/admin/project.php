@@ -7,9 +7,10 @@ class Project_Controller extends Website_Controller {
 		$project = new Project_Model();
 		if ( ! $_POST) // Display the form
 		{
-			$this->template->body = new View('admin/project/add');
+			$this->template->body = new View('admin/project/form');
 			$this->template->body->errors = '';
 			$this->template->body->project = $project;
+			$this->template->body->title = 'Add';
 		}
 		else
 		{
@@ -22,10 +23,10 @@ class Project_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/project/add');
+				$this->template->body = new View('admin/project/form');
 				$this->template->body->project = $project;
 				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
+				$this->template->body->title = 'Add';
 			}
 		}
 	}
@@ -35,9 +36,10 @@ class Project_Controller extends Website_Controller {
 		$project = new Project_Model($id);
 		if ( ! $_POST) // Display the form
 		{
-			$this->template->body = new View('admin/project/edit');
+			$this->template->body = new View('admin/project/form');
 			$this->template->body->errors = '';
 			$this->template->body->project = $project;
+			$this->template->body->title = 'Update';
 		}
 		else
 		{
@@ -50,10 +52,10 @@ class Project_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/project/edit');
+				$this->template->body = new View('admin/project/form');
 				$this->template->body->project = $project;
 				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
+				$this->template->body->title = 'Update';
 			}
 		}
 	}
