@@ -9,7 +9,7 @@ class Invoice_Controller extends Website_Controller {
 
 	public function create()
 	{
-		if (request::method() == 'post')
+		if (request::method() == 'post' AND ($this->input->post('tickets')) OR $this->input->post('non_hourly'))
 		{
 			$invoice = new Invoice_Model();
 
@@ -20,22 +20,24 @@ class Invoice_Controller extends Website_Controller {
 			$invoice_id = $invoice->save();
 
 			// Assign all the tickets to this invoice
-			foreach ($this->input->post('tickets') as $ticket_id)
-			{
-				$ticket = new Ticket_Model($ticket_id);
-				$ticket->invoiced = TRUE;
-				$ticket->invoice_id = $invoice->id;
-				$ticket->save();
-			}
+			if ($this->input->post('tickets'))
+				foreach ($this->input->post('tickets') as $ticket_id)
+				{
+					$ticket = new Ticket_Model($ticket_id);
+					$ticket->invoiced = TRUE;
+					$ticket->invoice_id = $invoice->id;
+					$ticket->save();
+				}
 
 			// Assign all the tickets to this invoice
-			foreach ($this->input->post('non_hourly') as $non_hourly_id)
-			{
-				$non_hourly = new Non_hourly_Model($non_hourly_id);
-				$non_hourly->invoiced = TRUE;
-				$non_hourly->invoice_id = $invoice->id;
-				$non_hourly->save();
-			}
+			if ($this->input->post('non_hourly'))
+				foreach ($this->input->post('non_hourly') as $non_hourly_id)
+				{
+					$non_hourly = new Non_hourly_Model($non_hourly_id);
+					$non_hourly->invoiced = TRUE;
+					$non_hourly->invoice_id = $invoice->id;
+					$non_hourly->save();
+				}
 
 			// Redirect to the invoice
 			url::redirect('invoice/view/'.$invoice->id);
