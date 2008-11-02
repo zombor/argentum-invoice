@@ -52,4 +52,10 @@ class Invoice_Model extends Auto_Modeler_ORM
 
 		return $return;
 	}
+
+	public function find_invoices_by_date($start_date, $end_date)
+	{
+		$sql = 'SELECT * FROM `invoices` WHERE `date` >= ? AND `date` < ? ORDER BY `id` DESC';
+		return $this->db->query($sql, array($start_date, $end_date))->result(TRUE, 'Invoice_Model');
+	}
 }
