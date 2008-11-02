@@ -18,8 +18,9 @@
 					<li><?=html::anchor('', 'Home')?></li>
 					<li><?=html::anchor('client', 'Clients')?></li>
 					<li><?=html::anchor('project', 'Projects')?></li>
-					<li><?=html::anchor('invoice', 'Invoices')?></li>
+					<li><?=html::anchor('invoice', 'Invoices')?></li><?php if ($_SESSION['auth_user']->has('role', 'admin')):?>
 					<li><?=html::anchor('admin/user/all', 'Users')?></li>
+					<li><?=html::anchor('admin/operation_type/all', 'Operation Types')?></li><?php endif; ?>
 					<li class="small"><?=html::anchor('#', 'Settings')?></li>
 					<li class="small"><?=html::anchor('user/logout', 'Logout')?></li>
 				</ul>

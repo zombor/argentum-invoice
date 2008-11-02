@@ -2,9 +2,9 @@
 
 class Operation_type_Controller extends Website_Controller {
 
-	public function view_all()
+	public function all()
 	{
-		$this->template->body = new View('admin/oepration_type/view_all');
+		$this->template->body = new View('admin/operation_type/all');
 		$this->template->body->operation_types = Auto_Modeler_ORM::factory('operation_type')->fetch_all('name');
 	}
 
@@ -25,7 +25,7 @@ class Operation_type_Controller extends Website_Controller {
 			try
 			{
 				$operation_type->save();
-				url::redirect('operation_type/view_all');
+				url::redirect('admin/operation_type/all');
 			}
 			catch (Kohana_User_Exception $e)
 			{
@@ -49,12 +49,12 @@ class Operation_type_Controller extends Website_Controller {
 		}
 		else
 		{
-			$client->set_fields($this->input->post());
+			$operation_type->set_fields($this->input->post());
 
 			try
 			{
 				$operation_type->save();
-				url::redirect('client/view_all');
+				url::redirect('admin/operation_type/all');
 			}
 			catch (Kohana_User_Exception $e)
 			{
