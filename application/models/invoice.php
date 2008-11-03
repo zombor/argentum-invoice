@@ -20,6 +20,11 @@ class Invoice_Model extends Auto_Modeler_ORM
 		foreach ($this->find_related('tickets') as $ticket)
 			$total_income+=$ticket->operation_type->rate*$ticket->total_time;
 
+		foreach ($this->find_related('non_hourly') as $non_hourly)
+			$total_income+=$non_hourly->cost;
+
+		$total_income+=$this->find_sales_tax();
+
 		return $total_income;
 	}
 
