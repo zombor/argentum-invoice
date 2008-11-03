@@ -20,8 +20,11 @@ table.invoice_list tr.total_row td { border-top: 1px dashed black; font-weight: 
 ul.submenu li a { display: block;}
 
 #project-list { margin-top: 1em;}
-#project-list li { line-height: 2em; background: #CDDEE0;}
-#project-list li .name { font-size: 11px; font-weight: bold; margin-left: 1em; width: 800px; display: inline-block;}
-#project-list li .task-count { width: 100px; font-size: 10px; margin-right: 1em; display: inline-block;}
-#project-list li .task-count strong { font-weight: bold;}
+#project-list li { font-size: 11px; line-height: 2.75em; background: #D3E2E4; border-top: 1px solid #84B1B6; border-bottom: 1px solid #84B1B6;}
+#project-list li:hover { background-color: #B1CED1;}
+
+#project-list li .client { text-transform: uppercase; color: #333; display: inline-block; width: 160px; margin-left: 1em;}
+#project-list li .name { font-size: 12px; font-weight: bold; width: 640px; display: inline-block;}
+#project-list li .task-count {  display: inline-block;}
+#project-list li .task-count strong { font-weight: bold; display: inline-block; width: 25px; text-align: right;}
 #project-list li a { border: none; color: #333;}
