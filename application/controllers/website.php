@@ -19,7 +19,11 @@ abstract class Website_Controller extends Template_Controller {
 		else
 		{
 			$this->template->title = 'ArgentumInvoice';
-			$this->profiler = new Profiler;
+			
+			if (IN_PRODUCTION === FALSE)
+			{
+				$this->profiler = new Profiler;
+			}
 		}
 
 		$this->session = new Session;
