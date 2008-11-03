@@ -64,7 +64,8 @@ class Project_Model extends Auto_Modeler_ORM
 			COUNT(tickets.id) AS active_tickets 
 		FROM projects
 		LEFT JOIN tickets ON tickets.project_id = projects.id 
-		      AND tickets.complete = 0' . $where;
+		      AND tickets.complete = 0'.$where.' 
+		GROUP BY projects.id';
 		
 		$result = $this->db->query($sql)->result();
 		return $result;
