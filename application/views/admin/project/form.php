@@ -5,6 +5,7 @@
 	<li><label for="name">Project Name:</label> <?=form::input('project[name]', $project->name)?></li>
 	<li><label for="client_id">Assigned Client:</label> <?=form::dropdown('project[client_id]', Auto_Modeler_ORM::factory('client')->select_list('id', 'company_name') + array('new' => 'New Client...'), $project->client_id)?></li>
 	<li><label for="notes">Project Notes:</label><br /><?=form::textarea(array('name' => 'project[notes]', 'value' => $project->notes))?></li>
+	<li><label for="taxable">Taxable</label><?=form::checkbox('taxable', TRUE, $project->taxable)?></li>
 	<li><?=form::submit('submit', $title.' Project')?></li>
 </ul>
 <div id="new_client">
@@ -19,7 +20,7 @@
 	<li><label for="mailing_zip_code">Mailing Zip Code:</label> <?=form::input('client[mailing_zip_code]', $client->mailing_zip_code)?></li>
 	<li><label for="email_address">Email Address:</label> <?=form::input('client[email_address]', $client->email_address)?></li>
 	<li><label for="phone_number">Phone Number:</label> <?=form::input('client[phone_number]', $client->phone_number)?></li>
-	<li><label for="tax_exempt">Tax Expemt:</label> <?=form::checkbox('client[tax_exempt]', TRUE, $client->tax_exempt)?></li>
+	<li><label for="tax_exempt">Tax Rate:</label> <?=form::input('client[tax_rate]',$client->tax_rate)?></li>
 </ul>
 </div>
 <?form::close()?>

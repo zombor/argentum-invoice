@@ -59,7 +59,6 @@ class Client_Controller extends Website_Controller {
 		else
 		{
 			$client->set_fields($this->input->post());
-			$client->tax_exempt = $this->input->post('tax_exempt', FALSE);
 
 			try
 			{

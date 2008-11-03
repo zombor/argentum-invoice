@@ -9,6 +9,6 @@
 	<li>Mailing Zip Code: <?=$client->mailing_zip_code?></li>
 	<li>Email Address: <?=$client->email_address?></li>
 	<li>Phone Number: <?=$client->phone_number?></li>
-	<li>Tax Exempt: <?=$client->tax_exempt?></li>
+	<li>Tax Rate: <?=$client->tax_rate?></li>
 </ul>
 <h2><?=html::anchor('admin/client/edit/'.$client->short_name, 'Edit This Client')?></h2>

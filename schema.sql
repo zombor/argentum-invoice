@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Nov 02, 2008 at 07:18 PM
+-- Generation Time: Nov 02, 2008 at 10:54 PM
 -- Server version: 5.0.45
 -- PHP Version: 5.2.6
 -- 
@@ -28,11 +28,11 @@ CREATE TABLE `clients` (
   `mailing_state` char(2) NOT NULL,
   `mailing_zip_code` char(5) NOT NULL,
   `email_address` varchar(75) NOT NULL,
-  `phone_number` char(10) NOT NULL,
-  `tax_exempt` binary(1) NOT NULL,
+  `phone_number` char(12) NOT NULL,
+  `tax_rate` decimal(5,2) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `short_name` (`short_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `clients`
@@ -74,7 +74,7 @@ CREATE TABLE `invoices` (
   `client_id` mediumint(9) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `invoices`
@@ -99,7 +99,7 @@ CREATE TABLE `non_hourly` (
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`),
   KEY `invoice_id` (`invoice_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `non_hourly`
@@ -141,9 +141,10 @@ CREATE TABLE `projects` (
   `client_id` mediumint(9) NOT NULL,
   `notes` text NOT NULL,
   `complete` binary(1) NOT NULL default '0',
+  `taxable` binary(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `projects`
@@ -212,7 +213,7 @@ CREATE TABLE `tickets` (
   KEY `project_id` (`project_id`),
   KEY `invoice_id` (`invoice_id`),
   KEY `operation_type_id` (`operation_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `tickets`
@@ -233,7 +234,7 @@ CREATE TABLE `time` (
   `end_time` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `ticket_id` (`ticket_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `time`
@@ -285,7 +286,7 @@ CREATE TABLE `users` (
 -- 
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_login`, `logins`, `active`) VALUES 
-(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1225668371, 29, 0x31),
+(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1225686671, 33, 0x31),
 (4, 'demo', '17e38db5f19f9f22cab501f47aef526870cff68ca3b15f7c44', 'test@test.com', 0, 0, 0x30);
 
 -- --------------------------------------------------------

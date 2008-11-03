@@ -8,7 +8,8 @@ class Project_Model extends Auto_Modeler_ORM
 	                        'name' => '',
 	                        'client_id' => '',
 	                        'notes' => '',
-	                        'complete' => FALSE);
+	                        'complete' => FALSE,
+	                        'taxable' => FALSE);
 
 	protected $rules = array('name' => array('required', 'standard_text'),
 	                         'client_id' => array('required', 'numeric'),

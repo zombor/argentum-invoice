@@ -14,14 +14,15 @@ class Client_Model extends Auto_Modeler_ORM
 	                        'mailing_zip_code' => '',
 	                        'email_address' => '',
 	                        'phone_number' => '',
-	                        'tax_exempt' => FALSE);
+	                        'tax_rate' => 0.0);
 
 	protected $rules = array('company_name' => array('required'),
 	                         'contact_first_name' => array('required', 'standard_text'),
 	                         'contact_last_name' => array('required'),
 	                         'email_address' => array('required', 'email'),
 	                         'phone_number' => array('phone'),
-	                         'mailing_zip_code' => array('numeric'));
+	                         'mailing_zip_code' => array('numeric'),
+	                         'tax_rate' => array('numeric'));
 
 	// Overloading constructor to load by a second column
 	public function __construct($id = NULL)
