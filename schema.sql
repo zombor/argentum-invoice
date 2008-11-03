@@ -346,10 +346,6 @@ ALTER TABLE `projects`
 -- Constraints for table `tickets`
 -- 
 ALTER TABLE `tickets`
-  ADD CONSTRAINT `tickets_ibfk_11` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`),
-ALTER TABLE `tickets`
-  ADD CONSTRAINT `tickets_ibfk_11` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`),  ADD CONSTRAINT `tickets_ibfk_10` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
-ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_11` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`),  ADD CONSTRAINT `tickets_ibfk_10` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,  ADD CONSTRAINT `tickets_ibfk_9` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 -- 
@@ -367,7 +363,5 @@ ALTER TABLE `user_tokens`
 -- 
 -- Constraints for table `users_roles`
 -- 
-ALTER TABLE `users_roles`
-  ADD CONSTRAINT `users_roles_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
 ALTER TABLE `users_roles`
   ADD CONSTRAINT `users_roles_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,  ADD CONSTRAINT `users_roles_ibfk_4` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
