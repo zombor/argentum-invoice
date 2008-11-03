@@ -27,7 +27,7 @@ class Project_Model extends Auto_Modeler_ORM
 		$projects = array('tickets' => array(),
 		                  'non_hourly' => array());
 
-		$sql = 'SELECT `tickets`.* FROM `tickets` LEFT JOIN `projects` ON `tickets`.`project_id` = `projects`.`id` WHERE `projects`.`client_id` = ? AND `projects`.`complete` = 0 AND `tickets`.`invoiced` = 0';
+		$sql = 'SELECT `tickets`.* FROM `tickets` LEFT JOIN `projects` ON `tickets`.`project_id` = `projects`.`id` WHERE `projects`.`client_id` = ? AND `projects`.`complete` = 0 AND `tickets`.`invoiced` = 0 AND `tickets`.`complete` = 1';
 
 		foreach ($this->db->query($sql, array($client_id))->result(TRUE, 'Ticket_Model') as $ticket)
 		{
