@@ -6,6 +6,7 @@ class Time_Model extends Auto_Modeler_ORM
 	
 	protected $data = array('id' => '',
 	                        'ticket_id' => '',
+	                        'user_id' => '',
 	                        'start_time' => '',
 	                        'end_time' => '');
 

@@ -115,7 +115,7 @@ class User_Model extends Auto_Modeler_ORM {
 
 	public function has_time($start_time)
 	{
-		$sql = 'SELECT `time`.* FROM `time` LEFT JOIN `tickets` ON `tickets`.`id` = `time`.`ticket_id` WHERE `tickets`.`user_id` = ? AND `time`.`start_time` < ? AND `time`.`end_time` > ?';
+		$sql = 'SELECT `time`.* FROM `time` WHERE `time`.`user_id` = ? AND `time`.`start_time` < ? AND `time`.`end_time` > ?';
 		$query = $this->db->query($sql, array($this->data['id'], $start_time, $start_time));
 		if (count($query))
 		{

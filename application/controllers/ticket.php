@@ -42,4 +42,14 @@ class Ticket_Controller extends Website_Controller {
 		$this->template->body->project = new Project_Model($project_id);
 	}
 
+	/*
+	*  function:     view
+	*  description:  Displays the details of the ticket, including time spent on ticket
+	*  parameters:   $id: The ID number of the ticket to view
+	*/
+	public function view($id)
+	{
+		$this->template->body = new View('ticket/view');
+		$this->template->body->ticket = new Ticket_Model($id);
+	}
 }
