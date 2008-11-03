@@ -49,4 +49,25 @@ class Project_Model extends Auto_Modeler_ORM
 
 		return $projects;
 	}
+	
+	/**
+	 * Retrieves a rowset of projects with ticket count
+	 *
+	 * @param boolean $include_completed  fetch completed projects
+	 */
+	public function projects_with_ticket_count($include_completed = FALSE) {
+		$where = ' WHERE 1 = 1 ';
+		if ($include_completed === FALSE) {
+			$where .= 'AND projects.complete = 0';
+		}
+		$sql = 'SELECT projects.*, 
+			COUNT(tickets.id) AS active_tickets 
+		FROM projects
+		LEFT JOIN tickets ON tickets.project_id = projects.id 
+		      AND tickets.complete = 0' . $where;
+		
+		$result = $this->db->query($sql)->result();
+		return $result;
+	}
+	
 }

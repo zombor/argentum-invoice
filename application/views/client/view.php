@@ -1,4 +1,4 @@
-<h1>View Client</h1>
+<h2>Client: <?=$client->company_name;?></h2>
 <ul>
 	<li>Company Name: <?=$client->company_name?></li>
 	<li>Contact First Name: <?=$client->contact_first_name?></li>

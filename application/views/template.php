@@ -31,9 +31,8 @@
 				<?=form::close()?>
 				</div>
 			</div>
-			<div id="body">
+			<div id="body" class="clear">
 				<?=$body?>
-				<div style="clear: both; padding-top: 35px;"></div>
 			</div>
 			<div id="footer">
 				<div id="copyright">&copy; 2008 Argentum Team</div>

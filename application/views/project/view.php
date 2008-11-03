@@ -1,4 +1,4 @@
-<h1>View Project</h1>
+<h2>Project: <?=$project->name?></h2>
 <?php include Kohana::find_file('views', 'project/menu')?>
 <ul>
 	<li>Project Name: <?=$project->name?></li>

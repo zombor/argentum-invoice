@@ -9,6 +9,9 @@ class Project_Controller extends Website_Controller {
 	public function index()
 	{
 		$this->template->body = new View('project/index');
+		$this->template->body->title = "Active Projects";
+		$this->template->body->project_list = new View('project/_list');
+		$this->template->body->project_list->projects = Auto_Modeler_ORM::factory('project')->projects_with_ticket_count();
 	}
 
 	/*
@@ -18,8 +21,10 @@ class Project_Controller extends Website_Controller {
 	*/
 	public function show_all()
 	{
-		$this->template->body = new View('project/show_all');
-		$this->template->body->projects = Auto_Modeler_ORM::factory('project')->fetch_all('name');
+		$this->template->body = new View('project/index');
+		$this->template->body->title = "All Projects";
+		$this->template->body->project_list = new View('project/_list');
+		$this->template->body->project_list->projects = Auto_Modeler_ORM::factory('project')->projects_with_ticket_count(TRUE);
 	}
 
 	/*
