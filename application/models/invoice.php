@@ -58,4 +58,17 @@ class Invoice_Model extends Auto_Modeler_ORM
 		$sql = 'SELECT * FROM `invoices` WHERE `date` >= ? AND `date` < ? ORDER BY `id` DESC';
 		return $this->db->query($sql, array($start_date, $end_date))->result(TRUE, 'Invoice_Model');
 	}
+
+	public function find_sales_tax()
+	{
+		$total = 0;
+
+		foreach ($this->find_related('tickets') as $ticket)
+		{
+			if ($ticket->project->taxable)
+				$total+=($ticket->project->client->tax_rate/100)*$ticket->total_time*$ticket->operation_type->rate;
+		}
+
+		return $total;
+	}
 }

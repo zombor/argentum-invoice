@@ -33,5 +33,15 @@
 			<td>Subtotal</td>
 			<td>$<?=number_format($subtotal, 2)?></td>
 		</tr>
+		<tr>
+			<td colspan="2"></td>
+			<td>Sales Tax</td>
+			<td>$<?=number_format($invoice->find_sales_tax(), 2)?></td>
+		</tr>
+		<tr>
+			<td colspan="2"></td>
+			<td>Grand Total</td>
+			<td>$<?=number_format($subtotal+$invoice->find_sales_tax(), 2)?></td>
+		</tr>
 	</tbody>
 </table>
