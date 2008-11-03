@@ -47,11 +47,15 @@ class User_Controller extends Website_Controller {
 	/*
 	*  function:     timesheet
 	*  description:  displays a user's timesheet for a specified time period
-	*  parameters:   $_POST['start_date']: unix time stamp of the start date
-	*                $_POST['end_date']:   unix time stamp of the end date
+	*  parameters:   $_GET['start_date']: array of start date data
+	*                $_GET['end_date']:   array of end date data
 	*/
 	public function timesheet()
 	{
-		
+		$_GET = $this->input->get();
+
+		$this->template->body = new View('user/timesheet');
+		$this->template->body->start_date = mktime(0, 0, 0, $_GET['start_date']['month'], $_GET['start_date']['day'], $_GET['start_date']['year']);
+		$this->template->body->end_date = mktime(0, 0, 0, $_GET['end_date']['month'], $_GET['end_date']['day'], $_GET['end_date']['year']);
 	}
 }
