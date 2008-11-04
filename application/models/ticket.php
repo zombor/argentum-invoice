@@ -31,8 +31,14 @@ class Ticket_Model extends Auto_Modeler_ORM
 			}
 			return $total;
 		}
-		else if ($key == 'user' AND $this->data['user_id'] == NULL)
-			return (object) array('id' => 0, 'username' => 'Unassigned');
+		else if ($key == 'user' AND $this->data['user_id'] == NULL) // Make the unassigned user
+		{
+			$user = new User_Model();
+			$user->id = 0;
+			$user->username = 'Unassigned';
+
+			return $user;
+		}
 		else
 			return parent::__get($key);
 	}
