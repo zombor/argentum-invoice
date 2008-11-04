@@ -11,7 +11,7 @@
 			<th>Invoice ID</th>
 		</tr>
 		<?php foreach ($tickets as $ticket):?><tr>
-			<td><?=$ticket->id?></td>
+			<td><?=html::anchor('ticket/view/'.$ticket->id, $ticket->id)?></td>
 			<td><?=$ticket->user->username?></td>
 			<td><?=date('m/d/Y', $ticket->creation_date)?></td>
 			<td><?=$ticket->description?></td>

@@ -5,7 +5,7 @@ class Ticket_Model extends Auto_Modeler_ORM
 	protected $table_name = 'tickets';
 	
 	protected $data = array('id' => '',
-	                        'user_id' => '',
+	                        'user_id' => NULL,
 	                        'project_id' => '',
 	                        'description' => '',
 	                        'creation_date' => '',
@@ -17,7 +17,6 @@ class Ticket_Model extends Auto_Modeler_ORM
 	                        'operation_type_id' => 1);
 
 	protected $rules = array('project_id' => array('required', 'numeric'),
-	                         'user_id' => array('required', 'numeric'),
 	                         'description' => array('required'),
 	                         'billable' => array('numeric'));
 
@@ -32,6 +31,8 @@ class Ticket_Model extends Auto_Modeler_ORM
 			}
 			return $total;
 		}
+		else if ($key == 'user' AND $this->data['user_id'] == NULL)
+			return (object) array('id' => 0, 'username' => 'Unassigned');
 		else
 			return parent::__get($key);
 	}

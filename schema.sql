@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Nov 02, 2008 at 10:54 PM
+-- Generation Time: Nov 03, 2008 at 06:56 PM
 -- Server version: 5.0.45
 -- PHP Version: 5.2.6
 -- 
@@ -32,7 +32,7 @@ CREATE TABLE `clients` (
   `tax_rate` decimal(5,2) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `short_name` (`short_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- 
 -- Dumping data for table `clients`
@@ -74,7 +74,7 @@ CREATE TABLE `invoices` (
   `client_id` mediumint(9) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- 
 -- Dumping data for table `invoices`
@@ -99,7 +99,7 @@ CREATE TABLE `non_hourly` (
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`),
   KEY `invoice_id` (`invoice_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- 
 -- Dumping data for table `non_hourly`
@@ -126,7 +126,7 @@ CREATE TABLE `operation_types` (
 INSERT INTO `operation_types` (`id`, `name`, `rate`) VALUES 
 (1, 'Project Management', 75.00),
 (2, 'Programming', 85.00),
-(3, 'Website Design', 80.00);
+(3, 'Design', 80.00);
 
 -- --------------------------------------------------------
 
@@ -144,7 +144,7 @@ CREATE TABLE `projects` (
   `taxable` binary(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- 
 -- Dumping data for table `projects`
@@ -198,7 +198,7 @@ CREATE TABLE `sessions` (
 DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `id` mediumint(9) NOT NULL auto_increment,
-  `user_id` mediumint(9) NOT NULL,
+  `user_id` mediumint(9) default NULL,
   `project_id` mediumint(9) NOT NULL,
   `description` text NOT NULL,
   `creation_date` int(11) NOT NULL,
@@ -213,7 +213,7 @@ CREATE TABLE `tickets` (
   KEY `project_id` (`project_id`),
   KEY `invoice_id` (`invoice_id`),
   KEY `operation_type_id` (`operation_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 -- 
 -- Dumping data for table `tickets`
@@ -234,7 +234,7 @@ CREATE TABLE `time` (
   `end_time` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `ticket_id` (`ticket_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- 
 -- Dumping data for table `time`
@@ -286,7 +286,7 @@ CREATE TABLE `users` (
 -- 
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_login`, `logins`, `active`) VALUES 
-(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1225686671, 33, 0x31),
+(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1225759701, 59, 0x31),
 (4, 'demo', '17e38db5f19f9f22cab501f47aef526870cff68ca3b15f7c44', 'test@test.com', 0, 0, 0x30);
 
 -- --------------------------------------------------------
@@ -346,7 +346,7 @@ ALTER TABLE `projects`
 -- Constraints for table `tickets`
 -- 
 ALTER TABLE `tickets`
-  ADD CONSTRAINT `tickets_ibfk_11` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`),  ADD CONSTRAINT `tickets_ibfk_10` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,  ADD CONSTRAINT `tickets_ibfk_9` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `tickets_ibfk_10` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,  ADD CONSTRAINT `tickets_ibfk_11` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`),  ADD CONSTRAINT `tickets_ibfk_9` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 -- 
 -- Constraints for table `time`
