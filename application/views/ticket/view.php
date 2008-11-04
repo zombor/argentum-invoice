@@ -1,5 +1,5 @@
 <h2>View Ticket ID# <?=$ticket->id?></h2>
-<p>Assigned to: <?=$ticket->user->username?></p>
+<p>Assigned to: <?=$ticket->user_id == NULL ? 'Unassigned' : $ticket->user->username?></p>
 <p>Operation: <?=$ticket->operation_type->name?></p>
 <h3>Time</h3>
 <table>

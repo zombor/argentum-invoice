@@ -13,7 +13,7 @@
 		</tr>
 		<?php foreach ($tickets as $ticket):?><tr>
 			<td><?=html::anchor('ticket/view/'.$ticket->id, $ticket->id)?></td>
-			<td><?=$ticket->user->username?></td>
+			<td><?=$ticket->user_id == NULL ? 'Unassigned' : ?></td>
 			<td><?=date('m/d/Y', $ticket->creation_date)?></td>
 			<td><?=date('m/d/Y', $ticket->close_date)?></td>
 			<td><?=$ticket->description?></td>
