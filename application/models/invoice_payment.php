@@ -7,7 +7,7 @@ class Invoice_Payment_Model extends Auto_Modeler_ORM {
 	protected $data = array('id' => '',
 	                        'invoice_id' => '',
 	                        'amount' => '',
-	                        'date' => '');
+	                        'date' => 0);
 
 	protected $belongs_to = array('users');
 
@@ -15,4 +15,19 @@ class Invoice_Payment_Model extends Auto_Modeler_ORM {
 	                         'amount' => array('required', 'numeric'),
 	                         'date' => array('required', 'numeric'));
 
+	public function __set($key, $value)
+	{
+		if ($key == 'date')
+			$this->data[$key] = strtotime($value);
+		else
+			parent::__set($key, $value);
+	}
+
+	public function __get($key)
+	{
+		if ($key == 'date')
+			return date('Y/m/d', $this->data['date'] == 0 ? time() : $this->data['date']);
+		else
+			return parent::__get($key);
+	}
 } // End Invoice_Payment_Model

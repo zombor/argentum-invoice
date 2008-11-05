@@ -11,6 +11,7 @@ a, a:link, a:active { color: #2E98C4; text-decoration: none; border-bottom: 1px 
 #body { margin-top: 1em; padding-bottom: 35px; min-height: 460px; }
 
 h2 { font-size: 1.8em; border-bottom: 1px dotted #4A5357; color: #4A5357; margin-bottom: 0.5em;}
+h3 { font-size: 1.4em; border-bottom: 1px dotted #4A5357; color: #4A5357; margin-bottom: 0.5em;}
 
 td, th { padding-left: 1.5em; padding-right: 1.5em; }
 
@@ -18,6 +19,8 @@ table.invoice_list tr.unpaid { background-color: red; color: white; }
 table.invoice_list tr.total_row td { border-top: 1px dashed black; font-weight: bold; }
 
 ul.submenu li a { display: block;}
+ul.submenu { clear: both;}
+ul.submenu li { float : left; margin-right: 1em;}
 
 #project-list { margin-top: 1em;}
 #project-list li { font-size: 11px; line-height: 2.75em; background: #D3E2E4; border-top: 1px solid #84B1B6; border-bottom: 1px solid #84B1B6;}

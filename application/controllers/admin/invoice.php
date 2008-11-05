@@ -63,4 +63,41 @@ class Invoice_Controller extends Website_Controller {
 			$this->template->body->client = $client;
 		}
 	}
+
+	public function post_payment($invoice_id)
+	{
+		$invoice_payment = new Invoice_Payment_Model();
+
+		if (request::method() == 'post')
+		{
+			$invoice_payment->set_fields($this->input->post());
+			$invoice_payment->date = $this->input->post('date');
+
+			try
+			{
+				$invoice_payment->save();
+
+				url::redirect('invoice/list_all');
+			}
+			catch (Kohana_User_Exception $e)
+			{
+				$this->template->body = new View('admin/invoice/post_payment');
+				$this->template->body->errors = $e;
+				$this->template->body->invoice_payment = $invoice_payment;
+				$this->template->body->invoice_id = $this->uri->segment(4);
+			}
+		}
+		else
+		{
+			$this->template->body = new View('admin/invoice/post_payment');
+			$this->template->body->errors = '';
+			$this->template->body->invoice_payment = $invoice_payment;
+			$this->template->body->invoice_id = $this->uri->segment(4);
+		}
+	}
+	
+	public function view_payments($invoice_id)
+	{
+		$this->template->body = new View('admin/invoice/view_payments');
+	}
 }

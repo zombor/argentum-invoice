@@ -15,22 +15,26 @@
 			<th>Invoice ID</th>
 			<th>Client</th>
 			<th>Total Income</th>
-			<th>Total Paid</th>
+			<th>Total Paid</th><?php if (Auth::instance()->logged_in('admin')):?>
+			<td>Admin</td><?php endif;?>
 		</tr>
 		<?php foreach ($invoices as $invoice):?><tr<?php if ($invoice->total_income() > $invoice->total_paid()):?> class="unpaid"<?php endif;?>>
 			<td><?=html::anchor('invoice/view/'.$invoice->id, $invoice->id)?></td>
 			<td><?=$invoice->client->company_name?></td>
-			<td>$<?=number_format($invoice->total_income(), 2)?>
-			<td>$<?=number_format($invoice->total_paid(), 2)?>
+			<td>$<?=number_format($invoice->total_income(), 2)?></td>
+			<td>$<?=number_format($invoice->total_paid(), 2)?></td>
 			<?php
 				$total_income+=$invoice->total_income();
 				$total_paid+=$invoice->total_paid();
 			?>
+			<?php if (Auth::instance()->logged_in('admin')):?><td><?=html::anchor('admin/invoice/post_payment/'.$invoice->id, html::image(array('src' => 'images/icons/money_add.png', 'alt' => 'Post Payment')))?></td>
+			<?php endif;?>
 		<?php endforeach;?></tr>
 		<tr class="total_row">
 			<td colspan="2"></td>
 			<td>$<?=number_format($total_income, 2)?></td>
 			<td>$<?=number_format($total_paid, 2)?></td>
+			<?php if (Auth::instance()->logged_in('admin')):?><td></td><?php endif;?>
 		</tr>
 	</tbody>
 </table>

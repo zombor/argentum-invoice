@@ -14,6 +14,7 @@
 	<body>
 		<div id="wrapper">
 			<div id="header" class="clear">
+				<?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?>
 				<ul id="nav">
 					<li><?=html::anchor('', 'Home')?></li>
 					<li><?=html::anchor('client', 'Clients')?></li>

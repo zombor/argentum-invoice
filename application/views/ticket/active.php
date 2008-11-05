@@ -1,4 +1,4 @@
-<h1>View Active Tickets For <?=html::anchor('project/view/'.$this->uri->segment(3), 'Project ID '.$this->uri->segment(3))?></h1>
+<h2>View Active Tickets For <?=html::anchor('project/view/'.$this->uri->segment(3), 'Project ID '.$this->uri->segment(3))?></h2>
 <?php include Kohana::find_file('views', 'project/menu')?>
 <table>
 	<tbody>

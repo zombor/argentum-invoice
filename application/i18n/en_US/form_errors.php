@@ -20,3 +20,8 @@ $lang['quantity']['numeric'] = 'Quantity must be numeric';
 
 $lang['cost']['required'] = 'Cost is required';
 $lang['cost']['numeric'] = 'Cost must be numeric';
+
+$lang['amount']['required'] = 'Payment amount is required';
+$lang['amount']['numeric'] = 'Payment amount must be numeric';
+$lang['date']['required'] = 'Date is required';
+$lang['date']['numeric'] = 'Date must be a valid date';

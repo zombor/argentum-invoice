@@ -1,4 +1,4 @@
-<ul>
+<ul class="submenu clear">
 	<li><?=html::anchor('admin/project/edit/'.$project->id, 'Edit Project')?></li>
 	<li><?=html::anchor('admin/ticket/add/'.$project->id, 'Create Ticket')?></li>
 	<li><?=html::anchor('ticket/active/'.$project->id, 'View Active Tickets')?></li>
