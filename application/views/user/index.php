@@ -1,4 +1,4 @@
-<h1>My Account</h1>
+<h2>My Account</h2>
 <p>View your timesheet using the form below:</p>
 <?=form::open('user/timesheet', array('method' => 'get'))?>
 <p>Start Time: <?=form::dropdown('start_date[year]', date::years(2008, date('Y')), date('Y'))?>/<?=form::dropdown('start_date[month]', date::months(), date('n'))?>/<?=form::dropdown('start_date[day]', date::days(12), date('j'))?></p>
