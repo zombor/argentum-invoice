@@ -21,7 +21,7 @@
 		<?php foreach ($tickets as $ticket):?><tr>
 			<td><?=form::checkbox('tickets['.$ticket->id.']', $ticket->id, TRUE)?></td>
 			<td><?=$ticket->id?></td>
-			<td><?=$ticket->user->username?></td>
+			<td><?=$ticket->user == NULL ? 'Unassigned' : $ticket->user->username ?></td>
 			<td><?=$ticket->description?></td>
 			<td><?=number_format($ticket->total_time, 2)?></td>
 			<td>$<?=number_format($ticket->operation_type->rate, 2)?></td>
