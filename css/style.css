@@ -17,6 +17,10 @@ a, a:link, a:active {
 	margin: 0 auto;
 }
 
+#header {
+	height: 43px;
+}
+
 #header ul#nav {
 	clear: both;
 }

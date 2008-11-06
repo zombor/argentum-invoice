@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<div id="header" class="clear">
+			<div id="header">
 				<?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?>
 				<ul id="nav">
 					<li><?=html::anchor('', 'Home')?></li>
