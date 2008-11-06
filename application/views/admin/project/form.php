@@ -6,6 +6,7 @@
 	<li><label for="client_id">Assigned Client:</label> <?=form::dropdown('project[client_id]', Auto_Modeler_ORM::factory('client')->select_list('id', 'company_name') + array('new' => 'New Client...'), $project->client_id)?></li>
 	<li><label for="notes">Project Notes:</label><br /><?=form::textarea(array('name' => 'project[notes]', 'value' => $project->notes))?></li>
 	<li><label for="taxable">Taxable</label><?=form::checkbox('taxable', TRUE, $project->taxable)?></li>
+	<li><label for="complete">Complete</label><?=form::checkbox('complete', TRUE, $project->complete)?></li>
 	<li><?=form::submit('submit', $title.' Project')?></li>
 </ul>
 <div id="new_client">

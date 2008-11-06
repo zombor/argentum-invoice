@@ -13,7 +13,7 @@ class Project_Controller extends Website_Controller {
 		$this->template->body = new View('project/index');
 		$this->template->body->title = "Active Projects";
 		$this->template->body->project_list = new View('project/_list');
-		$this->template->body->project_list->projects = Auto_Modeler_ORM::factory('project')->fetch_all('name');
+		$this->template->body->project_list->projects = Auto_Modeler_ORM::factory('project')->fetch_some(array('complete' => FALSE), 'name');
 	}
 
 	/*
