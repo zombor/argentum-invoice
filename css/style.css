@@ -1,33 +1,174 @@
-body {  background: #4A5357; font: 14px 'Helvetica'; line-height: 1.5;}
-a, a:link, a:active { color: #2E98C4; text-decoration: none; border-bottom: 1px dotted #3A4145;}
-#wrapper { width: 960px; background: #FFF; padding: 20px; margin: 0 auto;}
+body {
+	background: #4A5357;
+	font: 14px 'Helvetica';
+	line-height: 1.5;
+}
 
-#header ul#nav {clear: both;}
-#header ul#nav li { float: left; margin-right: 2em; text-align: left;}
-#header ul#nav li a { font-size: 12px; text-decoration: none; border: none; font-weight: bold; color: #3A4145;}
-#header ul#nav li.small { margin-right: 0; text-align: right; width: 70px;}
-#header ul#nav li.small a { font-size: 12px; color: #2E98C4;}
-#header #quicksearch { float: right;}
-#body { margin-top: 1em; padding-bottom: 35px; min-height: 460px; }
+a, a:link, a:active {
+	color: #2E98C4;
+	text-decoration: none;
+	border-bottom: 1px dotted #3A4145;
+}
 
-h2 { font-size: 1.8em; border-bottom: 1px dotted #4A5357; color: #4A5357; margin-bottom: 0.5em;}
-h3 { font-size: 1.4em; border-bottom: 1px dotted #4A5357; color: #4A5357; margin-bottom: 0.5em;}
+#wrapper {
+	width: 960px;
+	background: #FFF;
+	padding: 20px;
+	margin: 0 auto;
+}
 
-td, th { padding-left: 1.5em; padding-right: 1.5em; }
+#header ul#nav {
+	clear: both;
+}
 
-table.invoice_list tr.unpaid { background-color: red; color: white; }
-table.invoice_list tr.total_row td { border-top: 1px dashed black; font-weight: bold; }
+#header ul#nav li {
+	float: left;
+	margin-right: 2em;
+	text-align: left;
+}
 
-ul.submenu li a { display: block;}
-ul.submenu { clear: both;}
-ul.submenu li { float : left; margin-right: 1em;}
+#header ul#nav li a {
+	font-size: 12px;
+	text-decoration: none;
+	border: none;
+	font-weight: bold;
+	color: #3A4145;
+}
 
-#project-list { margin-top: 1em;}
-#project-list li { font-size: 11px; line-height: 2.75em; background: #D3E2E4; border-top: 1px solid #84B1B6; border-bottom: 1px solid #84B1B6;}
-#project-list li:hover { background-color: #B1CED1;}
+#header ul#nav li.small {
+	margin-right: 0;
+	text-align: right;
+	width: 70px;
+}
 
-#project-list li .client { text-transform: uppercase; color: #333; display: inline-block; width: 160px; margin-left: 1em;}
-#project-list li .name { font-size: 12px; font-weight: bold; width: 640px; display: inline-block;}
-#project-list li .task-count {  display: inline-block;}
-#project-list li .task-count strong { font-weight: bold; display: inline-block; width: 25px; text-align: right;}
-#project-list li a { border: none; color: #333;}
+#header ul#nav li.small a {
+	font-size: 12px;
+	color: #2E98C4;
+}
+
+#header #quicksearch {
+	float: right;
+}
+
+#body {
+	margin-top: 1em;
+	padding-bottom: 35px;
+	min-height: 460px;
+}
+
+h2 {
+	font-size: 1.8em;
+	border-bottom: 1px dotted #4A5357;
+	color: #4A5357;
+	margin-bottom: 0.5em;
+}
+
+h3 {
+	font-size: 1.4em;
+	border-bottom: 1px dotted #4A5357;
+	color: #4A5357;
+	margin-bottom: 0.5em;
+}
+
+td, th {
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+}
+
+table.invoice_list tr.unpaid {
+	background-color: red;
+	color: white;
+}
+
+table.invoice_list tr.total_row td {
+	border-top: 1px dashed black;
+	font-weight: bold;
+}
+
+ul.submenu li a {
+	display: block;
+}
+
+ul.submenu {
+	clear: both;
+}
+
+ul.submenu li {
+	float : left;
+	margin-right: 1em;
+}
+
+#project-list {
+	margin-top: 1em;
+}
+#project-list li {
+	font-size: 11px;
+	line-height: 2.75em;
+	background: #D3E2E4;
+	border-top: 1px solid #84B1B6;
+	border-bottom: 1px solid #84B1B6;
+}
+
+#project-list li:hover {
+	background-color: #B1CED1;
+}
+
+#project-list li .client {
+	text-transform: uppercase;
+	color: #333;
+	display: inline-block;
+	width: 160px;
+	margin-left: 1em;
+}
+
+#project-list li .name {
+	font-size: 12px;
+	font-weight: bold;
+	width: 640px;
+	display: inline-block;
+}
+
+#project-list li .task-count {
+	display: inline-block;
+}
+
+#project-list li .task-count strong {
+	font-weight: bold;
+	display: inline-block;
+	width: 25px;
+	text-align: right;
+}
+
+#project-list li a {
+	border: none;
+	color: #333;
+}
+
+#invoice .client {
+	float: right;
+	margin-right: 2em;
+}
+
+#invoice table {
+	width: 99%;
+	margin-top: 2em;
+	border: 1px solid black;
+}
+
+#invoice th {
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+
+#invoice tr.uneven {
+	background-color: #CCC;
+}
+
+#invoice tr.subtotal td {
+	border-top: 3px dashed black;
+}
+
+#invoice .total td {
+	font-weight: bold;
+	border-top: 2px solid black;
+}

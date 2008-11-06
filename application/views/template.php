@@ -4,8 +4,7 @@
 	<head>
 		<meta http-equiv="content-language" content="en" />
 		<title><?=$title?></title>
-		<?=html::stylesheet('css/reset')?>
-		<?=html::stylesheet('css/style')?>
+		<?=html::stylesheet(array('css/reset', 'css/style', 'css/print'), array('', '', 'print'))?>
 
 		<?=html::script('js/jquery')?>
 		<?=html::script('js/jquery.livequery')?>

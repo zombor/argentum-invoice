@@ -1,0 +1,17 @@
+body {
+	background-color: white;
+}
+
+#header {
+	display: none;
+}
+
+#footer {
+	display: none;
+}
+
+#wrapper {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
