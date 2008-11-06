@@ -22,7 +22,7 @@ abstract class Website_Controller extends Template_Controller {
 			
 			if (IN_PRODUCTION === FALSE)
 			{
-				$this->profiler = new Profiler;
+				//$this->profiler = new Profiler;
 			}
 		}
 
