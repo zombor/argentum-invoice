@@ -4,4 +4,4 @@
  *
  * Sets the default route to "welcome"
  */
-$config['_default'] = 'client';
+$config['_default'] = 'project';

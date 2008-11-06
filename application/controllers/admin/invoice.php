@@ -99,5 +99,15 @@ class Invoice_Controller extends Website_Controller {
 	public function view_payments($invoice_id)
 	{
 		$this->template->body = new View('admin/invoice/view_payments');
+		$this->template->body->invoice_payments = Auto_Modeler_ORM::factory('invoice_payment')->fetch_some(array('invoice_id' => $invoice_id));
+		$this->template->body->invoice_id = $invoice_id;
+	}
+	
+	public function delete_payment()
+	{
+		$payment_id = $this->input->post('payment_id');
+		$invoice_payment = new Invoice_Payment_Model($payment_id);
+		$invoice_payment->delete();
+		url::redirect('admin/invoice/view_payments/'.$invoice_payment->invoice_id);
 	}
 }

@@ -25,7 +25,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 
 		$total_income+=$this->find_sales_tax();
 
-		return $total_income;
+		return number_format($total_income, 2);
 	}
 
 	public function total_paid()

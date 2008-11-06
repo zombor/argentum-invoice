@@ -27,7 +27,10 @@
 				$total_income+=$invoice->total_income();
 				$total_paid+=$invoice->total_paid();
 			?>
-			<?php if (Auth::instance()->logged_in('admin')):?><td><?=html::anchor('admin/invoice/post_payment/'.$invoice->id, html::image(array('src' => 'images/icons/money_add.png', 'alt' => 'Post Payment')))?></td>
+			<?php if (Auth::instance()->logged_in('admin')):?><td>
+				<?=html::anchor('admin/invoice/post_payment/'.$invoice->id, html::image(array('src' => 'images/icons/money_add.png', 'alt' => 'Post Payment')))?>
+				<?=html::anchor('admin/invoice/view_payments/'.$invoice->id, html::image(array('src' => 'images/icons/money.png', 'alt' => 'View Payments')))?>
+			</td>
 			<?php endif;?>
 		<?php endforeach;?></tr>
 		<tr class="total_row">
