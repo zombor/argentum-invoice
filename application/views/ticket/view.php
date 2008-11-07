@@ -13,7 +13,7 @@
 		</tr>
 		<?php foreach ($ticket->find_related('time') as $time):?><tr>
 			<td><?=$time->id?></td>
-			<td><?=$time->user->username?></td>
+			<td><?=isset($time->user->username) ? $ticket->user->username : 'Unassigned'?></td>
 			<td><?=date('Y/m/d g:i A', $time->start_time)?></td>
 			<td><?=date('Y/m/d g:i A', $time->end_time)?></td>
 			<td><?=number_format(($time->end_time-$time->start_time)/60/60, 2)?></td>
