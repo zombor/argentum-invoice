@@ -14,7 +14,7 @@
 			<td><?=$non_hourly->quantity?></td>
 			<td><?=$non_hourly->description?></td>
 			<td><?=$non_hourly->cost?></td>
-			<td><?=html::anchor('admin/non_hourly/edit/'.$non_hourly->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Non Hourly')))?></td>
+			<td><?=$non_hourly->invoiced ? html::anchor('invoice/view/'.$non_hourly->invoice_id, $non_hourly->invoice_id) : html::anchor('admin/non_hourly/edit/'.$non_hourly->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Non Hourly')))?></td>
 		</tr><?php endforeach;?>
 	</tbody>
 </table>
