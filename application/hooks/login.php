@@ -16,6 +16,12 @@ class login {
 
 		if ($uri->segment(1) != 'user' AND ! $auth->logged_in('login'))
 		{
+			// Make sure the user can accept cookies
+			cookie::set(array('name' => 'cookie_check', 'value' => 'argentum'));
+			
+			if ( ! cookie::get('cookie_check', FALSE))
+				throw new Kohana_Exception('argentum.no_cookies');
+
 			$_SESSION['requested_page'] = $uri->string();
 			url::redirect('user/login');
 		}
