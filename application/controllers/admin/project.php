@@ -34,6 +34,8 @@ class Project_Controller extends Website_Controller {
 					$client->set_fields($this->input->post('client'));
 					$client->save();
 				}
+				else
+					$client = $project->client;
 
 				$project->save();
 				url::redirect('project/view/'.$project->id);
@@ -78,6 +80,8 @@ class Project_Controller extends Website_Controller {
 					$client->set_fields($this->input->post('client'));
 					$client->save();
 				}
+				else
+					$client = $project->client;
 
 				$project->save();
 				url::redirect('project/view/'.$project->id);
