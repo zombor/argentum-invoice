@@ -26,7 +26,7 @@ CREATE TABLE `clients` (
   `mailing_address` text NOT NULL,
   `mailing_city` varchar(30) NOT NULL,
   `mailing_state` char(2) NOT NULL,
-  `mailing_zip_code` char(5) NOT NULL,
+  `mailing_zip_code` char(10) NOT NULL,
   `email_address` varchar(75) NOT NULL,
   `phone_number` char(12) NOT NULL,
   `tax_rate` decimal(5,2) NOT NULL,
