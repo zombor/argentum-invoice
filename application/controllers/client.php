@@ -9,16 +9,6 @@ class Client_Controller extends Website_Controller {
 	public function index()
 	{
 		$this->template->body = new View('client/index');
-	}
-
-	/*
-	*  function:     show_all
-	*  description:  Displays all the clients in the application
-	*  parameters:   None expected.
-	*/
-	public function show_all()
-	{
-		$this->template->body = new View('client/show_all');
 		$this->template->body->clients = Auto_Modeler_ORM::factory('client')->fetch_all('company_name');
 	}
 
@@ -33,6 +23,7 @@ class Client_Controller extends Website_Controller {
 		
 		if ( ! $client->id)
 			Event::run('system.404');
+
 
 		$this->template->body = new View('client/view');
 		$this->template->body->client = $client;

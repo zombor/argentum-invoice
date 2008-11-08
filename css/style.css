@@ -63,6 +63,11 @@ h2 {
 	margin-bottom: 0.5em;
 }
 
+h2 a {
+	border: none;
+	float: right;
+}
+
 h3 {
 	font-size: 1.4em;
 	border-bottom: 1px dotted #4A5357;
@@ -85,13 +90,15 @@ table.invoice_list tr.total_row td {
 	font-weight: bold;
 }
 
-ul.submenu li a {
-	display: block;
-}
-
 ul.submenu {
 	clear: both;
 }
+
+ul.submenu li a {
+	display: block;
+	border: none;
+}
+
 
 ul.submenu li {
 	float : left;
@@ -101,6 +108,7 @@ ul.submenu li {
 #project-list {
 	margin-top: 1em;
 }
+
 #project-list li {
 	font-size: 11px;
 	line-height: 2.75em;
@@ -142,6 +150,48 @@ ul.submenu li {
 #project-list li a {
 	border: none;
 	color: #333;
+}
+
+#client-list {
+	width: 560px;
+}
+
+#client-list li {
+	font-size: 12px;
+	line-height: 2.75em;
+	background: #D3E2E4;
+	border-top: 1px solid #84B1B6;
+	border-bottom: 1px solid #84B1B6;
+}
+
+#client-list li:hover {
+	background-color: #B1CED1;
+}
+
+#client-list li a {
+	border: none;
+}
+
+#client-list li .company {
+	margin-left: 2em;
+	font-weight: bold;
+	display: inline-block;
+	width: 355px;
+	text-align: left;
+	font-weight: bold;
+}
+
+#client-list li .contact {
+	display: inline-block;
+	text-align: left;
+	color: #333;
+}
+
+#client-details ul li strong {
+	font-weight: bold;
+	display: block;
+	clear: both;
+	margin-top: 1em;
 }
 
 #invoice .client {

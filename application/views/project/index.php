@@ -1,9 +1,9 @@
 <h2><?=$title;?></h2>
 
-<div id="project-buttons" class="button-bar">
-	<?=html::anchor('admin/project/add', 'New Project')?> 
-	/ <?=html::anchor('project', 'Active')?> 
-	/ <?=html::anchor('project/show_all', 'All')?>
-</div>
+<ul class="submenu clear">
+	<li><?=html::anchor('admin/project/add', html::image('images/buttons/project_new.gif'))?> </li>
+	<li><?=html::anchor('project', 'Active')?></li>
+	<li><?=html::anchor('project/show_all', 'All')?></li>
+</ul>
 
 <?=$project_list;?>

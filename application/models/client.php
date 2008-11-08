@@ -65,4 +65,14 @@ class Client_Model extends Auto_Modeler_ORM
 		              'email_address' => $term);
 		return $this->db->from($this->table_name)->orlike($like)->get()->result(TRUE, 'Client_Model');
 	}
+	
+	/**
+	 * Returns the company's contact full name in the format of: First Last
+	 *
+	 * @return string full name
+	 */
+	public function contact_full_name()
+	{
+		return $this->contact_first_name.' '.$this->contact_last_name;
+	}
 }
