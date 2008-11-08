@@ -7,9 +7,9 @@
 		<title><?=$title?></title>
 		<?=html::stylesheet(array('css/reset', 'css/style', 'css/print'), array('', '', 'print'))?>
 
-		<?=html::script('js/jquery')?>
-		<?=html::script('js/jquery.livequery')?>
-		<?=html::script('js/effects')?>
+		<?=html::script('js/lib/jquery')?> 
+		<?=html::script('js/lib/jquery.livequery')?> 
+		<?=html::script('js/lib/effects')?> 
 	</head>
 	<body>
 		<div id="wrapper">
