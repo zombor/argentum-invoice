@@ -9,7 +9,7 @@
 
 		<?=html::script('js/lib/jquery')?> 
 		<?=html::script('js/lib/jquery.livequery')?> 
-		<?=html::script('js/lib/effects')?> 
+		<?=html::script('js/effects')?> 
 	</head>
 	<body>
 		<div id="wrapper">

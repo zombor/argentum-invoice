@@ -35,17 +35,5 @@
 		<li><label for="tax_exempt">Tax Rate:</label> <?=form::input('client[tax_rate]',$client->tax_rate)?></li>
 	</ul>
 	</div>
-	<script type="text/javascript">
-	$(function() {
-		// display new client form when "New client" is selected
-		$('#project_client_id').change(function() {
-			if ($(this).val() == 'new') {
-				$("#new_client").fadeIn();
-			} else {
-				$("#new_client").fadeOut();
-			}
-		});
-	});
-	</script>
 	<?form::close()?>
 </div>
