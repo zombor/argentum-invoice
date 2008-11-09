@@ -1,9 +1,9 @@
-<h1>Create Invoice For <?=$client->company_name?></h1>
+<h2>Create Invoice For <?=$client->company_name?></h2>
 <?=form::open('admin/invoice/create')?>
 <?=form::hidden('client_id', $client->id)?>
-<h2>Invoice Comments:</h2>
+<h3>Invoice Comments:</h3>
 <p><?=form::textarea('comments')?></p>
-<h2>Tickets to be billed:</h2>
+<h3>Tickets to be billed:</h3>
 <table>
 	<tbody>
 		<tr>

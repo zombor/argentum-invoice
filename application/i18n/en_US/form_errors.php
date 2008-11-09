@@ -25,3 +25,5 @@ $lang['amount']['required'] = 'Payment amount is required';
 $lang['amount']['numeric'] = 'Payment amount must be numeric';
 $lang['date']['required'] = 'Date is required';
 $lang['date']['numeric'] = 'Date must be a valid date';
+
+$lang['end_time']['invalid_time_input'] = 'Your end time must be after your start date';
