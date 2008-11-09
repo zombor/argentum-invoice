@@ -1,6 +1,45 @@
 <?php 
 	$subtotal = 0;
 ?>
+<style type="text/css">
+	#invoice .client {
+		float: right;
+		margin-right: 2em;
+	}
+
+	#invoice table {
+		width: 99%;
+		margin-top: 2em;
+		border: 1px solid black;
+	}
+
+	#invoice th {
+		font-weight: bold;
+		border-bottom: 1px solid black;
+	}
+
+	#invoice tr.uneven {
+		background-color: #CCC;
+	}
+
+	#invoice tr.subtotal td {
+		border-top: 3px dashed black;
+	}
+
+	#invoice .total td {
+		font-weight: bold;
+		border-top: 2px solid black;
+	}
+
+	#billing_client {
+		width: 99%;
+		border: none;
+	}
+
+	#billing_client .client {
+		width: 25%;
+	}
+</style>
 <div id="invoice">
 	<h2>Invoice #<?=$invoice->id?></h2>
 	<table id="billing_client">
