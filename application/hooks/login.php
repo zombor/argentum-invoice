@@ -14,7 +14,7 @@ class login {
 		$auth = new Auth();
 		$uri = new URI();
 
-		if ($uri->segment(1) != 'user' AND ! $auth->logged_in('login'))
+		if ($uri->segment(1) != 'user' AND $uri->segment(1) != 'invoice' AND ! $auth->logged_in('login'))
 		{
 			$_SESSION['requested_page'] = $uri->string();
 			url::redirect('user/login');

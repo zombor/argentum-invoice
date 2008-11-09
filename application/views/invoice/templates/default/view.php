@@ -3,17 +3,23 @@
 ?>
 <div id="invoice">
 	<h2>Invoice #<?=$invoice->id?></h2>
-	<div class="client">
-		Attn: <?=$invoice->client->contact_first_name?> <?=$invoice->client->contact_last_name?><br />
-		<?=$invoice->client->company_name?><br />
-		<?=$invoice->client->mailing_address?><br />
-		<?=$invoice->client->mailing_city?>, <?=$invoice->client->mailing_state?> <?=$invoice->client->mailing_zip?>
-	</div>
-	<div class="company">
-		Remit Payment To: <?=Kohana::config('argentum.company_name')?><br />
-		<?=Kohana::config('argentum.company_address')?><br />
-		<?=Kohana::config('argentum.company_city')?>, <?=Kohana::config('argentum.company_state')?> <?=Kohana::config('argentum.company_zip')?>
-	</div>
+	<table id="billing_client">
+		<tbody>
+			<tr>
+				<td class="company">
+					Remit Payment To: <?=Kohana::config('argentum.company_name')?><br />
+					<?=Kohana::config('argentum.company_address')?><br />
+					<?=Kohana::config('argentum.company_city')?>, <?=Kohana::config('argentum.company_state')?> <?=Kohana::config('argentum.company_zip')?>
+				</td>
+				<td class="client">
+					Attn: <?=$invoice->client->contact_first_name?> <?=$invoice->client->contact_last_name?><br />
+					<?=$invoice->client->company_name?><br />
+					<?=$invoice->client->mailing_address?><br />
+					<?=$invoice->client->mailing_city?>, <?=$invoice->client->mailing_state?> <?=$invoice->client->mailing_zip?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 	<table>
 		<tbody>
 			<tr>
@@ -24,11 +30,11 @@
 			</tr>
 			<?php foreach ($invoice->find_operation_types() as $operation_type_id => $operation_type):?><tr class="<?=text::alternate('even', 'uneven')?>">
 			<?php $subtotal+=($operation_type['rate']*$operation_type['time'])?>
-				<td><?=number_format($operation_type['time'], 2)?></td>
+<td><?=number_format($operation_type['time'], 2)?></td>
 				<td><?=$operation_type['name']?></td>
 				<td>$<?=number_format($operation_type['rate'], 2)?></td>
 				<td>$<?=number_format(($operation_type['rate']*$operation_type['time']), 2)?></td>
-			<?php endforeach;?></tr>
+			</tr><?php endforeach;?>
 			<?php foreach ($invoice->find_related('non_hourly') as $non_hourly):?><tr>
 			<?php $subtotal+=$non_hourly->cost?>
 				<td><?=$non_hourly->quantity?></td>
@@ -54,3 +60,4 @@
 		</tbody>
 	</table>
 </div>
+<h3><?=html::anchor('invoice/view_pdf/'.$invoice->id, 'Download PDF', array('class' => 'download_pdf'))?></h3>
