@@ -1,4 +1,4 @@
-<div id="project-form">
+<div id="project_form">
 	<h2><?=$title?> Project</h2>
 	<?=$errors?>
 	<?=form::open()?>

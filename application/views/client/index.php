@@ -4,7 +4,7 @@
 	<li><?=html::anchor('admin/client/add', html::image('images/buttons/client_new.gif'))?></li>
 </ul>
 
-<div id="client-list">
+<div id="client_list">
 	<ul>
 		<?php foreach ($clients as $client):?> 
 		<li>

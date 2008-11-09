@@ -1,6 +1,6 @@
 <h2>Client: <?=$client->company_name;?></h2>
 
-<div id="client-details">
+<div id="client_details">
 	<ul>
 	<li><strong>Contact</strong> <?=$client->contact_full_name()?> (<?=html::mailto($client->email_address)?>)</li>
 	<li><strong>Address</strong>
