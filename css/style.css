@@ -152,6 +152,33 @@ ul.submenu li {
 	color: #333;
 }
 
+#project-form ul li label { 
+	width: 190px; display: inline-block;
+}
+
+#project-form #notes {
+	width: 350px;
+	height: 100px;
+}
+
+#project-form #new_client {
+	width: 350px; 
+	float: left;
+	margin: -240px 0 0 370px;
+	padding: 20px;
+	background: #E5ECF0;
+	display: none;
+}
+
+#project-form #client_mailing_address {
+	float: right;
+	margin-top: -1em;
+	margin-bottom: 0.5em;
+	width: 155px;
+}
+
+#project-form #new_client h4 { font-weight: bold;}
+
 #client-list {
 	width: 560px;
 }
