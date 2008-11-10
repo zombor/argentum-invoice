@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Nov 03, 2008 at 06:56 PM
+-- Generation Time: Nov 09, 2008 at 07:31 PM
 -- Server version: 5.0.45
 -- PHP Version: 5.2.6
 -- 
@@ -32,7 +32,7 @@ CREATE TABLE `clients` (
   `tax_rate` decimal(5,2) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `short_name` (`short_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `clients`
@@ -52,7 +52,7 @@ CREATE TABLE `invoice_payments` (
   `date` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `invoice_id` (`invoice_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `invoice_payments`
@@ -74,7 +74,7 @@ CREATE TABLE `invoices` (
   `client_id` mediumint(9) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `invoices`
@@ -99,11 +99,12 @@ CREATE TABLE `non_hourly` (
   PRIMARY KEY  (`id`),
   KEY `project_id` (`project_id`),
   KEY `invoice_id` (`invoice_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `non_hourly`
 -- 
+
 
 -- --------------------------------------------------------
 
@@ -117,7 +118,7 @@ CREATE TABLE `operation_types` (
   `name` varchar(50) NOT NULL,
   `rate` decimal(10,2) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- 
 -- Dumping data for table `operation_types`
@@ -126,7 +127,8 @@ CREATE TABLE `operation_types` (
 INSERT INTO `operation_types` (`id`, `name`, `rate`) VALUES 
 (1, 'Project Management', 75.00),
 (2, 'Programming', 85.00),
-(3, 'Design', 80.00);
+(3, 'Design', 80.00),
+(4, 'Web Hosting', 19.95);
 
 -- --------------------------------------------------------
 
@@ -144,7 +146,7 @@ CREATE TABLE `projects` (
   `taxable` binary(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `projects`
@@ -208,12 +210,13 @@ CREATE TABLE `tickets` (
   `invoiced` binary(1) NOT NULL,
   `invoice_id` mediumint(9) default NULL,
   `operation_type_id` mediumint(9) NOT NULL,
+  `rate` decimal(10,2) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`),
   KEY `project_id` (`project_id`),
   KEY `invoice_id` (`invoice_id`),
   KEY `operation_type_id` (`operation_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `tickets`
@@ -234,7 +237,7 @@ CREATE TABLE `time` (
   `end_time` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `ticket_id` (`ticket_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `time`
@@ -286,8 +289,8 @@ CREATE TABLE `users` (
 -- 
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_login`, `logins`, `active`) VALUES 
-(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1225759701, 59, 0x31),
-(4, 'demo', '17e38db5f19f9f22cab501f47aef526870cff68ca3b15f7c44', 'test@test.com', 0, 0, 0x30);
+(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1226279349, 246, 0x31),
+(4, 'demo', '413ff01db44667eb2eaef46bc8068b0c98861cbc49a30ec45d', 'test@test.com', 1226279827, 9, 0x31);
 
 -- --------------------------------------------------------
 
@@ -303,7 +306,7 @@ CREATE TABLE `users_roles` (
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`),
   KEY `role_id` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- 
 -- Dumping data for table `users_roles`
@@ -312,7 +315,7 @@ CREATE TABLE `users_roles` (
 INSERT INTO `users_roles` (`id`, `user_id`, `role_id`) VALUES 
 (11, 1, 2),
 (12, 1, 1),
-(13, 4, 1);
+(14, 4, 1);
 
 -- 
 -- Constraints for dumped tables
