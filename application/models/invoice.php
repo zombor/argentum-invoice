@@ -18,7 +18,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 		$total_income = 0;
 		// Find all the tickets and get the total cost of them
 		foreach ($this->find_related('tickets') as $ticket)
-			$total_income+=$ticket->operation_type->rate*$ticket->total_time;
+			$total_income+=$ticket->rate*$ticket->total_time;
 
 		foreach ($this->find_related('non_hourly') as $non_hourly)
 			$total_income+=$non_hourly->cost;
@@ -49,7 +49,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 		{
 			if ( ! isset($return[$ticket->operation_type->id]))
 				$return[$ticket->operation_type->id] = array('name' => $ticket->operation_type->name,
-				                                             'rate' => $ticket->operation_type->rate,
+				                                             'rate' => $ticket->rate,
 				                                             'time' => $ticket->total_time);
 			else
 				$return[$ticket->operation_type->id]['time']+=$ticket->total_time;
@@ -71,7 +71,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 		foreach ($this->find_related('tickets') as $ticket)
 		{
 			if ($ticket->project->taxable)
-				$total+=($ticket->project->client->tax_rate/100)*$ticket->total_time*$ticket->operation_type->rate;
+				$total+=($ticket->project->client->tax_rate/100)*$ticket->total_time*$ticket->rate;
 		}
 
 		return $total;

@@ -33,6 +33,7 @@ class Project_Controller extends Website_Controller {
 					$client = new Client_Model();
 					$client->set_fields($this->input->post('client'));
 					$client->save();
+					$project->client_id = $client->id;
 				}
 				else
 					$client = $project->client;

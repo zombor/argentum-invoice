@@ -24,8 +24,8 @@
 			<td><?=$ticket->user == NULL ? 'Unassigned' : $ticket->user->username ?></td>
 			<td><?=$ticket->description?></td>
 			<td><?=number_format($ticket->total_time, 2)?></td>
-			<td>$<?=number_format($ticket->operation_type->rate, 2)?></td>
-			<td>$<?=number_format($ticket->total_time*$ticket->operation_type->rate, 2)?></td>
+			<td>$<?=number_format($ticket->rate, 2)?></td>
+			<td>$<?=number_format($ticket->total_time*$ticket->rate, 2)?></td>
 		</tr><?php endforeach;?>
 		<?php endforeach;?>
 		<tr>
