@@ -92,7 +92,7 @@ class User_Model extends Auto_Modeler_ORM {
 	 */
 	public function username_exists($name)
 	{
-		return (bool) $this->db->where('username', $name)->count_records('users');
+		return (bool) $this->db->where('username', $name)->count_records($this->table_name);
 	}
 	
 	/**
