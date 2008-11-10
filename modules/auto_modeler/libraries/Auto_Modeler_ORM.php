@@ -60,20 +60,20 @@ class Auto_Modeler_ORM extends Auto_Modeler
 		}
 	}
 
-	public function find_related($key)
+	public function find_related($key, $where = array())
 	{
 		$model = inflector::singular($key).'_Model';
 		$temp = new $model();
 		if ($temp->has_attribute(inflector::singular($this->table_name).'_id')) // Look for a one to many relationship
 		{
-			return $this->db->from($key)->where(inflector::singular($this->table_name).'_id', $this->data['id'])->get()->result(TRUE, inflector::singular(ucwords($key)).'_Model');
+			return $this->db->from($key)->where($where + array(inflector::singular($this->table_name).'_id' => $this->data['id']))->get()->result(TRUE, inflector::singular(ucwords($key)).'_Model');
 		}
 		else // Get a many to many relationship
 		{
 			$join_table = $this->table_name.'_'.$key;
 			$this_key = inflector::singular($this->table_name).'_id';
 			$f_key = inflector::singular($key).'_id';
-	
+
 			return $this->db->select($key.'.*')->from($key)->where($join_table.'.'.$this_key, $this->data['id'])->join($join_table, $join_table.'.'.$f_key, $key.'.id')->get()->result(TRUE, inflector::singular(ucwords($key)).'_Model');
 		}
 	}

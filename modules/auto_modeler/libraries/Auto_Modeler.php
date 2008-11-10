@@ -169,4 +169,9 @@ class Auto_Modeler extends Model
 
 		return $rows;
 	}
+
+	public function has_attribute($key)
+	{
+		return array_key_exists($key, $this->data);
+	}
 }
