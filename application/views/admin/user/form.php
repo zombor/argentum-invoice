@@ -46,11 +46,6 @@
 		</ul>
 		</fieldset>
 	</li>
-	
-	<li>
-		<?=form::label('active', 'Active')?>
-		<?=form::checkbox('active', '1', (bool)$user->active)?>
-	</li>
 	<li>
 		<?=form::submit('save', 'Save')?>
 	</li>
