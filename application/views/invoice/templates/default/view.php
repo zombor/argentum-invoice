@@ -3,8 +3,7 @@
 ?>
 <style type="text/css">
 	#invoice .client {
-		float: right;
-		margin-right: 2em;
+		width: 25%;
 	}
 
 	#invoice table {

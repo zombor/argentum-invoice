@@ -11,7 +11,7 @@ class Auto_Modeler_ORM extends Auto_Modeler
 		if (isset($this->data[$key.'_id']))
 		{
 			// Get the row from the forgien table
-			return $this->db->from($key.'s')->where('id', $this->data[$key.'_id'])->get()->current();
+			return $this->db->from($key.'s')->where('id', $this->data[$key.'_id'])->get()->result(TRUE, inflector::singular(ucwords($key)).'_Model')->current();
 		}
 		else if (isset($this->data[$key]))
 			return $this->data[$key];
