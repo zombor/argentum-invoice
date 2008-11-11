@@ -16,13 +16,29 @@ class Settings_Controller extends Website_Controller
 
 	public function application()
 	{
+		$settings = new Settings_Model();
+		$this->template->body = new View('admin/settings/application');
+		$this->template->body->settings = $settings;
+		$this->template->body->errors = '';
+
 		if ( ! $_POST)
 		{
-			$this->template->body = new View('admin/settings/application');
+			$this->template->body->status = NULL;
 		}
 		else
 		{
-			// Save the settings
+			$settings->set_fields($this->input->post());
+			try
+			{
+				$settings->save();
+				$this->template->body->status = TRUE;
+			}
+			catch (Kohana_User_Exception $e)
+			{
+				$this->template->body->errors = $e;
+				$this->template->body->settings = $settings;
+				$this->template->body->status = FALSE;
+			}
 		}
 	}
 }
