@@ -121,6 +121,14 @@ ul.submenu li {
 	background-color: #B1CED1;
 }
 
+#project_list li .project_id {
+	text-transform: uppercase;
+	color: #333;
+	display: inline-block;
+	width: 55px;
+	margin-left: 1em;
+}
+
 #project_list li .client {
 	text-transform: uppercase;
 	color: #333;
@@ -132,15 +140,15 @@ ul.submenu li {
 #project_list li .name {
 	font-size: 12px;
 	font-weight: bold;
-	width: 640px;
+	width: 550px;
 	display: inline-block;
 }
 
-#project_list li .task_count {
+#project_list li .task-count {
 	display: inline-block;
 }
 
-#project_list li .task_count strong {
+#project_list li .task-count strong {
 	font-weight: bold;
 	display: inline-block;
 	width: 25px;
