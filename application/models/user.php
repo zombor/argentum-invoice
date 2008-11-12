@@ -127,4 +127,10 @@ class User_Model extends Auto_Modeler_ORM {
 		}
 		return FALSE;
 	}
+
+	public function find_assigned_projects()
+	{
+		$sql = 'SELECT DISTINCT `projects`.* FROM `projects` LEFT JOIN `tickets` ON `tickets`.`project_id` = `projects`.`id` WHERE `tickets`.`user_id` = ?';
+		return $this->db->query($sql, array($this->data['id']))->result(TRUE, 'Project_Model');
+	}
 } // End User_Model
