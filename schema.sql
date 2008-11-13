@@ -276,10 +276,18 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` mediumint(9) NOT NULL auto_increment,
   `username` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `last_login` int(11) NOT NULL,
   `logins` mediumint(9) NOT NULL,
+  `email_ticket_create` binary(1) NOT NULL default '1',
+  `email_ticket_close` binary(1) NOT NULL default '1',
+  `email_ticket_update` binary(1) NOT NULL default '1',
+  `email_ticket_time` binary(1) NOT NULL default '1',
+  `email_project_creation` binary(1) NOT NULL default '0',
+  `email_project_close` binary(1) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 PACK_KEYS=0 AUTO_INCREMENT=5 ;
 
@@ -287,9 +295,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 -- 
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_login`, `logins`, `active`) VALUES 
-(1, 'admin', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1226279349, 246, 0x31),
-(4, 'demo', '413ff01db44667eb2eaef46bc8068b0c98861cbc49a30ec45d', 'test@test.com', 1226279827, 9, 0x31);
+INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `password`, `email`, `last_login`, `logins`, `email_ticket_create`, `email_ticket_close`, `email_ticket_update`, `email_ticket_time`, `email_project_creation`, `email_project_close`) VALUES 
+(1, 'admin', 'Admin', 'User', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1226546253, 282, 0x31, 0x31, 0x31, 0x31, 0x30, 0x30),
+(4, 'demo', 'Demo', 'User', '785e0c0ccfb860d466d5d870b95c87220b374e4f2ce8a5bc0c', 'test@test.com', 1226494173, 15, 0x31, 0x31, 0x31, 0x31, 0x30, 0x30);
 
 -- --------------------------------------------------------
 

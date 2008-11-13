@@ -6,13 +6,23 @@ class User_Model extends Auto_Modeler_ORM {
 
 	protected $data = array('id' => '',
 	                        'username' => '',
+	                        'first_name' => '',
+	                        'last_name' => '',
 	                        'password' => '',
 	                        'email' => '',
 	                        'last_login' => '',
-	                        'logins' => '');
+	                        'logins' => '',
+	                        'email_ticket_create' => '',
+	                        'email_ticket_close' => '',
+	                        'email_ticket_update' => '',
+	                        'email_ticket_time' => '',
+	                        'email_project_creation' => '',
+	                        'email_project_close' => '');
 
 	protected $rules = array('username' => array('required'),
-	                         'email' => array('required', 'email'));
+	                         'email' => array('required', 'email'),
+	                         'first_name' => array('required', 'standard_text'),
+	                         'last_name' => array('required', 'standard_text'));
 
 	protected $callbacks = array('username' => 'check_username');
 	

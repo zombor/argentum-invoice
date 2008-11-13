@@ -1,5 +1,5 @@
 <h2>Invoices</h2>
-<ul class="submenu">
+<ul class="submenu clear">
 	<li><?=html::anchor('invoice/list_all', 'View All Invoices')?></li>
 </ul>
 

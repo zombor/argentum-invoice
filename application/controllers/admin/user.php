@@ -56,9 +56,10 @@ class User_Controller extends Website_Controller
 	public function edit()
 	{
 		$user = new User_Model($this->input->get('id', FALSE));
+
 		if ( ! $user->id)
 			Event::run('system.404');
-		
+
 		$this->template->body = $view = View::factory('admin/user/form')
 			->set('title', 'Edit User: '.$user->username)
 			->set('errors', '')
@@ -92,6 +93,44 @@ class User_Controller extends Website_Controller
 			{
 				$this->template->body->errors = $e;
 				$this->template->body->user_roles = $this->input->post('roles', array());
+			}
+		}
+	}
+
+	public function settings()
+	{
+		$user = $_SESSION['auth_user'];
+		$this->template->body = new View('admin/user/settings');
+
+		if ( ! $_POST)
+		{
+			$this->template->body->user = $user;
+			$this->template->body->errors = '';
+			$this->template->body->status = NULL;
+		}
+		else
+		{
+			$user->set_fields($this->input->post());
+			$user->email_ticket_create = $this->input->post('email_ticket_create', FALSE);
+			$user->email_ticket_close = $this->input->post('email_ticket_close', FALSE);
+			$user->email_ticket_update = $this->input->post('email_ticket_update', FALSE);
+			$user->email_ticket_time = $this->input->post('email_ticket_time', FALSE);
+			$user->email_project_creation = $this->input->post('email_project_creation', FALSE);
+			$user->email_project_close = $this->input->post('email_project_close', FALSE);
+
+			try
+			{
+				$user->save();
+				$_SESSION['auth_user'] = $user;
+				$this->template->body->user = $user;
+				$this->template->body->errors = '';
+				$this->template->body->status = TRUE;
+			}
+			catch (Kohana_User_Exception $e)
+			{
+				$this->template->body->errors = $e;
+				$this->template->body->user = $user;
+				$this->template->body->status = FALSE;
 			}
 		}
 	}

@@ -27,3 +27,8 @@ $lang['date']['required'] = 'Date is required';
 $lang['date']['numeric'] = 'Date must be a valid date';
 
 $lang['end_time']['invalid_time_input'] = 'Your end time must be after your start date';
+
+$lang['first_name']['required'] = 'First Name is required';
+$lang['first_name']['standard_text'] = 'First Name must consist of letters, numbers, spaces and periods';
+$lang['last_name']['required'] = 'Last Name is required';
+$lang['last_name']['standard_text'] = 'Last Name must consist of letters, numbers, spaces and periods';

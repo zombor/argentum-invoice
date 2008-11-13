@@ -231,3 +231,12 @@ ul.submenu li {
 	clear: both;
 	margin-top: 1em;
 }
+
+ul.errors {
+	margin-bottom: 1em;
+}
+
+ul.errors li {
+	color: red;
+	margin-left: 1em;
+}
