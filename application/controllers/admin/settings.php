@@ -41,4 +41,71 @@ class Settings_Controller extends Website_Controller
 			}
 		}
 	}
+	
+	public function modules()
+	{
+		$settings = new Settings_Model();
+		$this->template->body = new View('admin/settings/modules');
+		$db = new Database();
+		
+		// Update the module list in the database
+		$d = dir(MODPATH.'argentum/');
+		$directories = array();
+		while (($entry = $d->read()) !== FALSE)
+		{
+			// Set the module to not enabled by default
+			if ($entry != '.' AND $entry != '..') $directories[$entry] = FALSE;
+		}
+
+		// Sync the folder with the database
+		foreach ($directories as $dir => $found)
+		{
+			if ( ! count($db->from('modules')->where('name', $dir)->limit(1)->get()))
+				$db->insert('modules', array('name' => $dir, 'active' => FALSE));
+		}
+
+		// Now remove the ones that weren't found from the database
+		foreach ($db->get('modules') as $row)
+			if ( ! array_key_exists($row->name, $directories))
+				$db->delete('modules', array('name', $row->name));
+			else if ($row->active)
+				$directories[$row->name] = TRUE;
+			else
+				$directories[$row->name] = FALSE;
+
+		if ( ! $_POST)
+		{
+			$this->template->body->status = NULL;
+			$this->template->body->modules = $directories;
+		}
+		else
+		{
+			unset($_POST['go']);
+			try
+			{
+				// First unset everything
+				$db->query('UPDATE `modules` SET `active` = 0');
+
+				// Then set all the applicable modules
+				foreach ($this->input->post() as $field => $active)
+				{
+					$db->update('modules', array('active' => TRUE), array('name' => $field));
+				}
+
+				foreach ($db->get('modules') as $row)
+					if ($row->active)
+						$directories[$row->name] = TRUE;
+					else
+						$directories[$row->name] = FALSE;
+
+				$this->template->body->status = TRUE;
+				$this->template->body->modules = ($directories + $_POST);
+			}
+			catch (Kohana_Database_Exception $e)
+			{
+				$this->template->body->status = FALSE;
+				$this->template->body->modules = ($directories + $_POST);
+			}
+		}
+	}
 }

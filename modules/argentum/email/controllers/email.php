@@ -2,7 +2,7 @@
 
 class Email_Controller extends Controller {
 
-	public function project_add()
+	public function _project_add()
 	{
 		// Send an email to all users who are set to receive emails on new projects
 		$swift = email::connect();
@@ -17,7 +17,6 @@ class Email_Controller extends Controller {
 		try
 		{
 			$swift->send($message, $recipients, $_SESSION['auth_user']->email);
-			url::redirect('project/view/'.Event::$data->id);
 		}
 		catch (Swift_ConnectionException $e)
 		{

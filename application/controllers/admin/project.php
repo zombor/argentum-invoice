@@ -41,6 +41,8 @@ class Project_Controller extends Website_Controller {
 				$project->save();
 
 				Event::run('argentum.project_add', $project);
+
+				url::redirect('project/view/'.$project->id);
 			}
 			catch (Kohana_User_Exception $e)
 			{
