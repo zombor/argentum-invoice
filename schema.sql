@@ -13,6 +13,19 @@
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `modules`
+-- 
+
+CREATE TABLE `modules` (
+  `id` mediumint(9) NOT NULL auto_increment,
+  `name` varchar(100) NOT NULL,
+  `active` binary(1) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+-- 
 -- Table structure for table `clients`
 -- 
 
