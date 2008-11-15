@@ -295,12 +295,6 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `last_login` int(11) NOT NULL,
   `logins` mediumint(9) NOT NULL,
-  `email_ticket_create` binary(1) NOT NULL default '1',
-  `email_ticket_close` binary(1) NOT NULL default '1',
-  `email_ticket_update` binary(1) NOT NULL default '1',
-  `email_ticket_time` binary(1) NOT NULL default '1',
-  `email_project_creation` binary(1) NOT NULL default '0',
-  `email_project_close` binary(1) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 PACK_KEYS=0 AUTO_INCREMENT=5 ;
 

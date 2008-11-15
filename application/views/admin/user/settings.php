@@ -4,18 +4,10 @@
 <?=$errors?>
 <?=form::open()?>
 <ul>
-	<li><label for="first_name">First Name</label> <?=form::input('first_name', $user->first_name)?></li>
-	<li><label for="last_name">Last Name</label> <?=form::input('last_name', $user->last_name)?></li>
-	<li><label for="email">Email</label> <?=form::input('email', $user->email)?></li>
+	<li><label for="user[first_name]">First Name</label> <?=form::input('user[first_name]', $user->first_name)?></li>
+	<li><label for="user[last_name]">Last Name</label> <?=form::input('user[last_name]', $user->last_name)?></li>
+	<li><label for="user[email]">Email</label> <?=form::input('user[email]', $user->email)?></li>
 </ul>
-<h3>Receive Emails For:</h3>
-<ul>
-	<li><?=form::checkbox('email_ticket_create', TRUE, $user->email_ticket_create)?> <label for="email_ticket_create">Ticket Creation</label></li>
-	<li><?=form::checkbox('email_ticket_close', TRUE, $user->email_ticket_close)?> <label for="email_ticket_close">Ticket Close</label></li>
-	<li><?=form::checkbox('email_ticket_update', TRUE, $user->email_ticket_update)?> <label for="email_ticket_update">Ticket Update</label></li>
-	<li><?=form::checkbox('email_ticket_time', TRUE, $user->email_ticket_time)?> <label for="email_ticket_time">Ticket Time Addition</label></li>
-	<li><?=form::checkbox('email_project_creation', TRUE, $user->email_project_creation)?> <label for="email_project_creation">Project Creation</label></li>
-	<li><?=form::checkbox('email_project_close', TRUE, $user->email_project_close)?> <label for="email_project_close">Project Close</label></li>
-</ul>
+<?php Event::run('argentum.user_settings_display', $user)?>
 <p><?=form::submit('save', 'Save Settings')?></p>
 <?=form::close()?>

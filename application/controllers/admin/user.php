@@ -110,13 +110,7 @@ class User_Controller extends Website_Controller
 		}
 		else
 		{
-			$user->set_fields($this->input->post());
-			$user->email_ticket_create = $this->input->post('email_ticket_create', FALSE);
-			$user->email_ticket_close = $this->input->post('email_ticket_close', FALSE);
-			$user->email_ticket_update = $this->input->post('email_ticket_update', FALSE);
-			$user->email_ticket_time = $this->input->post('email_ticket_time', FALSE);
-			$user->email_project_creation = $this->input->post('email_project_creation', FALSE);
-			$user->email_project_close = $this->input->post('email_project_close', FALSE);
+			$user->set_fields($this->input->post('user'));
 
 			try
 			{
@@ -125,6 +119,10 @@ class User_Controller extends Website_Controller
 				$this->template->body->user = $user;
 				$this->template->body->errors = '';
 				$this->template->body->status = TRUE;
+
+				$email_settings = $this->input->post('email');
+				$data = array('user' => $user, 'settings' => $email_settings);
+				Event::run('argentum.user_settings_save', $data);
 			}
 			catch (Kohana_User_Exception $e)
 			{

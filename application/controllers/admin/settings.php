@@ -41,7 +41,8 @@ class Settings_Controller extends Website_Controller
 			}
 		}
 	}
-	
+
+	// TODO: Find a better way!
 	public function modules()
 	{
 		$settings = new Settings_Model();
@@ -89,7 +90,20 @@ class Settings_Controller extends Website_Controller
 				// Then set all the applicable modules
 				foreach ($this->input->post() as $field => $active)
 				{
-					$db->update('modules', array('active' => TRUE), array('name' => $field));
+					// Make sure we run the installer if it hasnt been installed yet.
+					// Then mark it as installed
+					if (count($db->getwhere('modules', array('installed' => FALSE, 'name' => $field))))
+					{
+						Kohana::config_set('core.modules', array_merge(Kohana::config('core.modules'), array(MODPATH.'argentum/'.$field)));
+						$class = ucfirst($field).'_Install';
+						include Kohana::find_file('libraries', $field.'_install');
+
+						// Run the installer
+						$install = new $class;
+						$install->run_install();
+					}
+
+					$db->update('modules', array('active' => TRUE, 'installed' => TRUE), array('name' => $field));
 				}
 
 				foreach ($db->get('modules') as $row)
