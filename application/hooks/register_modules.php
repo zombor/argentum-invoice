@@ -13,7 +13,7 @@ class register_modules {
 		$db = Database::instance();
 		$modules = array();
 		// Get the list of modules from the db
-		foreach ($db->get('modules', array('active' => TRUE, 'installed' => TRUE)) as $module)
+		foreach ($db->getwhere('modules', array('active' => TRUE, 'installed' => TRUE)) as $module)
 		{
 			$modules[] = MODPATH.'argentum/'.$module->name;
 		}
