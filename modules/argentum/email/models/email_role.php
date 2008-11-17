@@ -9,6 +9,7 @@ class Email_Role_Model extends Auto_Modeler_ORM {
 	                        'ticket_create' => FALSE,
 	                        'ticket_close' => FALSE,
 	                        'ticket_update' => FALSE,
+	                        'ticket_delete' => FALSE,
 	                        'ticket_time' => FALSE,
 	                        'project_create' => FALSE,
 	                        'project_close' => FALSE);

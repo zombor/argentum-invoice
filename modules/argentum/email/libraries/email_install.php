@@ -15,6 +15,7 @@ class Email_Install {
 		                   `user_id` mediumint(9) NOT NULL,
 		                   `ticket_create` binary(1) NOT NULL,
 		                   `ticket_close` binary(1) NOT NULL,
+		                   `ticket_delete` binary(1) NOT NULL,
 		                   `ticket_update` binary(1) NOT NULL,
 		                   `ticket_time` binary(1) NOT NULL,
 		                   `project_create` binary(1) NOT NULL,

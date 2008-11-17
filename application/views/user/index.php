@@ -1,5 +1,5 @@
 <h2>My Account</h2>
-<h3><?=html::anchor('user/settings', 'Edit My Account')?></h3>
+<h3><?=html::anchor('admin/user/settings', 'Edit My Account')?></h3>
 <h3><?=html::anchor('user/active_projects', 'View My Projects')?></h3>
 <h3>Timesheet</h3>
 <p>View your timesheet by choosing your options below.</p>

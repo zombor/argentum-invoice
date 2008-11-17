@@ -36,8 +36,10 @@ class Time_Controller extends Website_Controller {
 					$ticket->complete= TRUE;
 					$ticket->close_date = time();
 					$ticket->save();
+					Event::run('argentum.ticket_close', $ticket);
 				}
 
+				Event::run('argentum.ticket_time', $time);
 				url::redirect('ticket/'.($time->ticket->complete ? 'closed' : 'active').'/'.$time->ticket->project->id);
 			}
 			catch (Kohana_User_Exception $e)

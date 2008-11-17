@@ -28,12 +28,15 @@ class Ticket_Controller extends Website_Controller {
 			$ticket->set_fields($this->input->post());
 			$ticket->creation_date = time();
 			$ticket->user_id = $this->input->post('user_id');
+			$ticket->created_by = $_SESSION['auth_user']->id;
 
 			try
 			{
 				$ticket->save();
 				$ticket->rate = $ticket->operation_type->rate;
 				$ticket->save();
+				
+				Event::run('argentum.ticket_create', $ticket);
 				url::redirect('ticket/active/'.$ticket->project_id);
 			}
 			catch (Kohana_User_Exception $e)
@@ -67,12 +70,16 @@ class Ticket_Controller extends Website_Controller {
 			$ticket->complete = $this->input->post('complete', FALSE);
 
 			if ($ticket->complete)
+			{
 				$ticket->close_date = time();
+				Event::run('argentum.ticket_close', $ticket);
+			}
 
 			try
 			{
 				$ticket->save();
 
+				Event::run('argentum.ticket_update', $ticket);
 				url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
 			}
 			catch (Kohana_User_Exception $e)
@@ -91,7 +98,9 @@ class Ticket_Controller extends Website_Controller {
 	*/
 	public function delete()
 	{
-		Auto_Modeler_ORM::factory('ticket', $this->input->post('id'))->delete();
-		url::redirect('ticket/view_project/');
+		$ticket = Auto_Modeler_ORM::factory('ticket', $this->input->post('id'));
+		$ticket->delete();
+		Event::run('argentum.ticket_delete', $ticket);
+		url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
 	}
 }

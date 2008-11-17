@@ -6,6 +6,7 @@ class Ticket_Model extends Auto_Modeler_ORM
 	
 	protected $data = array('id' => '',
 	                        'user_id' => NULL,
+	                        'created_by' => '',
 	                        'project_id' => '',
 	                        'description' => '',
 	                        'creation_date' => '',
