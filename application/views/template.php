@@ -6,10 +6,12 @@
 		<meta http-equiv="content-language" content="en" />
 		<title><?=$title?></title>
 		<?=html::stylesheet(array('css/reset', 'css/style', 'css/print'), array('', '', 'print'))?>
+		<?php Event::run('argentum.stylesheet_display')?>
 
-		<?=html::script('js/lib/jquery')?> 
-		<?=html::script('js/lib/jquery.livequery')?> 
-		<?=html::script('js/effects')?> 
+		<?=html::script('js/lib/jquery')?>
+		<?=html::script('js/lib/jquery.livequery')?>
+		<?=html::script('js/effects')?>
+		<?php Event::run('argentum.js_display')?>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -20,6 +22,7 @@
 					<li><?=html::anchor('client', 'Clients')?></li>
 					<li><?=html::anchor('project', 'Projects')?></li>
 					<li><?=html::anchor('invoice', 'Invoices')?></li>
+					<?php Event::run('argentum.nav_links_display')?>
 					<li class="small"><?=html::anchor('user/index', 'My Account')?></li><?php if (Auth::instance()->logged_in('admin')):?>
 					<li class="small"><?=html::anchor('admin/settings', 'Settings')?></li><?php endif; ?>
 					<li class="small"><?=html::anchor('user/logout', 'Logout')?></li>
@@ -32,6 +35,7 @@
 			</div>
 			<div id="body" class="clear">
 				<?=$body?>
+				<?php Event::run('argentum.body_display')?>
 			</div>
 			<div id="footer">
 				<div id="copyright">&copy; 2008 Argentum Team</div>
