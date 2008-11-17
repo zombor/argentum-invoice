@@ -56,7 +56,7 @@ class Settings_Controller extends Website_Controller
 		{
 			// Set the module to not enabled by default
 			// Don't include hidden folders
-			if ($entry[0] == '.') $directories[$entry] = FALSE;
+			if ($entry[0] != '.') $directories[$entry] = FALSE;
 		}
 
 		// Sync the folder with the database
