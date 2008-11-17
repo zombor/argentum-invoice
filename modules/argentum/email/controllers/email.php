@@ -115,7 +115,7 @@ class Email_Controller extends Controller {
 	public function _ticket_delete()
 	{
 		$swift = email::connect();
-		$message = new Swift_Message('Ticket Delted For Project #'.Event::$data->project->id.' - ID:'.Event::$data->id,
+		$message = new Swift_Message('Ticket Deleted For Project #'.Event::$data->project->id.' - ID:'.Event::$data->id,
 		                             View::factory('emails/ticket_delete')->set(array('ticket' => Event::$data)),
 		                             'text/html');
 		$recipients = new Swift_RecipientList();
@@ -203,6 +203,7 @@ class Email_Controller extends Controller {
 		$roles = Auto_Modeler_ORM::factory('email_role')->fetch_some(array('user_id' => Event::$data['user']->id))->current();
 		$roles->ticket_create = isset(Event::$data['settings']['ticket_create']);
 		$roles->ticket_close = isset(Event::$data['settings']['ticket_close']);
+		$roles->ticket_delete = isset(Event::$data['settings']['ticket_delete']);
 		$roles->ticket_time = isset(Event::$data['settings']['ticket_time']);
 		$roles->project_create = isset(Event::$data['settings']['project_create']);
 		$roles->project_close = isset(Event::$data['settings']['project_close']);
