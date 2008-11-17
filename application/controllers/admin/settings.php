@@ -48,7 +48,7 @@ class Settings_Controller extends Website_Controller
 		$settings = new Settings_Model();
 		$this->template->body = new View('admin/settings/modules');
 		$db = new Database();
-		
+
 		// Update the module list in the database
 		$d = dir(MODPATH.'argentum/');
 		$directories = array();
@@ -62,17 +62,21 @@ class Settings_Controller extends Website_Controller
 		foreach ($directories as $dir => $found)
 		{
 			if ( ! count($db->from('modules')->where('name', $dir)->limit(1)->get()))
-				$db->insert('modules', array('name' => $dir, 'active' => FALSE));
+			{
+				$module = new Module_Model();
+				$module->name = $dir;
+				$module->save();
+			}
 		}
 
 		// Now remove the ones that weren't found from the database
-		foreach ($db->get('modules') as $row)
-			if ( ! array_key_exists($row->name, $directories))
-				$db->delete('modules', array('name', $row->name));
-			else if ($row->active)
-				$directories[$row->name] = TRUE;
+		foreach (Auto_Modeler_ORM::factory('module')->fetch_all() as $module)
+			if ( ! array_key_exists($module->name, $directories))
+			{
+				$module->delete();
+			}
 			else
-				$directories[$row->name] = FALSE;
+				$directories[$module->name] = $module;
 
 		if ( ! $_POST)
 		{
@@ -90,6 +94,7 @@ class Settings_Controller extends Website_Controller
 				// Then set all the applicable modules
 				foreach ($this->input->post() as $field => $active)
 				{
+					$module = new Module_Model($field);
 					// Make sure we run the installer if it hasnt been installed yet.
 					// Then mark it as installed
 					if (count($db->getwhere('modules', array('installed' => FALSE, 'name' => $field))))
@@ -103,17 +108,16 @@ class Settings_Controller extends Website_Controller
 						$install->run_install();
 					}
 
-					$db->update('modules', array('active' => TRUE, 'installed' => TRUE), array('name' => $field));
+					$module->active = TRUE;
+					$module->installed = TRUE;
+					$module->save();
 				}
 
-				foreach ($db->get('modules') as $row)
-					if ($row->active)
-						$directories[$row->name] = TRUE;
-					else
-						$directories[$row->name] = FALSE;
+				foreach (Auto_Modeler_ORM::factory('module')->fetch_all() as $module)
+					$directories[$module->name] = $module;
 
 				$this->template->body->status = TRUE;
-				$this->template->body->modules = ($directories + $_POST);
+				$this->template->body->modules = $directories;
 			}
 			catch (Kohana_Database_Exception $e)
 			{
@@ -121,5 +125,24 @@ class Settings_Controller extends Website_Controller
 				$this->template->body->modules = ($directories + $_POST);
 			}
 		}
+	}
+	
+	public function uninstall_module($module)
+	{
+		Kohana::config_set('core.modules', array_merge(Kohana::config('core.modules'), array(MODPATH.'argentum/'.$module)));
+		$class = ucfirst($module).'_Install';
+		include Kohana::find_file('libraries', $module.'_install');
+
+		// Run the uninstaller
+		$install = new $class;
+		$install->uninstall();
+
+		$module = new Module_Model($module);
+
+		$module->installed = FALSE;
+		$module->active = FALSE;
+		$module->save();
+
+		url::redirect('admin/settings/modules');
 	}
 }
