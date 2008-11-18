@@ -219,12 +219,12 @@ CREATE TABLE `tickets` (
   `description` text NOT NULL,
   `creation_date` int(11) NOT NULL,
   `close_date` int(11) NOT NULL,
-  `complete` binary(1) NOT NULL,
-  `billable` binary(1) NOT NULL,
-  `invoiced` binary(1) NOT NULL,
+  `complete` binary(1) NOT NULL default 0,
+  `billable` binary(1) NOT NULL default 1,
+  `invoiced` binary(1) NOT NULL default 0,
   `invoice_id` mediumint(9) default NULL,
-  `operation_type_id` mediumint(9) NOT NULL,
-  `rate` decimal(10,2) NOT NULL,
+  `operation_type_id` mediumint(9) NOT NULL default 1,
+  `rate` decimal(10,2) NOT NULL default 0,
   PRIMARY KEY  (`id`),
   KEY `user_id` (`user_id`),
   KEY `project_id` (`project_id`),
@@ -303,9 +303,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 -- 
 
-INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `password`, `email`, `last_login`, `logins`, `email_ticket_create`, `email_ticket_close`, `email_ticket_update`, `email_ticket_time`, `email_project_creation`, `email_project_close`) VALUES 
-(1, 'admin', 'Admin', 'User', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 1226546253, 282, 0x31, 0x31, 0x31, 0x31, 0x30, 0x30),
-(4, 'demo', 'Demo', 'User', '785e0c0ccfb860d466d5d870b95c87220b374e4f2ce8a5bc0c', 'test@test.com', 1226494173, 15, 0x31, 0x31, 0x31, 0x31, 0x30, 0x30);
+INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `password`, `email`, `last_login`, `logins`) VALUES 
+(1, 'admin', 'Admin', 'User', '67e34ce34532ca41db7941c0182066516a9d7f6aa783f5cbdb', 'test@test.com', 0, 0),
+(4, 'demo', 'Demo', 'User', '785e0c0ccfb860d466d5d870b95c87220b374e4f2ce8a5bc0c', 'test@test.com', 0, 0);
 
 -- --------------------------------------------------------
 

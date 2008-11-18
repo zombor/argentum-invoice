@@ -11,13 +11,7 @@ class User_Model extends Auto_Modeler_ORM {
 	                        'password' => '',
 	                        'email' => '',
 	                        'last_login' => '',
-	                        'logins' => '',
-	                        'email_ticket_create' => '',
-	                        'email_ticket_close' => '',
-	                        'email_ticket_update' => '',
-	                        'email_ticket_time' => '',
-	                        'email_project_creation' => '',
-	                        'email_project_close' => '');
+	                        'logins' => '');
 
 	protected $rules = array('username' => array('required'),
 	                         'email' => array('required', 'email'),
