@@ -123,7 +123,7 @@ class Settings_Controller extends Website_Controller
 			catch (Kohana_Database_Exception $e)
 			{
 				$this->template->body->status = FALSE;
-				$this->template->body->modules = ($directories + $_POST);
+				$this->template->body->modules = $directories;
 			}
 		}
 	}

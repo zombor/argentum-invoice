@@ -13,6 +13,7 @@ class send_email {
 		Event::add('argentum.project_create', array('Email_Controller', '_project_create'));
 		Event::add('argentum.project_close', array('Email_Controller', '_project_close'));
 		Event::add('argentum.user_settings_display', array('Email_Controller', '_user_settings_display'));
+		Event::add('argentum.system_settings_display', array('Email_Controller', '_system_settings_display'));
 		Event::add('argentum.user_settings_save', array('Email_Controller', '_user_settings_save'));
 		Event::add('argentum.ticket_create', array('Email_Controller', '_ticket_create'));
 		Event::add('argentum.ticket_close', array('Email_Controller', '_ticket_close'));

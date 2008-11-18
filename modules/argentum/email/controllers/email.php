@@ -1,6 +1,6 @@
 <?php
 
-class Email_Controller extends Controller {
+class Email_Controller extends Website_Controller {
 
 	public function _project_add()
 	{
@@ -224,5 +224,39 @@ class Email_Controller extends Controller {
 			$roles = $roles->current();
 
 		View::factory('user_settings_display')->set(array('roles' => $roles))->render(TRUE);
+	}
+
+	public function _system_settings_display()
+	{
+		View::factory('system_settings_display')->render(TRUE);
+	}
+
+	public function settings()
+	{
+		$settings = new Email_Settings_Model();
+		$this->template->body = new View('admin/settings/email_form');
+		$this->template->body->settings = $settings;
+		$this->template->body->errors = '';
+
+		if ( ! $_POST)
+		{
+			$this->template->body->status = NULL;
+		}
+		else
+		{
+			$settings->set_fields($this->input->post());
+			try
+			{
+				$settings->save();
+				$this->template->body->status = TRUE;
+				$this->template->body->settings = $settings;
+			}
+			catch (Kohana_User_Exception $e)
+			{
+				$this->template->body->errors = $e;
+				$this->template->body->settings = $settings;
+				$this->template->body->status = FALSE;
+			}
+		}
 	}
 }

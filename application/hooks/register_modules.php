@@ -5,7 +5,7 @@ class register_modules {
 	public function __construct()
 	{
 		// Hook into routing
-		Event::add('system.routing', array($this, 'register'));
+		Event::add_after('system.routing', array('Router', 'find_uri'), array($this, 'register'));
 	}
 
 	public function register()
