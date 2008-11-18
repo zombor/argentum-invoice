@@ -1,9 +1,19 @@
 <?php
+/**
+ * Model for user email settings
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Email_Role_Model extends Auto_Modeler_ORM {
 
+	// Table name for the model
 	protected $table_name = 'email_roles';
 
+	// Data array for the model
 	protected $data = array('id' => '',
 	                        'user_id' => '',
 	                        'ticket_create' => FALSE,
@@ -14,9 +24,12 @@ class Email_Role_Model extends Auto_Modeler_ORM {
 	                        'project_create' => FALSE,
 	                        'project_close' => FALSE);
 
+	// Rules array for the model
 	protected $rules = array('user_id' => array('required'));
 
-	// Overloading constructor to load by a second column
+	/**
+	 * Overloading the constructor to load by a user_id
+	 */
 	public function __construct($id = NULL)
 	{
 		parent::__construct();

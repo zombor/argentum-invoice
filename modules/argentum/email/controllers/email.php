@@ -1,7 +1,18 @@
 <?php
+/**
+ * Controller actions for the email events
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Email_Controller extends Website_Controller {
 
+	/**
+	 * Sends an email when a project is created
+	 */
 	public function _project_add()
 	{
 		$this->send_mail('Project Created - ID:'.Event::$data->id.', '.Event::$data->name,
@@ -9,6 +20,9 @@ class Email_Controller extends Website_Controller {
 		                 'project_create');
 	}
 
+	/**
+	 * Sends an email when a project is closed
+	 */
 	public function _project_close()
 	{
 		$this->send_mail('Project Closed - ID:'.Event::$data->id.', '.Event::$data->name,
@@ -16,6 +30,9 @@ class Email_Controller extends Website_Controller {
 		                 'project_close');
 	}
 
+	/**
+	 * Sends an email when a ticket is created
+	 */
 	public function _ticket_create()
 	{
 		$swift = email::connect();
@@ -48,6 +65,9 @@ class Email_Controller extends Website_Controller {
 		}
 	}
 
+	/**
+	 * Sends an email when a ticket is closed
+	 */
 	public function _ticket_close()
 	{
 		$swift = email::connect();
@@ -80,6 +100,9 @@ class Email_Controller extends Website_Controller {
 		}
 	}
 
+	/**
+	 * Sends an email when a ticket is updated
+	 */
 	public function _ticket_update()
 	{
 		$swift = email::connect();
@@ -112,6 +135,9 @@ class Email_Controller extends Website_Controller {
 		}
 	}
 
+	/**
+	 * Sends an email when a ticket is deleted
+	 */
 	public function _ticket_delete()
 	{
 		$swift = email::connect();
@@ -143,6 +169,10 @@ class Email_Controller extends Website_Controller {
 			throw new Kohana_User_Exception('swift.general_error', $e->getMessage());
 		}
 	}
+
+	/**
+	 * Sends an email when a tickethas time added to it
+	 */
 	public function _ticket_time()
 	{
 		$swift = email::connect();
@@ -175,6 +205,12 @@ class Email_Controller extends Website_Controller {
 		}
 	}
 
+	/**
+	 * DRY method for project creation email
+	 * @param string $title
+	 * @param string body
+	 * @param string column
+	 */
 	protected function send_mail($title, $body, $column)
 	{
 		// Send an email to all users who are set to receive emails on new projects
@@ -198,6 +234,9 @@ class Email_Controller extends Website_Controller {
 		}
 	}
 
+	/**
+	 * Saves the email role preferences for a user account
+	 */
 	public function _user_settings_save()
 	{
 		$roles = Auto_Modeler_ORM::factory('email_role')->fetch_some(array('user_id' => Event::$data['user']->id))->current();
@@ -210,10 +249,14 @@ class Email_Controller extends Website_Controller {
 		$roles->save();
 	}
 
+	/**
+	 * Displays the email preferences screen for a user account
+	 */
 	public function _user_settings_display()
 	{
 		$roles = Auto_Modeler_ORM::factory('email_role')->fetch_some(array('user_id' => $_SESSION['auth_user']->id));
 
+		// If the user doesn't have any roles, create an empty role row
 		if ( ! count($roles))
 		{
 			$roles = new Email_Role_Model();
@@ -226,11 +269,17 @@ class Email_Controller extends Website_Controller {
 		View::factory('user_settings_display')->set(array('roles' => $roles))->render(TRUE);
 	}
 
+	/**
+	 * Displays the system settings link
+	 */
 	public function _system_settings_display()
 	{
 		View::factory('system_settings_display')->render(TRUE);
 	}
 
+	/**
+	 * Form for processing general application email preferences
+	 */
 	public function settings()
 	{
 		$settings = new Email_Settings_Model();
@@ -245,6 +294,7 @@ class Email_Controller extends Website_Controller {
 		else
 		{
 			$settings->set_fields($this->input->post());
+
 			try
 			{
 				$settings->save();

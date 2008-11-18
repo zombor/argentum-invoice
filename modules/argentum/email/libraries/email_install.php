@@ -1,15 +1,29 @@
 <?php
+/**
+ * Performs install/uninstall methods for the email module
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Email_Install {
 
+	/**
+	 * Constructor to load the shared database library
+	 */
 	public function __construct()
 	{
 		$this->db = Database::instance();
 	}
 
+	/**
+	 * Creates the required database tables for the email module
+	 */
 	public function run_install()
 	{
-		// Create the database tables. We need a roles table, and a join table
+		// Create the database tables.
 		$this->db->query('CREATE TABLE `email_roles` (
 		                   `id` mediumint(9) auto_increment,
 		                   `user_id` mediumint(9) NOT NULL,
@@ -24,6 +38,9 @@ class Email_Install {
 		                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
 	}
 
+	/**
+	 * Deletes the database tables for the email module
+	 */
 	public function uninstall()
 	{
 		$this->db->query('DROP TABLE `email_roles`');
