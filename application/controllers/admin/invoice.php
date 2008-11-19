@@ -1,21 +1,17 @@
 <?php
+/**
+ * Invoice Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Invoice_Controller
-*  description: Provides application support for creating and modifying invoices
-*/
 class Invoice_Controller extends Website_Controller {
 
-	/*
-	*  function:     create
-	*  description:  Creates an invoice for a client.
-	                 Will display all unbilled tickets and non-hourly items for all
-	                 active projects for the client.
-	*  parameters:   $_GET['client_id']: The ID of the client to create the invoice for
-	                 $_POST['tickets']:    An array of tickets to bill
-	                 $_POST['non_hourly']: An array of non-hourly items to bill
-	                 $_POST['comments']:   Comments for the invoice to save
-	                 $_POST['client_id']:  The ID of the client to invoice
+	/**
+	 * Creates an invoice for a client
 	*/
 	public function create()
 	{
@@ -64,6 +60,9 @@ class Invoice_Controller extends Website_Controller {
 		}
 	}
 
+	/**
+	 * Adds a payment to an invoice
+	 */
 	public function post_payment($invoice_id)
 	{
 		$invoice_payment = new Invoice_Payment_Model();
@@ -95,14 +94,20 @@ class Invoice_Controller extends Website_Controller {
 			$this->template->body->invoice_id = $this->uri->segment(4);
 		}
 	}
-	
+
+	/**
+	 * Views all payments for an invoice
+	 */
 	public function view_payments($invoice_id)
 	{
 		$this->template->body = new View('admin/invoice/view_payments');
 		$this->template->body->invoice_payments = Auto_Modeler_ORM::factory('invoice_payment')->fetch_some(array('invoice_id' => $invoice_id));
 		$this->template->body->invoice_id = $invoice_id;
 	}
-	
+
+	/**
+	 * Deleted a payments for an invoice
+	 */
 	public function delete_payment()
 	{
 		$payment_id = $this->input->post('payment_id');

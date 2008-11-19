@@ -1,4 +1,12 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
+/**
+ * Invoice Payment model
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Invoice_Payment_Model extends Auto_Modeler_ORM {
 

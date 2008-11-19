@@ -1,9 +1,13 @@
 <?php
+/**
+ * Project Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Website_Controller
-*  description: Provides basic setup for all application controllers
-*/
 abstract class Website_Controller extends Template_Controller {
 
 	public function __construct()

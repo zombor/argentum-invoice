@@ -1,4 +1,12 @@
 <?php
+/**
+ * Settings model
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Settings_Model extends Auto_Modeler
 {

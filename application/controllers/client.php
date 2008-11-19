@@ -1,9 +1,13 @@
 <?php
+/**
+ * Client Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Client_Controller
-*  description: Provides application support for viewing and searching for clients
-*/
 class Client_Controller extends Website_Controller {
 
 	public function index()
@@ -12,11 +16,9 @@ class Client_Controller extends Website_Controller {
 		$this->template->body->clients = Auto_Modeler_ORM::factory('client')->fetch_all('company_name');
 	}
 
-	/*
-	*  function:     view
-	*  description:  Displays the information for the requested client
-	*  parameters:   $short_name: The short name of the client to view
-	*/
+	/**
+	 *  Displays a client's information
+	 */
 	public function view($short_name = NULL)
 	{
 		$client = new Client_Model($short_name);
@@ -29,12 +31,9 @@ class Client_Controller extends Website_Controller {
 		$this->template->body->client = $client;
 	}
 
-	/*
-	*  function:     search
-	*  description:  Searches for clients
-	*  parameters:   $_GET['term']: The search term to query the database with.
-	*                               Searches the company name, contact name and address.
-	*/
+	/**
+	 *  Searches for a client
+	 */
 	public function search()
 	{
 		$term = $this->input->get('term');

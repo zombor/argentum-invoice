@@ -1,4 +1,12 @@
 <?php
+/**
+ * Non-hourly model
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Non_hourly_Model extends Auto_Modeler_ORM
 {

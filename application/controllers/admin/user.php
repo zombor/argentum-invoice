@@ -1,9 +1,13 @@
 <?php
+/**
+ * User Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       User_Controller
-*  description: Provides application support for users inclusing adding, editing, and deleting
-*/
 class User_Controller extends Website_Controller
 {
 	/**
@@ -97,6 +101,9 @@ class User_Controller extends Website_Controller
 		}
 	}
 
+	/**
+	 * Updates user preferences
+	 */
 	public function settings()
 	{
 		$user = $_SESSION['auth_user'];

@@ -1,7 +1,18 @@
 <?php
+/**
+ * Project Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Settings_Controller extends Website_Controller
 {
+	/**
+	 * Custom constructor so we can make sure only admins can make changes
+	 */
 	public function __construct()
 	{
 		// Make sure the user is an application administrator
@@ -9,11 +20,18 @@ class Settings_Controller extends Website_Controller
 
 		parent::__construct();
 	}
+
+	/**
+	 * Displays the application settings list
+	 */
 	public function index()
 	{
 		$this->template->body = new View('admin/settings/index');
 	}
 
+	/**
+	 * Updates main application settings
+	 */
 	public function application()
 	{
 		$settings = new Settings_Model();
@@ -42,7 +60,9 @@ class Settings_Controller extends Website_Controller
 		}
 	}
 
-	// TODO: Find a better way!
+	/**
+	 * Updates installed/activated modules
+	 */
 	public function modules()
 	{
 		$settings = new Settings_Model();
@@ -127,7 +147,10 @@ class Settings_Controller extends Website_Controller
 			}
 		}
 	}
-	
+
+	/**
+	 * Uninstalls a module, and runs the module uninstaller
+	 */
 	public function uninstall_module($module)
 	{
 		Kohana::config_set('core.modules', array_merge(Kohana::config('core.modules'), array(MODPATH.'argentum/'.$module)));

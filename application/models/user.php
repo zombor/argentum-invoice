@@ -1,4 +1,12 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
+/**
+ * User model
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class User_Model extends Auto_Modeler_ORM {
 
@@ -132,6 +140,9 @@ class User_Model extends Auto_Modeler_ORM {
 		return FALSE;
 	}
 
+	/**
+	 * Finds all projects assigned to this user
+	 */
 	public function find_assigned_projects()
 	{
 		$sql = 'SELECT DISTINCT `projects`.* FROM `projects` LEFT JOIN `tickets` ON `tickets`.`project_id` = `projects`.`id` WHERE `tickets`.`user_id` = ?';

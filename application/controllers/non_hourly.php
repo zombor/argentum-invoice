@@ -1,16 +1,19 @@
 <?php
+/**
+ * Non-Hourly Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Non_hourly_Controller
-*  description: Provides application support for viewing non-hourly items for projects
-*/
 class Non_hourly_Controller extends Website_Controller {
 
-	/*
-	*  function:     view_project
-	*  description:  Displays all non-hourly items for a project
-	*  parameters:   $project_id: The project the view
-	*/
+	/**
+	 * Views all non-hourly items for a project
+	 * @param int $project_id
+	 */
 	public function view_project($project_id)
 	{
 		$this->template->body = new View('non_hourly/view_project');

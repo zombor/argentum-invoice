@@ -1,9 +1,13 @@
 <?php
+/**
+ * Invoice Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Invoice_Controller
-*  description: Provides application support for viewing invoices
-*/
 class Invoice_Controller extends Website_Controller {
 
 	public function index()
@@ -11,13 +15,11 @@ class Invoice_Controller extends Website_Controller {
 		$this->template->body = new View('invoice/index');
 	}
 
-	/*
-	*  function:     list_all
-	*  description:  Displays all invoices for a requested time period.
-	                 By default, it displays all invoices for the current year.
-	*  parameters:   $year:  Year to view
-	*                $month: Month to view
-	*/
+	/**
+	 * Displays all invoices
+	 * @param int $year
+	 * @param int $month
+	 */
 	public function list_all($year = NULL, $month = NULL)
 	{
 		if ($year == NULL AND $month == NULL)
@@ -32,11 +34,10 @@ class Invoice_Controller extends Website_Controller {
 		$this->template->body->invoices = Auto_Modeler_ORM::factory('invoice')->find_invoices_by_date($start_date, $end_date);
 	}
 
-	/*
-	*  function:     view
-	*  description:  Displays the requested invoice
-	*  parameters:   $invoice_id: The invoice id to view
-	*/
+	/**
+	 * Views an invoice
+	 * @param int $invoice_id
+	 */
 	public function view($invoice_id = NULL)
 	{
 		$invoice = new Invoice_Model($invoice_id);
@@ -47,7 +48,11 @@ class Invoice_Controller extends Website_Controller {
 		$this->template->body = new View('invoice/templates/default/view');
 		$this->template->body->invoice = new Invoice_Model($invoice_id);
 	}
-	
+
+	/**
+	 * Views a PDF version of a invoice
+	 * @param int $invoice_id
+	 */
 	public function view_pdf($invoice_id = NULL)
 	{
 		$invoice = new Invoice_Model($invoice_id);

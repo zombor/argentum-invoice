@@ -1,4 +1,12 @@
 <?php
+/**
+ * Invoice model
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Invoice_Model extends Auto_Modeler_ORM
 {
@@ -10,6 +18,10 @@ class Invoice_Model extends Auto_Modeler_ORM
 	                        'comments' => '',
 	                        'client_id' => '');
 
+	/**
+	 * Calculates the total income for this invoice
+	 * @return double
+	 */
 	public function total_income()
 	{
 		if ( ! $this->data['id'])
@@ -28,6 +40,10 @@ class Invoice_Model extends Auto_Modeler_ORM
 		return number_format($total_income, 2);
 	}
 
+	/**
+	 * Calculates the total amount paid for this invoice
+	 * @return double
+	 */
 	public function total_paid()
 	{
 		$total_paid = 0;
@@ -38,6 +54,10 @@ class Invoice_Model extends Auto_Modeler_ORM
 		return $total_paid;
 	}
 
+	/**
+	 * Finds the operation types for this invoice
+	 * @return array operation type id with values as the total data for that operation
+	 */
 	public function find_operation_types()
 	{
 		if ( ! $this->data['id'])
@@ -58,12 +78,22 @@ class Invoice_Model extends Auto_Modeler_ORM
 		return $return;
 	}
 
+	/**
+	 * Finds all invoices created between a start and end date
+	 * @param $start_date
+	 * @param $end_date
+	 * @return object
+	 */
 	public function find_invoices_by_date($start_date, $end_date)
 	{
 		$sql = 'SELECT * FROM `invoices` WHERE `date` >= ? AND `date` < ? ORDER BY `id` DESC';
 		return $this->db->query($sql, array($start_date, $end_date))->result(TRUE, 'Invoice_Model');
 	}
 
+	/**
+	 * Finds all invoices created between a start and end date
+	 * @return float
+	 */
 	public function find_sales_tax()
 	{
 		$total = 0;

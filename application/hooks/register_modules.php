@@ -1,13 +1,27 @@
 <?php
+/**
+ * Register Modules Hook
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class register_modules {
 
+	/**
+	 * Adds the register method to load after the find_uri Router method.
+	 */
 	public function __construct()
 	{
 		// Hook into routing
 		Event::add_after('system.routing', array('Router', 'find_uri'), array($this, 'register'));
 	}
 
+	/**
+	 * Loads all argentum modules
+	 */
 	public function register()
 	{
 		$db = Database::instance();

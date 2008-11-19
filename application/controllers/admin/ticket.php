@@ -1,17 +1,18 @@
 <?php
+/**
+ * Ticket Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Ticket_Controller
-*  description: Provides application support for adding, editing and deleting tickets
-*/
 class Ticket_Controller extends Website_Controller {
 
-	/*
-	*  function:     add
-	*  description:  Creates a new ticket
-	*  parameters:   $project_id: The project to add the ticket to
-	*                $_POST: Contains the post data to create the ticket
-	*/
+	/**
+	 *  Creates a new ticket for a project
+	 */
 	public function add($project_id)
 	{
 		$ticket = new Ticket_Model();
@@ -48,12 +49,9 @@ class Ticket_Controller extends Website_Controller {
 		}
 	}
 
-	/*
-	*  function:     edit
-	*  description:  Updates an existing ticket
-	*  parameters:   $id: The ticket ID
-	*                $_POST: Contains the post data to update the ticket
-	*/
+	/**
+	 *  Updates a ticket for a project
+	 */
 	public function edit($id)
 	{
 		$ticket = new Ticket_Model($id);
@@ -91,11 +89,9 @@ class Ticket_Controller extends Website_Controller {
 		}
 	}
 
-	/*
-	*  function:     delete
-	*  description:  Deletes a ticket
-	*  parameters:   $_POST['id']: ID of the ticket to delete
-	*/
+	/**
+	 *  Deletes a ticket
+	 */
 	public function delete()
 	{
 		$ticket = Auto_Modeler_ORM::factory('ticket', $this->input->post('id'));

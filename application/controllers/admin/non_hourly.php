@@ -1,17 +1,18 @@
 <?php
+/**
+ * Non_hourly Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Non_hourly_Controller
-*  description: Provides application support for creating and updating non-hourly items
-*/
 class Non_hourly_Controller extends Website_Controller {
 
-	/*
-	*  function:     add
-	*  description:  Creates a non-hourly item
-	*  parameters:   $project_id: The project the add to
-	*                $_POST: Contains the post data to create the project
-	*/
+	/**
+	 * Adds a non-hourly item to a project
+	 */
 	public function add($project_id)
 	{
 		$non_hourly = new Non_hourly_Model();
@@ -43,12 +44,9 @@ class Non_hourly_Controller extends Website_Controller {
 		}
 	}
 
-	/*
-	*  function:     edit
-	*  description:  Updates a non-hourly item
-	*  parameters:   $id: The ID of the non-hourly item to edit
-	*                $_POST: Contains the post data to create the project
-	*/
+	/**
+	 * Updates a non-hourly item for a project
+	 */
 	public function edit($id)
 	{
 		$non_hourly = new Non_hourly_Model($id);

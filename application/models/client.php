@@ -1,4 +1,12 @@
 <?php
+/**
+ * Client model
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Client_Model extends Auto_Modeler_ORM
 {
@@ -55,6 +63,11 @@ class Client_Model extends Auto_Modeler_ORM
 		return parent::save($extra_data, $extra_validation_methods);
 	}
 
+	/**
+	 * Searches for a client
+	 *
+	 * @return object
+	 */
 	public function search($term)
 	{
 		$like = array('company_name' => $term,

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Time model
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
 class Time_Model extends Auto_Modeler_ORM
 {
@@ -30,6 +38,9 @@ class Time_Model extends Auto_Modeler_ORM
 		}
 	}
 
+	/**
+	 * Checks to see if a time block is valid
+	 */
 	public function check_entered_time(Validation $validation, $input)
 	{
 		if ($this->data['start_time'] > $validation[$input] OR $this->data['start_time'] == $validation[$input])

@@ -1,15 +1,18 @@
 <?php
+/**
+ * Project Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Ticket_Controller
-*  description: Provides application support for viewing tickets for projects
-*/
 class Ticket_Controller extends Website_Controller {
 
-	/*
-	*  function:     active
-	*  description:  Displays the active tickets for the requested project
-	*  parameters:   $project_id: The ID number of the project to view
+	/**
+	 * Displays all active tickets for a project
+	 * @param int $project_id
 	*/
 	public function active($project_id)
 	{
@@ -18,10 +21,9 @@ class Ticket_Controller extends Website_Controller {
 		$this->template->body->project = new Project_Model($project_id);
 	}
 
-	/*
-	*  function:     closed
-	*  description:  Displays the closed tickets for the requested project
-	*  parameters:   $project_id: The ID number of the project to view
+	/**
+	 * Displays all closed tickets for a project
+	 * @param int $project_id
 	*/
 	public function closed($project_id)
 	{
@@ -30,10 +32,9 @@ class Ticket_Controller extends Website_Controller {
 		$this->template->body->project = new Project_Model($project_id);
 	}
 
-	/*
-	*  function:     invoiced
-	*  description:  Displays the invoiced tickets for the requested project
-	*  parameters:   $project_id: The ID number of the project to view
+	/**
+	 * Displays all invoiced tickets for a project
+	 * @param int $project_id
 	*/
 	public function invoiced($project_id)
 	{
@@ -42,10 +43,9 @@ class Ticket_Controller extends Website_Controller {
 		$this->template->body->project = new Project_Model($project_id);
 	}
 
-	/*
-	*  function:     view
-	*  description:  Displays the details of the ticket, including time spent on ticket
-	*  parameters:   $id: The ID number of the ticket to view
+	/**
+	 * Views details for a ticket
+	 * @param int $id
 	*/
 	public function view($id)
 	{

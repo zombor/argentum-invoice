@@ -1,27 +1,27 @@
 <?php
+/**
+ * Operation_type Controller
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ */
 
-/*
-*  class:       Operation_type_Controller
-*  description: Provides application support for creating and editing operation types
-*/
 class Operation_type_Controller extends Website_Controller {
 
-	/*
-	*  function:     all
-	*  description:  Displays all operation types
-	*  parameters:   None expected.
-	*/
+	/**
+	 * Displays all operation types
+	 */
 	public function all()
 	{
 		$this->template->body = new View('admin/operation_type/all');
 		$this->template->body->operation_types = Auto_Modeler_ORM::factory('operation_type')->fetch_all('name');
 	}
 
-	/*
-	*  function:     add
-	*  description:  Creates a new Operation Type
-	*  parameters:   $_POST: Contains the post data to create the project
-	*/
+	/**
+	 * Creates a new operation type
+	 */
 	public function add()
 	{
 		$operation_type = new Operation_type_Model();
@@ -51,12 +51,9 @@ class Operation_type_Controller extends Website_Controller {
 		}
 	}
 
-	/*
-	*  function:     edit
-	*  description:  Updates an existing operation type
-	*  parameters:   $id: ID of the operation type to edit
-	                 $_POST: Contains the post data to create the project
-	*/
+	/**
+	 * Edits an existing operation type
+	 */
 	public function edit($id)
 	{
 		$operation_type = new Operation_type_Model($id);
@@ -86,11 +83,9 @@ class Operation_type_Controller extends Website_Controller {
 		}
 	}
 
-	/*
-	*  function:     delete
-	*  description:  Deletes an operation type
-	*  parameters:   $_POST['id']: ID of the operation type to delete
-	*/
+	/**
+	 * Deletes an operation type
+	 */
 	public function delete()
 	{
 		Auto_Modeler_ORM::factory('operation_type', $this->input->post('id'))->delete();
