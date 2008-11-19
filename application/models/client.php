@@ -35,7 +35,7 @@ class Client_Model extends Auto_Modeler_ORM
 	                         'mailing_address' => array('required'),
 	                         'mailing_city' => array('required'),
 	                         'mailing_state' => array('required'),
-	                         'mailing_zip_code' => array('required'));
+	                         'mailing_zip_code' => array('numeric'));
 
 	// Overloading constructor to load by a second column
 	public function __construct($id = NULL)
