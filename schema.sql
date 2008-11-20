@@ -85,6 +85,7 @@ CREATE TABLE `invoices` (
   `date` int(11) NOT NULL,
   `comments` text NOT NULL,
   `client_id` mediumint(9) NOT NULL,
+  `template_name` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

@@ -1,8 +1,24 @@
+<?php
+/**
+ * Invoice Create View
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ *
+ * @property object $client Client Model Object
+ * @property array  $template array of available invoice templates
+ * @property array  $projects array of project tickets and non-hourly items 
+ */
+?>
 <h2>Create Invoice For <?=$client->company_name?></h2>
 <?=form::open('admin/invoice/create')?>
 <?=form::hidden('client_id', $client->id)?>
 <h3>Invoice Comments:</h3>
 <p><?=form::textarea('comments')?></p>
+<h3>Invoice Template:</h3>
+<p><?=form::dropdown('template_name', $templates)?></p>
 <h3>Tickets to be billed:</h3>
 <table>
 	<tbody>

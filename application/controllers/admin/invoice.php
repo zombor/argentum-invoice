@@ -23,6 +23,8 @@ class Invoice_Controller extends Website_Controller {
 			$invoice->comments = $this->input->post('comments');
 			$invoice->date = time();
 			$invoice->client_id = $this->input->post('client_id');
+			$invoice->template_name = $this->input->post('template_name');
+
 			$invoice_id = $invoice->save();
 
 			// Assign all the tickets to this invoice
@@ -57,6 +59,17 @@ class Invoice_Controller extends Website_Controller {
 			// Load all the unbill items for this client
 			$this->template->body->projects = Auto_Modeler_ORM::factory('project')->find_unbilled($client->id);
 			$this->template->body->client = $client;
+
+			// Find all the invoice templates
+			$d = dir(APPPATH.'views/invoice/templates/');
+			$directories = array();
+			while (($entry = $d->read()) !== FALSE)
+			{
+				// Don't include hidden folders
+				if ($entry[0] != '.') $directories[$entry] = ucfirst(str_replace('_', ' ', $entry));
+			}
+
+			$this->template->body->templates = $directories;
 		}
 	}
 

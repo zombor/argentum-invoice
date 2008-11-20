@@ -45,7 +45,7 @@ class Invoice_Controller extends Website_Controller {
 		if ( ! $invoice->id)
 			Event::run('system.404');
 
-		$this->template->body = new View('invoice/templates/default/view');
+		$this->template->body = new View('invoice/templates/'.$invoice->template_name.'/view');
 		$this->template->body->invoice = new Invoice_Model($invoice_id);
 	}
 
@@ -62,7 +62,7 @@ class Invoice_Controller extends Website_Controller {
 
 		require Kohana::find_file('vendor/dompdf', 'dompdf_config.inc');
 
-		$html = View::factory('invoice/templates/default/pdf')->set(array('invoice' => new Invoice_Model($invoice_id)));
+		$html = View::factory('invoice/templates/'.$invoice->template_name.'/pdf')->set(array('invoice' => new Invoice_Model($invoice_id)));
 		$dompdf = new DOMPDF();
 		$dompdf->load_html($html);
 		$dompdf->render();

@@ -1,3 +1,16 @@
+<?php
+/**
+ * Invoice View Payments View
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ *
+ * @property int    $invoice_id ID of the invoice to post payment for
+ * @property object $invoice_payments the invoice payment database result object
+ */
+?>
 <h2>Invoice Payments for Invoice ID <?=$invoice_id?></h2>
 <table>
 	<tbody>

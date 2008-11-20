@@ -1,4 +1,16 @@
-<?php 
+<?php
+/**
+ * Invoice Default View
+ *
+ * @package		Argentum
+ * @author		Argentum Team
+ * @copyright 	(c) 2008 Argentum Team
+ * @license		http://www.argentuminvoice.com/license.txt
+ *
+ * @property object $invoice Main Invoice Object
+ */
+?>
+<?php
 	$subtotal = 0;
 ?>
 <style type="text/css">
