@@ -37,7 +37,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 
 		$total_income+=$this->find_sales_tax();
 
-		return number_format($total_income, 2);
+		return $total_income;
 	}
 
 	/**
@@ -57,6 +57,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 	/**
 	 * Finds the operation types for this invoice
 	 * @return array operation type id with values as the total data for that operation
+	 * @todo Fix bug if ticket rate is different than operation type rate.
 	 */
 	public function find_operation_types()
 	{
