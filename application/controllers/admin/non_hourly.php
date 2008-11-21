@@ -15,12 +15,13 @@ class Non_hourly_Controller extends Website_Controller {
 	 */
 	public function add($project_id)
 	{
+		$this->template->body = new View('admin/non_hourly/form');
+		$this->template->body->title = 'Create';
 		$non_hourly = new Non_hourly_Model();
 		$non_hourly->project_id = $project_id;
 
 		if ( ! $_POST) // Display the form
 		{
-			$this->template->body = new View('admin/non_hourly/add');
 			$this->template->body->errors = '';
 			$this->template->body->non_hourly = $non_hourly;
 		}
@@ -36,10 +37,8 @@ class Non_hourly_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/non_hourly/add');
 				$this->template->body->non_hourly = $non_hourly;
 				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
 			}
 		}
 	}
@@ -49,11 +48,12 @@ class Non_hourly_Controller extends Website_Controller {
 	 */
 	public function edit($id)
 	{
+		$this->template->body = new View('admin/non_hourly/form');
+		$this->template->body->title = 'Edit';
 		$non_hourly = new Non_hourly_Model($id);
 
 		if ( ! $_POST) // Display the form
 		{
-			$this->template->body = new View('admin/non_hourly/edit');
 			$this->template->body->errors = '';
 			$this->template->body->non_hourly = $non_hourly;
 		}
@@ -68,10 +68,8 @@ class Non_hourly_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/non_hourly/edit');
 				$this->template->body->non_hourly = $non_hourly;
 				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
 			}
 		}
 	}

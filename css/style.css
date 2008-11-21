@@ -160,11 +160,11 @@ ul.submenu li {
 	color: #333;
 }
 
-#project_form ul li label { 
+#project_form ul li label, #ticket_form ul li label, #non_hourly_form ul li label { 
 	width: 190px; display: inline-block;
 }
 
-#project_form #notes {
+#project_form #notes, #ticket_form #description, #non_hourly_form #description {
 	width: 350px;
 	height: 100px;
 }
@@ -239,4 +239,24 @@ ul.errors {
 ul.errors li {
 	color: red;
 	margin-left: 1em;
+}
+
+.tickets th, .non_hourly th, #invoice_form th {
+	background: #D3E2E4;
+	border-top: 1px solid #84B1B6;
+	border-bottom: 1px solid #84B1B6;
+}
+
+.tickets tr:hover, .non_hourly tr:hover, #invoice_form tr:hover {
+	background: #84B1B6;
+}
+
+#invoice_form {
+	width: 99%;
+}
+
+#invoice_form .project {
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: bold;
 }

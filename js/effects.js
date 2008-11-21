@@ -8,4 +8,23 @@ $(function() {
 			$("#new_client").fadeOut();
 		}
 	});
+
+	$('#jqmodal_window').jqm({
+		trigger: false,
+		onHide:  function(hash) {
+			hash.w.fadeOut('2000',function(){ hash.o.remove(); });
+			$("#jqmodal_window .content").html('Please wait... <img src="/images/busy.gif" alt="loading" />');
+		}
+	});
+
+	$('#create_ticket, #add_nonhourly, .edit_ticket, .add_time').click(function() {
+		$('#jqmodal_window').jqmShow();
+		$.ajax({ type: "GET",
+		         url: $(this).attr('href'),
+		         dataType: "html",
+		         success: function(r) { $("#jqmodal_window .content").html(r); },
+		         error: function(r) { alert(r); }
+		});
+		return false;
+	});
 });

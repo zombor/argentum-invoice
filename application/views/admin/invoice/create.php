@@ -20,7 +20,7 @@
 <h3>Invoice Template:</h3>
 <p><?=form::dropdown('template_name', $templates)?></p>
 <h3>Tickets to be billed:</h3>
-<table>
+<table id="invoice_form">
 	<tbody>
 		<tr>
 			<th>Bill</th>
@@ -32,7 +32,7 @@
 			<th>Ticket Total Cost</th>
 		</tr>
 		<?php foreach ($projects['tickets'] as $project_id => $tickets):?><tr>
-			<th colspan="7"><?=Auto_Modeler_ORM::factory('project', $project_id)->name?></th>
+			<th colspan="7" class="project">Project: <?=Auto_Modeler_ORM::factory('project', $project_id)->name?></th>
 		</tr>
 		<?php foreach ($tickets as $ticket):?><tr>
 			<td><?=form::checkbox('tickets['.$ticket->id.']', $ticket->id, TRUE)?></td>
@@ -50,7 +50,7 @@
 		<tr>
 			<th>Bill</th>
 			<th>Nonhourly ID</th>
-			<th>Description</th>
+			<th colspan="3">Description</th>
 			<th>Quantity</th>
 			<th>Cost</th>
 		</tr>

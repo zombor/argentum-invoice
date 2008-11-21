@@ -1,6 +1,6 @@
 <h2>View Non-Hourly Items For <?=html::anchor('project/view/'.$this->uri->segment(3), 'Project ID '.$this->uri->segment(3))?></h2>
 <?php include Kohana::find_file('views', 'project/menu')?>
-<table>
+<table class="non_hourly">
 	<tbody>
 		<tr>
 			<th>ID</th>

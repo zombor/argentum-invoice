@@ -5,10 +5,11 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta http-equiv="content-language" content="en" />
 		<title><?=$title?></title>
-		<?=html::stylesheet(array('css/reset', 'css/style', 'css/print'), array('', '', 'print'))?>
+		<?=html::stylesheet(array('css/reset', 'css/style', 'css/print', 'css/jqmodal'), array('', '', 'print', ''))?>
 		<?php Event::run('argentum.stylesheet_display')?>
 
 		<?=html::script('js/lib/jquery')?>
+		<?=html::script('js/lib/jqmodal')?>
 		<?=html::script('js/lib/jquery.livequery')?>
 		<?=html::script('js/effects')?>
 		<?php Event::run('argentum.js_display')?>
@@ -36,6 +37,10 @@
 			<div id="body" class="clear">
 				<?=$body?>
 				<?php Event::run('argentum.body_display')?>
+				<div id="jqmodal_window">
+					<div class="title">Window Title<a href="#" class="jqmClose">Close</a></div>
+					<div class="content"></div>
+				</div>
 			</div>
 			<div id="footer">
 				<div id="copyright">&copy; 2008 Argentum Team</div>

@@ -1,6 +1,6 @@
 <h2>View Closed Tickets For <?=html::anchor('project/view/'.$this->uri->segment(3), 'Project ID '.$this->uri->segment(3))?></h2>
 <?php include Kohana::find_file('views', 'project/menu')?>
-<table>
+<table class="tickets">
 	<tbody>
 		<tr>
 			<th>Ticket ID</th>
@@ -18,7 +18,7 @@
 			<td><?=date('m/d/Y', $ticket->close_date)?></td>
 			<td><?=$ticket->description?></td>
 			<td><?=number_format($ticket->total_time, 2)?> Hours</td>
-			<td><?=html::anchor('admin/ticket/edit/'.$ticket->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Ticket')))?></td>
+			<td><?=html::anchor('admin/ticket/edit/'.$ticket->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Ticket')), array('class' => 'edit_ticket'))?></td>
 	</tr><?php endforeach;?>
 	</tbody>
 </table>
