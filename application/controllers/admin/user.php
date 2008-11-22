@@ -35,7 +35,6 @@ class User_Controller extends Website_Controller
 		{
 			$user->set_fields($this->input->post());
 			$user->password = $this->input->post('password');
-			$user->active = $this->input->post('active', FALSE);
 			try 
 			{
 				$user->save();
@@ -80,7 +79,6 @@ class User_Controller extends Website_Controller
 		{
 			$user->set_fields($this->input->post());
 			$user->password = $this->input->post('password');
-			$user->active = $this->input->post('active', FALSE);
 
 			try
 			{
