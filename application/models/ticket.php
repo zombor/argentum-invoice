@@ -12,7 +12,7 @@ class Ticket_Model extends Auto_Modeler_ORM
 {
 	protected $table_name = 'tickets';
 	
-	protected $data = array('id' => '',
+	protected $data = array('id' => NULL,
 	                        'user_id' => NULL,
 	                        'created_by' => '',
 	                        'project_id' => '',

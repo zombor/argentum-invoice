@@ -12,7 +12,7 @@ class Time_Model extends Auto_Modeler_ORM
 {
 	protected $table_name = 'time';
 
-	protected $data = array('id' => '',
+	protected $data = array('id' => NULL,
 	                        'ticket_id' => '',
 	                        'user_id' => '',
 	                        'start_time' => '',

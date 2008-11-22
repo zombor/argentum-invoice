@@ -12,7 +12,7 @@ class Client_Model extends Auto_Modeler_ORM
 {
 	protected $table_name = 'clients';
 	
-	protected $data = array('id' => '',
+	protected $data = array('id' => NULL,
 	                        'company_name' => '',
 	                        'short_name' => '',
 	                        'contact_first_name' => '',

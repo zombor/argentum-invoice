@@ -12,7 +12,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 {
 	protected $table_name = 'invoices';
 	
-	protected $data = array('id' => '',
+	protected $data = array('id' => NULL,
 	                        'title' => '',
 	                        'date' => '',
 	                        'comments' => '',

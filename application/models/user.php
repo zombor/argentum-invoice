@@ -12,7 +12,7 @@ class User_Model extends Auto_Modeler_ORM {
 
 	protected $table_name = 'users';
 
-	protected $data = array('id' => '',
+	protected $data = array('id' => NULL,
 	                        'username' => '',
 	                        'first_name' => '',
 	                        'last_name' => '',

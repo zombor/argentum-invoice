@@ -12,7 +12,7 @@ class Settings_Model extends Auto_Modeler
 {
 	protected $table_name = 'settings';
 	
-	protected $data = array('id' => '',
+	protected $data = array('id' => NULL,
 	                        'company_name' => '',
 	                        'company_address' => '',
 	                        'company_city' => '',

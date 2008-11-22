@@ -12,7 +12,7 @@ class Project_Model extends Auto_Modeler_ORM
 {
 	protected $table_name = 'projects';
 	
-	protected $data = array('id' => '',
+	protected $data = array('id' => NULL,
 	                        'name' => '',
 	                        'client_id' => '',
 	                        'notes' => '',

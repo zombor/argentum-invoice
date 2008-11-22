@@ -12,7 +12,7 @@ class Module_Model extends Auto_Modeler_ORM {
 
 	protected $table_name = 'modules';
 
-	protected $data = array('id' => '',
+	protected $data = array('id' => NULL,
 	                        'name' => '',
 	                        'active' => FALSE,
 	                        'installed' => FALSE);
