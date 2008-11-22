@@ -93,9 +93,7 @@ class Settings_Controller extends Website_Controller
 		// Now remove the ones that weren't found from the database
 		foreach (Auto_Modeler_ORM::factory('module')->fetch_all() as $module)
 			if ( ! array_key_exists($module->name, $directories))
-			{
 				$module->delete();
-			}
 			else
 				$directories[$module->name] = $module;
 

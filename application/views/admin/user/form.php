@@ -22,7 +22,17 @@
 		<?=form::label('username', 'Username')?>
 		<?=form::input('username', $user->username)?>
 	</li>
-	
+
+	<li>
+		<?=form::label('first_name', 'First Name')?>
+		<?=form::input('first_name', $user->first_name)?>
+	</li>
+
+	<li>
+		<?=form::label('last_name', 'Last Name')?>
+		<?=form::input('last_name', $user->last_name)?>
+	</li>
+
 	<li>
 		<?=form::label('password', 'Password')?>
 		<?=form::password('password')?>
