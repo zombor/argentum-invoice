@@ -277,3 +277,8 @@ ul#project_list, #client_list ul, #client_details ul, #ticket_form ul, ul.projec
 	margin: 0;
 	padding: 0;
 }
+
+.task_count {
+	float: right;
+	margin-right: 1em;
+}
