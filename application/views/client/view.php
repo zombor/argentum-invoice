@@ -9,7 +9,7 @@
 	<?=$client->mailing_zip_code?>
 	</li>
 	<li><strong>Phone Number</strong> <?=$client->phone_number?></li>
-	<li><strong>Tax Rate</strong> <?=$client->tax_rate?></li>
+	<li><strong>Tax Rate (%)</strong> <?=$client->tax_rate?></li>
 	</ul>
 </div>
 <h2><?=html::anchor('admin/client/edit/'.$client->short_name, 'Edit This Client')?></h2>

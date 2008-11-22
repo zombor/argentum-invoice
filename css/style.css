@@ -10,6 +10,14 @@ a, a:link, a:active {
 	border-bottom: 1px dotted #3A4145;
 }
 
+#body ul {
+	list-style: disc;
+}
+
+#body li {
+	margin-left: 1.5em;
+}
+
 #wrapper {
 	width: 960px;
 	background: #FFF;
@@ -92,6 +100,7 @@ table.invoice_list tr.total_row td {
 
 ul.submenu {
 	clear: both;
+	list-style: none;
 }
 
 ul.submenu li a {
@@ -101,8 +110,10 @@ ul.submenu li a {
 
 
 ul.submenu li {
-	float : left;
-	margin-right: 1em;
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 #project_list {
@@ -259,4 +270,10 @@ ul.errors li {
 	text-align: center;
 	font-size: 1.5em;
 	font-weight: bold;
+}
+
+ul#project_list, #client_list ul, #client_details ul, #ticket_form ul, ul.project_details li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }

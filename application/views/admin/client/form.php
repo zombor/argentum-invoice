@@ -11,7 +11,7 @@
 	<li><label for="mailing_zip_code">Mailing Zip Code:</label> <?=form::input('mailing_zip_code', $client->mailing_zip_code)?></li>
 	<li><label for="email_address">Email Address:</label> <?=form::input('email_address', $client->email_address)?></li>
 	<li><label for="phone_number">Phone Number:</label> <?=form::input('phone_number', $client->phone_number)?></li>
-	<li><label for="tax_rate">Tax Rate:</label> <?=form::input('tax_rate', $client->tax_rate)?></li>
+	<li><label for="tax_rate">Tax Rate (%):</label> <?=form::input('tax_rate', $client->tax_rate)?></li>
 	<li><?=form::submit('submit', $title.' Client')?></li>
 </ul>
 <?form::close()?>

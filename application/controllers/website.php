@@ -31,5 +31,6 @@ abstract class Website_Controller extends Template_Controller {
 		}
 
 		$this->session = new Session;
+		include Kohana::find_file('vendor', 'Markdown');
 	}
 }

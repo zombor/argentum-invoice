@@ -10,7 +10,8 @@
 
 		<?=html::script('js/lib/jquery')?>
 		<?=html::script('js/lib/jqmodal')?>
-		<?=html::script('js/lib/jquery.livequery')?>
+		<?=html::script('js/lib/livequery')?>
+		<?=html::script('js/lib/form')?>
 		<?=html::script('js/effects')?>
 		<?php Event::run('argentum.js_display')?>
 	</head>
@@ -38,7 +39,7 @@
 				<?=$body?>
 				<?php Event::run('argentum.body_display')?>
 				<div id="jqmodal_window">
-					<div class="title">Window Title<a href="#" class="jqmClose">Close</a></div>
+					<a href="#" class="jqmClose">Close</a>
 					<div class="content"></div>
 				</div>
 			</div>

@@ -14,6 +14,7 @@ $(function() {
 		onHide:  function(hash) {
 			hash.w.fadeOut('2000',function(){ hash.o.remove(); });
 			$("#jqmodal_window .content").html('Please wait... <img src="/images/busy.gif" alt="loading" />');
+			window.location.reload();
 		}
 	});
 
@@ -27,4 +28,17 @@ $(function() {
 		});
 		return false;
 	});
+	
+	$('#ticket_form form').livequery('submit', function() {
+		// Submit the form with ajax
+		$(this).ajaxSubmit({
+			target: '#jqmodal_window .content'
+		});
+		return false;
+	});
 });
+
+function processJson(data) {
+	alert(data.message);
+	window.location.reload();
+}

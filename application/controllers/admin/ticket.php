@@ -13,7 +13,7 @@ class Ticket_Controller extends Website_Controller {
 	/**
 	 *  Creates a new ticket for a project
 	 */
-	public function add($project_id)
+	public function add($project_id, $ajax = FALSE)
 	{
 		$ticket = new Ticket_Model();
 		$ticket->project_id = $project_id;
@@ -28,7 +28,7 @@ class Ticket_Controller extends Website_Controller {
 		{
 			$ticket->set_fields($this->input->post());
 			$ticket->creation_date = time();
-			$ticket->user_id = $this->input->post('user_id');
+			$ticket->user_id = $_POST['user_id'] == '' ? NULL : $this->input->post('user_id');
 			$ticket->created_by = $_SESSION['auth_user']->id;
 
 			try
@@ -36,9 +36,11 @@ class Ticket_Controller extends Website_Controller {
 				$ticket->save();
 				$ticket->rate = $ticket->operation_type->rate;
 				$ticket->save();
-				
 				Event::run('argentum.ticket_create', $ticket);
-				url::redirect('ticket/active/'.$ticket->project_id);
+				if (request::is_ajax())
+					$this->template->body = View::factory('ticket/view')->bind('ticket', $ticket);
+				else
+					url::redirect('ticket/active/'.$ticket->project_id);
 			}
 			catch (Kohana_User_Exception $e)
 			{
@@ -64,7 +66,7 @@ class Ticket_Controller extends Website_Controller {
 		else
 		{
 			$ticket->set_fields($this->input->post());
-			$ticket->user_id = $this->input->post('user_id');
+			$ticket->user_id = $_POST['user_id'] == '' ? NULL : $this->input->post('user_id');
 			$ticket->complete = $this->input->post('complete', FALSE);
 
 			if ($ticket->complete)
@@ -78,7 +80,10 @@ class Ticket_Controller extends Website_Controller {
 				$ticket->save();
 
 				Event::run('argentum.ticket_update', $ticket);
-				url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
+				if (request::is_ajax())
+					$this->template->body = View::factory('ticket/view')->bind('ticket', $ticket);
+				else
+					url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
 			}
 			catch (Kohana_User_Exception $e)
 			{
