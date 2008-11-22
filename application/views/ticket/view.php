@@ -1,6 +1,7 @@
 <h2>View Ticket ID# <?=$ticket->id?></h2>
 <p>Assigned to: <?=$ticket->user_id == NULL ? 'Unassigned' : $ticket->user->username?></p>
 <p>Operation: <?=$ticket->operation_type->name?></p>
+<p>Description: <?=Markdown($ticket->description)?></p>
 <h3>Time</h3>
 <table>
 	<tbody>

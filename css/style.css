@@ -76,8 +76,8 @@ h3 {
 }
 
 td, th {
-	padding-left: 1.5em;
-	padding-right: 1.5em;
+	padding-left: .5em;
+	padding-right: .5em;
 }
 
 table.invoice_list tr.unpaid {
