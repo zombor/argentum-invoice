@@ -27,6 +27,7 @@ class Time_Controller extends Website_Controller {
 		else
 		{
 			$time->set_fields($this->input->post());
+			$time->user_id = $_SESSION['auth_user']->id;
 
 			try
 			{
@@ -61,6 +62,6 @@ class Time_Controller extends Website_Controller {
 	{
 		$time = new Time_Model($this->input->post('id'));
 		$time->delete();
-		url::redirect('ticket/'.($time->ticket->complete ? 'closed' : 'active').'/'.$time->ticket->project->id);
+		url::redirect('ticket/view/'.$time->ticket->id);
 	}
 }

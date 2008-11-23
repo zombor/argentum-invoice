@@ -18,7 +18,7 @@ $(function() {
 		}
 	});
 
-	$('#create_ticket, #add_nonhourly, .edit_ticket, .add_time').click(function() {
+	$('#create_ticket, #add_nonhourly, .edit_ticket, .add_time, .view_ticket').click(function() {
 		$('#jqmodal_window').jqmShow();
 		$.ajax({ type: "GET",
 		         url: $(this).attr('href'),

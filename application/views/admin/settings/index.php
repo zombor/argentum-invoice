@@ -1,5 +1,5 @@
 <h2>Settings</h2>
-<ul>
+<ul id="settings_list">
 	<li><?=html::anchor('admin/settings/application', 'Application Settings')?></li>
 	<li><?=html::anchor('admin/settings/modules', 'Modules')?></li>
 	<li><?=html::anchor('admin/user/all', 'User Admin')?></li>

@@ -1,5 +1,5 @@
 <h2>User Login</h2>
-<?=form::open('user/login')?>
+<?=form::open('user/login', array('id' => 'login_form'))?>
 <ul>
 	<li>
 		<?=form::label('username', 'Username')?>

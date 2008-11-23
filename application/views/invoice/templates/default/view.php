@@ -52,7 +52,7 @@
 	}
 </style>
 <div id="invoice">
-	<h2>Invoice #<?=$invoice->id?></h2>
+	<h2>Invoice #<?=$invoice->id?> - <?=date('Y/m/d', $invoice->date)?></h2>
 	<table id="billing_client">
 		<tbody>
 			<tr>

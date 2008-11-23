@@ -10,14 +10,6 @@ a, a:link, a:active {
 	border-bottom: 1px dotted #3A4145;
 }
 
-#body ul {
-	list-style: disc;
-}
-
-#body li {
-	margin-left: 1.5em;
-}
-
 #wrapper {
 	width: 960px;
 	background: #FFF;
@@ -272,13 +264,21 @@ ul.errors li {
 	font-weight: bold;
 }
 
-ul#project_list, #client_list ul, #client_details ul, #ticket_form ul, ul.project_details li {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
 .task_count {
 	float: right;
 	margin-right: 1em;
+}
+
+ul.submenu li {
+	margin-left: 0.75em;
+	margin-right: 0.75em;
+}
+
+table.tickets {
+	width: 99%;
+}
+
+table.tickets li {
+	list-style: disc;
+	margin-left: 1.5em;
 }
