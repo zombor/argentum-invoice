@@ -36,7 +36,7 @@ class login {
 		else if ($uri->segment(1) == 'user' AND ! empty($_SERVER['HTTP_REFERER']))
 		{
 			// Make sure they can read cookies.
-			if ( ! cookie::get('kohanasession', FALSE))
+			if ( ! cookie::get(Kohana::config('session.name'), FALSE))
 				throw new Kohana_Exception('argentum.no_cookies');
 		}
 		else
