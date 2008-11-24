@@ -215,8 +215,8 @@ CREATE TABLE `sessions` (
 DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `id` mediumint(9) NOT NULL auto_increment,
-  `user_id` mediumint(9) default NULL,
-  `created_by` mediumint(9) default NOT NULL,
+  `user_id` mediumint(9) NULL,
+  `created_by` mediumint(9) NOT NULL,
   `project_id` mediumint(9) NOT NULL,
   `description` text NOT NULL,
   `creation_date` int(11) NOT NULL,
