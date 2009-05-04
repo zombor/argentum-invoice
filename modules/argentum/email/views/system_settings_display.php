@@ -1,1 +1,0 @@
-<li><?=html::anchor('email/settings', 'Email Plugin Settings')?></li>
