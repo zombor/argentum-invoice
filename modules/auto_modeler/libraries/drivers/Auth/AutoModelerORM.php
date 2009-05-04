@@ -2,14 +2,13 @@
 /**
  * Auto_Modeler Auth driver.
  *
- * $Id: ORM.php 2747 2008-06-05 18:31:27Z Shadowhand $
- *
- * @package    Auth
- * @author     Kohana Team
- * @copyright  (c) 2007-2008 Kohana Team
- * @license    http://kohanaphp.com/license.html
+ * @package     Auth
+ * @package     Auto_Modeler
+ * @author      Jeremy Bush
+ * @copyright   (c) 2008 Jeremy Bush
+ * @license     http://www.opensource.org/licenses/isc-license.txt
  */
-class Auth_AutoModelerORM_Driver implements Auth_Driver {
+class Auth_AutoModelerORM_Driver extends Auth_Driver {
 
 	protected $config;
 
@@ -62,7 +61,7 @@ class Auth_AutoModelerORM_Driver implements Auth_Driver {
 		// If the passwords match, perform a login
 		if ($user->has('role', 'login') AND $user->password === $password)
 		{
-			if ($remember == TRUE)
+			if ($remember)
 			{
 				// Create a new autologin token
 				$token = Auto_Modeler_ORM::factory('user_token');
@@ -108,7 +107,7 @@ class Auth_AutoModelerORM_Driver implements Auth_Driver {
 			// Load the token and user
 			$token = Auto_Modeler_ORM::factory('user_token', $token);
 
-			if ($token->id > 0 AND $token->user->id > 0)
+			if ($token->id AND $token->user->id)
 			{
 				if ($token->user_agent === sha1(Kohana::$user_agent))
 				{
