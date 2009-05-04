@@ -223,7 +223,7 @@ class Database_Core {
 				throw new Kohana_Database_Exception('database.connection', $this->driver->show_error());
 
 			// Clear password after successful connect
-			$this->config['connection']['pass'] = NULL;
+			//$this->config['connection']['pass'] = NULL;
 		}
 	}
 

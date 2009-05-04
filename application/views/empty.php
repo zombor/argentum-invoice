@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta http-equiv="content-language" content="en" />
 		<title><?=$title?></title>
-		<?=html::stylesheet(array('css/reset'))?>
+		<?=html::stylesheet(array('css/reset', 'css/layout', 'css/style'))?>
 		<?php if (Auth::instance()->logged_in()) page::render('stylesheet')?>
 
 		<?=html::script('js/lib/jquery')?>

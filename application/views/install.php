@@ -5,13 +5,27 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta http-equiv="content-language" content="en" />
 		<title><?=$title?></title>
-		<?=html::stylesheet(array('css/reset', 'css/style', 'css/print', 'css/jqmodal'), array('', '', 'print', ''))?>
+		<?=html::stylesheet(array('css/reset', 'css/layout', 'css/style', 'css/print', 'css/jqmodal'), array('', '', '', 'print', ''))?>
 	</head>
 	<body>
-		<div id="wrapper">
-			<?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?>
-			<div id="body">
+		<div id="body">
+			<div id="header">
+				<?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?>
+			</div>
+			<div id="navigation">
+				&nbsp;
+			</div>
+			<div id="quicksearch">
+				&nbsp;
+			</div>
+			<div class="clear">
+				&nbsp;
+			</div>
+			<div id="content" style="margin-top: 25px;">
 				<?=$body?>
+			</div>
+			<div id="footer">
+				&copy; 2009 Argentum Team
 			</div>
 		</div>
 	</body>

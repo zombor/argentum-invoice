@@ -799,6 +799,7 @@ final class Kohana {
 	 */
 	public static function exception_handler($exception, $message = NULL, $file = NULL, $line = NULL)
 	{
+		try {
 		// PHP errors have 5 args, always
 		$PHP_ERROR = (func_num_args() === 5);
 
@@ -919,6 +920,11 @@ final class Kohana {
 		// Turn off error reporting
 		error_reporting(0);
 		exit;
+		}
+		catch (Exception $e)
+		{
+			die($e);
+		}
 	}
 
 	/**

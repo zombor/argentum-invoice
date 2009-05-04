@@ -214,78 +214,87 @@ class Settings_Controller extends Website_Controller
 				break;
 			case 3:
 				// Install the Databases
-				$db = Database::instance();
-
-				// Only run the schema files if the tables don't exist
-				// Inspired by http://us2.php.net/manual/en/function.mysql-query.php#85876
-				if ( ! $db->table_exists('users'))
-				{
-					$tables = View::factory('admin/settings/schema/tables')->render();
-					$query = '';
-					foreach (explode("\n", $tables) as $sql)
-					{
-						if (trim($sql) != "" AND strpos($sql, "--") === FALSE)
-						{
-							$query .= $sql;
-							if (preg_match("/;[\040]*\$/", $sql))
-							{
-								$db->query($query);
-								$query = '';
-							}
-						}
-					}
-
-					/*$constriants = View::factory('admin/settings/schema/constraints')->render();
-					$query = '';
-					foreach (explode("\n", $constriants) as $sql)
-					{
-						if (trim($sql) != "" AND strpos($sql, "--") === false)
-						{
-							$query .= $sql;
-							if (preg_match("/;[\040]*\$/", $sql))
-							{
-								$db->query($query);
-								$query = '';
-							}
-						}
-					}*/
-
-					$data = View::factory('admin/settings/schema/data')->render();
-					$query = '';
-					foreach (explode("\n", $data) as $sql)
-					{
-						if (trim($sql) != "" AND strpos($sql, "--") === false)
-						{
-							$query .= $sql;
-							if (preg_match("/;[\040]*\$/", $sql))
-							{
-								$db->query($query);
-								$query = '';
-							}
-						}
-					}
-				}
-
-				$admin_user = new User_Model();
-				$admin_user->username = $this->input->post('username');
-				$admin_user->password = $this->input->post('password');
-				$admin_user->email = $this->input->post('email');
-				$admin_user->first_name = $this->input->post('first_name');
-				$admin_user->last_name = $this->input->post('last_name');
-
 				try
 				{
-					$admin_user->save();
-					$admin_user->roles = 1;
-					$admin_user->roles = 2;
+					$db = Database::instance();
+
+					// Only run the schema files if the tables don't exist
+					// Inspired by http://us2.php.net/manual/en/function.mysql-query.php#85876
+					if ( ! $db->table_exists('users'))
+					{
+						$tables = View::factory('admin/settings/schema/tables')->render();
+						$query = '';
+						foreach (explode("\n", $tables) as $sql)
+						{
+							if (trim($sql) != "" AND strpos($sql, "--") === FALSE)
+							{
+								$query .= $sql;
+								if (preg_match("/;[\040]*\$/", $sql))
+								{
+									$db->query($query);
+									$query = '';
+								}
+							}
+						}
+
+						/*$constriants = View::factory('admin/settings/schema/constraints')->render();
+						$query = '';
+						foreach (explode("\n", $constriants) as $sql)
+						{
+							if (trim($sql) != "" AND strpos($sql, "--") === false)
+							{
+								$query .= $sql;
+								if (preg_match("/;[\040]*\$/", $sql))
+								{
+									$db->query($query);
+									$query = '';
+								}
+							}
+						}*/
+
+						$data = View::factory('admin/settings/schema/data')->render();
+						$query = '';
+						foreach (explode("\n", $data) as $sql)
+						{
+							if (trim($sql) != "" AND strpos($sql, "--") === false)
+							{
+								$query .= $sql;
+								if (preg_match("/;[\040]*\$/", $sql))
+								{
+									$db->query($query);
+									$query = '';
+								}
+							}
+						}
+					}
+
+					$admin_user = new User_Model();
+					$admin_user->username = $this->input->post('username');
+					$admin_user->password = $this->input->post('password');
+					$admin_user->email = $this->input->post('email');
+					$admin_user->first_name = $this->input->post('first_name');
+					$admin_user->last_name = $this->input->post('last_name');
+
+					try
+					{
+						$admin_user->save();
+						$admin_user->roles = 1;
+						$admin_user->roles = 2;
+					}
+					catch (Kohana_User_Exception $e)
+					{
+						$this->install(2);
+						$this->template->body->user = new User_Model();
+					}
+
+					$this->template->body = new View('admin/settings/install/3');
 				}
-				catch (Kohana_User_Exception $e)
+				catch (Kohana_Database_Exception $e)
 				{
 					$this->install(2);
+					echo 'Invalid Database Settings';
 					$this->template->body->user = new User_Model();
 				}
-
-				$this->template->body = new View('admin/settings/install/3');
 				break;
 			case 4:
 				$settings = new Settings_Model();
