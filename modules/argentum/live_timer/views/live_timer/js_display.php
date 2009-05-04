@@ -1,0 +1,1 @@
+<script type="text/javascript" src="<?=url::site()?>live_timer/effects"></script>

@@ -1,0 +1,11 @@
+$(function() {
+	$('#project_id').change(function()
+	{
+		$.ajax({
+		        type:    "POST",
+		        url:     "find_tickets.html",
+		        data:    "project_id="+$('#project_id option:selected').val(),
+		        success: function(html) { $('#ticket_id').html(html); }
+		});
+	});
+});

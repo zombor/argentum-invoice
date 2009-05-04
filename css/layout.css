@@ -1,0 +1,213 @@
+body {
+	background-color: #0B5A55;
+	font: 11pt arial, sans-serif;
+}
+
+h1, h2, h3 {
+	font-weight: bold;
+	letter-spacing: 2px;
+	margin-bottom: .5em;
+}
+
+ul {
+	margin-bottom: .5em;
+}
+
+h1 {
+	font-size: 18pt;
+}
+
+h2 {
+	font-size: 14pt;
+}
+
+h3 {
+	font-size: 12pt;
+}
+
+p {
+	margin-top: 10px;
+}
+
+blockquote {
+	background-color: #CCCCCC;
+	border: 1px dashed #333333;
+	margin: 0.35em;
+	padding: 0.7em;
+	-moz-border-radius: 0.35em;
+	-webkit-border-radius: 0.35em;
+	-khtml-border-radius: 0.35em;
+	-o-border-radius: 0.35em;
+}
+
+blockquote.message {
+	background: #CCDCEA url(images/help.png) no-repeat 5px center;
+	border-color: #85A6CB;
+	padding-left: 25px;
+}
+
+blockquote.message.good {
+	background: #C1F3BA url(images/accept.png) no-repeat 5px center;
+	border-color: #0D6700;
+}
+
+blockquote.message.bad {
+	background: #FFBFB7 url(images/exclamation.png) no-repeat 5px center;
+	border-color: #FF0000;
+}
+
+div#body {
+	-moz-border-radius: 0.7em;
+	-webkit-border-radius: 0.7em;
+	-khtml-border-radius: 0.7em;
+	-o-border-radius: 0.7em;
+	background-color: #0B5A55;
+	margin: 0.7em;
+	/*	padding: 10px;*/
+	/*width: 95%;*/
+}
+
+/**
+ * header css
+ */
+div#header {
+	background-color: #FFFFFF;
+	height: 5em;
+	padding: 0.7em;
+	-moz-border-radius: 0.7em;
+	-webkit-border-radius: 0.7em;
+	-khtml-border-radius: 0.7em;
+	-o-border-radius: 0.7em;
+	width: 25em;
+}
+
+div#quicksearch {
+	clear: left;
+	float: left;
+	position: relative;
+	top: -5em;
+	left: 28em;
+}
+
+/**
+ * end of header
+ */
+/**
+ * navigation css
+ */
+div#navigation {
+	height: 1.9em;
+	padding: 0.2em 0.7em;
+	float: left;
+	position: relative;
+	top: -6.5em;
+	left: 26em;
+}
+
+ul#nav {
+}
+
+ul#nav li {
+	float: left;
+}
+
+ul#nav li a {
+	color: #FFFFFF;
+	float: left;
+	margin: 2px 2px;
+	padding: 3px 5px;
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	-khtml-border-radius: 0.2em;
+	-o-border-radius: 0.2em;
+	text-decoration: none;
+	font-weight: bold;
+	border: 0;
+}
+
+ul#nav li a:hover {
+	background-color: #01999A;
+	text-decoration: underline;
+}
+
+/**
+ * end of navigation
+ */
+/**
+ * content body css
+ */
+div#content {
+	-moz-border-radius: 0.7em;
+	-webkit-border-radius: 0.7em;
+	-khtml-border-radius: 0.7em;
+	-o-border-radius: 0.7em;
+	background-color: #FFFFFF;
+	padding: 0.7em;
+	position: relative;
+	top: -4em;
+	min-height: 300px;
+}
+
+/**
+ * form css
+ */
+form ul li label, form ul li input[type = text] {
+	float: left;
+	margin-bottom: 5px;
+}
+
+form ul li label {
+	width: 100px;
+}
+
+form ul li input[type = text] {
+}
+
+form ul li {
+	clear: both;
+}
+
+/**
+ * end of form
+ */
+/**
+ * end of content body
+ */
+/**
+ * footer css
+ */
+div#footer {
+	color: #FFFFFF;
+	position: relative;
+	text-align: center;
+	top: -3em;
+}
+
+/**
+ * end of footer
+ */
+div.clear {
+	height: 0;
+	clear: both;
+}
+
+/**
+ * labelify css
+ */
+input.labelify {
+	color: #CCCCCC;
+}
+
+/**
+ * end of labelify
+ */
+/**
+ * login page css
+ */
+div#login {
+	float: left;
+}
+
+div#register {
+	float: right;
+}
