@@ -214,7 +214,7 @@ class Settings_Controller extends Website_Controller
 					// Suppress warnings for this test
 					error_reporting(0);
 					$db = new Database;
-					$result = $db->from('users')->get();
+					$result = $db->query('CREATE TABLE `argentum_test` (`id` INT NOT NULL)');
 
 					if ($error = mysql_error())
 					{
@@ -224,10 +224,12 @@ class Settings_Controller extends Website_Controller
 						$this->template->body->errors = View::factory('form_errors')->set(array('errors' => $post->errors('form_errors')));
 						return;
 					}
+					$db->query('DROP TABLE `argentum_test`');
 					error_reporting(E_ALL ^ E_NOTICE);
 				}
 				catch (Kohana_Database_Exception $e)
 				{
+					Kohana::log('error', $e);
 					$post->add_error('database', 'invalid_settings');
 					$this->install(1);
 					$this->template->body->set($this->input->post());
