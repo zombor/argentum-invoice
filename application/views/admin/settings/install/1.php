@@ -11,12 +11,12 @@
 <?php if (isset($errors)):?><?=$errors?><?php endif;?>
 <?=form::open('admin/settings/install/2')?>
 <ul>
-	<li><label for="host">Server Address:</label> <?=form::input('host', isset($host) ? $host : '')?></li>
-	<li><label for="database">Database Name:</label> <?=form::input('database', isset($database) ? $database : '')?></li>
-	<li><label for="username">Username:</label> <?=form::input('username', isset($username) ? $username : '')?></li>
-	<li><label for="password">Password:</label> <?=form::input('password', isset($password) ? $password : '', array('autocomplete' => 'no'))?></li>
-	<li><label for="table_prefix">Table Prefix:</label> <?=form::input('table_prefix', 'AI_', isset($table_prefix) ? $table_prefix : '')?></li>
-	<li><label for="persistent">Use Persistent Connection:</label> <?=form::dropdown('persistent', array(FALSE => 'No', TRUE => 'Yes'), isset($persistent) ? $persistent : FALSE)?></li>
+	<li><label for="host">Server Address:</label> <?=form::input('host', isset($host) ? $host : '')?> (Valid hostname for your mysql database server)</li>
+	<li><label for="database">Database Name:</label> <?=form::input('database', isset($database) ? $database : '')?> (Database name, must already exist)</li>
+	<li><label for="username">Username:</label> <?=form::input('username', isset($username) ? $username : '')?> (Valid username for the above database)</li>
+	<li><label for="password">Password:</label> <?=form::input('password', isset($password) ? $password : '', array('autocomplete' => 'no'))?> (Valid password for the above database)</li>
+	<li><label for="table_prefix">Table Prefix:</label> <?=form::input('table_prefix', 'AI_', isset($table_prefix) ? $table_prefix : '')?> (Table prefix for this Argentum installer)</li>
+	<li><label for="persistent">Use Persistent Connection:</label> <?=form::dropdown('persistent', array(FALSE => 'No', TRUE => 'Yes'), isset($persistent) ? $persistent : FALSE)?> (Use persistent connection when db server is on a seperate server)</li>
 </ul>
 <p><?=form::submit('continue', 'Go to Step 2')?></p>
 <?=form::close()?>
