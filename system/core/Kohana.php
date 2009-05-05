@@ -799,7 +799,6 @@ final class Kohana {
 	 */
 	public static function exception_handler($exception, $message = NULL, $file = NULL, $line = NULL)
 	{
-		try {
 		// PHP errors have 5 args, always
 		$PHP_ERROR = (func_num_args() === 5);
 
@@ -914,17 +913,12 @@ final class Kohana {
 		if ( ! Event::has_run('system.shutdown'))
 		{
 			// Run the shutdown even to ensure a clean exit
-			Event::run('system.shutdown');
+			//Event::run('system.shutdown');
 		}
 
 		// Turn off error reporting
 		error_reporting(0);
 		exit;
-		}
-		catch (Exception $e)
-		{
-			die($e);
-		}
 	}
 
 	/**

@@ -28,8 +28,10 @@ abstract class Website_Controller extends Template_Controller {
 			//$this->profiler = new Profiler;
 		}
 
-		if (Kohana::config('argentum.installed'))
+		if (Kohana::config('argentum.installed') AND (Router::$controller != 'settings' OR Router::$method != 'install'))
 			$this->session = new Session;
+		else
+			$this->template->set_filename('install');
 		include_once Kohana::find_file('vendor', 'Markdown');
 	}
 }

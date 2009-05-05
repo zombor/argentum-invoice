@@ -42,6 +42,7 @@ $lang['host']['required'] = 'Hostname is required';
 $lang['host']['standard_text'] = 'Hostname must not contain any special characters';
 $lang['database']['required'] = 'Database Name is required';
 $lang['database']['alpha_dash'] = 'Database Name must contain only alphanumeric and dash characters';
+$lang['database']['invalid_settings'] = 'Invalid database settings. Please verify your settings';
 $lang['username']['required'] = 'Username is required';
 $lang['username']['alpha_dash'] = 'Database Name must contain only alphanumeric and dash characters';
 $lang['password']['required'] = 'Password is required';
