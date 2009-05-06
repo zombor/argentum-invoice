@@ -10,6 +10,7 @@ $lang['email']['required'] = 'Email Address is required';
 $lang['email']['email'] = 'Email Address must be a valid email address';
 $lang['mailing_zip_code']['numeric'] = 'Zip Code must be a valid zip code';
 $lang['mailing_address']['required'] = 'Mailing Address is required';
+$lang['mailing_country']['required'] = 'Mailing Country is required';
 $lang['mailing_city']['required'] = 'Mailing City is required';
 $lang['mailing_state']['required'] = 'Mailing State is required';
 
