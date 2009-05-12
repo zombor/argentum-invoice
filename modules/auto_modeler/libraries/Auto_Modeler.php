@@ -62,11 +62,17 @@ class Auto_Modeler_Core extends Model implements ArrayAccess
 			$this->data[$key] = $value;
 	}
 
-	/*public function __sleep()
+	public function __sleep()
 	{
 		// Store only information about the object without db property
 		return array_diff(array_keys(get_object_vars($this)), array('db'));
-	}*/
+	}
+
+	public function __wakeup()
+	{
+		if ( ! is_object($this->db))
+			$this->db = Database::instance($this->db);
+	}
 
 	public function as_array()
 	{
