@@ -102,12 +102,13 @@ class Invoice_Model extends Auto_Modeler_ORM
 
 		foreach ($this->find_related('tickets') as $ticket)
 		{
-			if ( ! isset($return[$ticket->operation_type->id]))
-				$return[$ticket->operation_type->id] = array('name' => $ticket->operation_type->name,
-				                                             'rate' => $ticket->rate,
-				                                             'time' => $ticket->total_time);
+			if ( ! isset($return[$ticket->operation_type->id.'_'.$ticket->rate]))
+				$return[$ticket->operation_type->id.'_'.$ticket->rate] = array('id'   => $ticket->operation_type->id,
+				                                                               'name' => $ticket->operation_type->name,
+				                                                               'rate' => $ticket->rate,
+				                                                               'time' => $ticket->total_time);
 			else
-				$return[$ticket->operation_type->id]['time']+=$ticket->total_time;
+				$return[$ticket->operation_type->id.'_'.$ticket->rate]['time']+=$ticket->total_time;
 		}
 
 		return $return;
