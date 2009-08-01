@@ -134,6 +134,7 @@ class Settings_Controller extends Website_Controller
 					$module->save();
 				}
 
+				Database::instance()->clear_cache();
 				foreach (Auto_Modeler_ORM::factory('module')->fetch_all() as $module)
 					$directories[$module->name] = $module;
 
