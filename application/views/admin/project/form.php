@@ -1,5 +1,3 @@
-
-
 <div id="project_form">
 	<h2><?=$title?> Project</h2>
 	<?=$errors?>
@@ -41,4 +39,5 @@
 	<li><label for="tax_exempt">Tax Rate:</label> <?=form::input('client[tax_rate]',$client->tax_rate)?></li>
 	<li><label for="currency_id">Currency:</label> <?=form::dropdown('client[currency_id]', Auto_Modeler_ORM::factory('currency')->select_list('id', 'name'), $client->currency_id)?></li>
 </ul>
-</div>
+</div>	
+	<p style="clear: both;">&nbsp;</p>
