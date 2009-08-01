@@ -39,6 +39,11 @@ class Project_Controller extends Website_Controller {
 					$client->save();
 					$project->client_id = $client->id;
 				}
+				elseif ($_POST['project']['client_id'] == '--')
+				{
+					$client = new Client_Model;
+					$project->client_id = '';
+				}
 				else
 					$client = $project->client;
 

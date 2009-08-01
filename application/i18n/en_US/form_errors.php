@@ -15,6 +15,7 @@ $lang['mailing_city']['required'] = 'Mailing City is required';
 $lang['mailing_state']['required'] = 'Mailing State is required';
 $lang['phone_number']['phone'] = 'Phone Number must be a properly formatted phone number';
 $lang['mailing_country']['required'] = 'Mailing Country is required';
+$lang['client_id']['required'] = 'You must select a client';
 
 $lang['name']['required'] = 'Name is required';
 $lang['description']['required'] = 'Description is required';
