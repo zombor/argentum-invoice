@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
 	<head>
 		<meta http-equiv="content-language" content="en" />
+		<meta http-equiv="content-type" content="charset=utf-8" />
 		<title><?=$title?></title>
 		<?=html::stylesheet(array('css/reset', 'css/layout', 'css/style', 'css/print', 'css/colorbox', 'css/colorbox-custom'),
 		                    array('', '', '', 'print', '', ''))?>
