@@ -33,10 +33,6 @@ class Client_Model extends Auto_Modeler_ORM
 	                         'email_address' => array('required', 'email'),
 	                         'phone_number' => array('phone'),
 	                         'tax_rate' => array('numeric'),
-	                         'mailing_address' => array('required'),
-	                         'mailing_city' => array('required'),
-	                         'mailing_state' => array(),
-	                         'mailing_country' => array('required'),
 	                         'mailing_zip_code' => array('alpha_numeric'),
 	                         'currency_id' => array('required'));
 
