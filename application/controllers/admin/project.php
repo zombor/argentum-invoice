@@ -73,7 +73,7 @@ class Project_Controller extends Website_Controller {
 		}
 		else
 		{
-			$project->set_fields($this->input->post());
+			$project->set_fields($this->input->post('project'));
 
 			try
 			{
