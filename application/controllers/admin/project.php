@@ -27,6 +27,8 @@ class Project_Controller extends Website_Controller {
 		else
 		{
 			$project->set_fields($this->input->post('project'));
+			$project->taxable = $this->input->post('taxable', FALSE);
+			$project->complete = $this->input->post('complete', FALSE);
 
 			try
 			{
@@ -74,6 +76,8 @@ class Project_Controller extends Website_Controller {
 		else
 		{
 			$project->set_fields($this->input->post('project'));
+			$project->taxable = $this->input->post('taxable', FALSE);
+			$project->complete = $this->input->post('complete', FALSE);
 
 			try
 			{
