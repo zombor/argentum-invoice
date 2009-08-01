@@ -13,6 +13,8 @@ $lang['mailing_address']['required'] = 'Mailing Address is required';
 $lang['mailing_country']['required'] = 'Mailing Country is required';
 $lang['mailing_city']['required'] = 'Mailing City is required';
 $lang['mailing_state']['required'] = 'Mailing State is required';
+$lang['phone_number']['phone'] = 'Phone Number must be a properly formatted phone number';
+$lang['mailing_country']['required'] = 'Mailing Country is required';
 
 $lang['name']['required'] = 'Name is required';
 $lang['description']['required'] = 'Description is required';
