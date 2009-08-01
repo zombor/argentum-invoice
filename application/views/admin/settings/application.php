@@ -9,7 +9,7 @@
 	<li><label for="company_city">Company City:</label> <?=form::input('company_city', $settings->company_city)?></li>
 	<li><label for="company_state">Company State:</label> <?=form::input('company_state', $settings->company_state)?></li>
 	<li><label for="company_zip">Company ZIP:</label> <?=form::input('company_zip', $settings->company_zip)?></li>
-	<li><label for="default_currency">Default Currency:</label> <?=form::dropdown('default_currency', Auto_Modeler_ORM::factory('currency')->select_list('id', array('name', 'symbol')), $settings->default_currency)?></li>
+	<li><label for="default_currency">Default Currency:</label> <?=form::dropdown('default_currency', Auto_Modeler_ORM::factory('currency')->select_list('id', array('name', 'symbol')), $settings->default_currency, 'disabled="disabled"')?></li>
 	<li><?=form::submit('update', 'Update Settings')?></li>
 </ul>
 <?=form::close()?>
