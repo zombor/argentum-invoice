@@ -53,10 +53,10 @@ class page_Core {
 			switch ($type)
 			{
 				case 'stylesheet':
-					echo '<link rel="stylesheet" type="text/css" href="'.url::base().$file.'" />';
+					echo '<link rel="stylesheet" type="text/css" href="'.url::base(TRUE).$file.'" />';
 					break;
 				case 'javascript':
-					echo '<script type="text/javascript" src="'.url::base().$file.'"></script>';
+					echo '<script type="text/javascript" src="'.url::base(TRUE).$file.'"></script>';
 					break;
 			}
 		}
