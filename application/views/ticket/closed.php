@@ -1,4 +1,4 @@
-<h2>View Closed Tickets For <?=html::anchor('project/view/'.$this->uri->segment(3), 'Project ID '.$this->uri->segment(3))?></h2>
+<h2>View Closed Tickets For <?=html::anchor('project/view/'.$project->id, 'Project ID '.$project->id.': '.$project->name)?></h2>
 <?php include Kohana::find_file('views', 'project/menu')?>
 <table class="tickets">
 	<tbody>
