@@ -224,3 +224,7 @@ table.tickets li {
 	list-style: disc;
 	margin-left: 1.5em;
 }
+
+.form_delete, .form_delete input {
+	display: inline;
+}
