@@ -68,6 +68,7 @@ class Ticket_Controller extends Website_Controller {
 			$ticket->set_fields($this->input->post());
 			$ticket->user_id = $_POST['user_id'] == '' ? NULL : $this->input->post('user_id');
 			$ticket->complete = $this->input->post('complete', FALSE);
+			$ticket->billable = $this->input->post('billable', FALSE);
 
 			if ($ticket->complete)
 			{
