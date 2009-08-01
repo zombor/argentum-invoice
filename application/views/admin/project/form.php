@@ -36,6 +36,7 @@
 	<li><label for="mailing_state">Mailing State/Province:</label> <?=form::input('client[mailing_state]', $client->mailing_state)?></li>
 	<li><label for="mailing_country">Mailing Country:</label> <?=form::input('client[mailing_country]', $client->mailing_country)?></li>
 	<li><label for="mailing_zip_code">Mailing Zip Code:</label> <?=form::input('client[mailing_zip_code]', $client->mailing_zip_code)?></li>
+	<li><label for="mailing_country">Mailing Country:</label> <?=form::input('mailing_country', $client->mailing_country)?></li>
 	<li><label for="phone_number">Phone Number:</label> <?=form::input('client[phone_number]', $client->phone_number)?></li>
 	<li><label for="tax_exempt">Tax Rate:</label> <?=form::input('client[tax_rate]',$client->tax_rate)?></li>
 	<li><label for="currency_id">Currency:</label> <?=form::dropdown('client[currency_id]', Auto_Modeler_ORM::factory('currency')->select_list('id', 'name'), $client->currency_id)?></li>
