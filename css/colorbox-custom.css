@@ -15,7 +15,7 @@
 	#borderMiddleLeft{width:27px; background:url(../images/colorbox/borderMiddleLeft.png) 0 0 repeat-y;}
 	#borderMiddleRight{width:27px; background:url(../images/colorbox/borderMiddleRight.png) 0 0 repeat-y;}
 	#modalContent{background:#fff; }
-		#modalLoadedContent{margin-bottom:20px;}
+		#modalLoadedContent{margin: 5px; margin-bottom:20px;}
 			#contentTitle{display:none;}
 			#contentCurrent{position:absolute; bottom:0px; left:65px; font-weight:bold; color:#999;}
 			#contentPrevious{position:absolute; bottom:0px; left:0; font-weight:bold;}

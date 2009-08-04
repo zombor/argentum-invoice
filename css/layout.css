@@ -211,3 +211,8 @@ div#login {
 div#register {
 	float: right;
 }
+
+#modalLoadedContent h2 {
+	background-color: #0B5A55;
+	color: white;
+}

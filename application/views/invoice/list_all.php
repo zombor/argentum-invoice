@@ -43,11 +43,12 @@
 				
 			?>
 			<?php if (Auth::instance()->logged_in('admin')):?><td>
-				<?=html::anchor('admin/invoice/post_payment/'.$invoice->id, html::image(array('src' => 'images/icons/money_add.png', 'alt' => 'Post Payment')))?>
-				<?=html::anchor('admin/invoice/view_payments/'.$invoice->id, html::image(array('src' => 'images/icons/money.png', 'alt' => 'View Payments')))?>
+				<?=html::anchor('admin/invoice/post_payment/'.$invoice->id, html::image(array('src' => 'images/icons/money_add.png', 'alt' => 'Post Payment')), array('class' => 'colorbox'))?>
+				<?=html::anchor('admin/invoice/view_payments/'.$invoice->id, html::image(array('src' => 'images/icons/money.png', 'alt' => 'View Payments')), array('class' => 'colorbox'))?>
 			</td>
 			<?php endif;?>
-		<?php endforeach;?></tr>
+		</tr>
+		<?php endforeach;?>
 		<tr class="total_row">
 			<td colspan="2"></td>
 			<td>$<?=number_format($invoice_subtotal, 2)?></td>
