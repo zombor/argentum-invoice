@@ -120,7 +120,7 @@ class Invoice_Controller extends Website_Controller {
 	public function view_payments($invoice_id)
 	{
 		$this->template->body = new View('admin/invoice/view_payments');
-		$this->template->body->invoice_payments = Auto_Modeler_ORM::factory('invoice_payment')->fetch_some(array('invoice_id' => $invoice_id));
+		$this->template->body->invoice_payments = Auto_Modeler_ORM::factory('invoice_payment')->fetch_where(array('invoice_id' => $invoice_id));
 		$this->template->body->invoice_id = $invoice_id;
 	}
 
