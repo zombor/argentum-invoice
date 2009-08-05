@@ -101,11 +101,22 @@ class Ticket_Controller extends Website_Controller {
 	/**
 	 *  Deletes a ticket
 	 */
-	public function delete()
+	public function delete($ticket_id)
 	{
-		$ticket = Auto_Modeler_ORM::factory('ticket', $this->input->post('id'));
-		$ticket->delete();
-		Event::run('argentum.ticket_delete', $ticket);
-		url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
+		$ticket = new Ticket_Model($ticket_id);
+
+		if ( ! $ticket->id)
+			Event::run('system.404');
+
+		if (isset($_POST['confirm']))
+		{
+			$ticket->delete();
+			Event::run('argentum.ticket_delete', $ticket);
+			url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
+		}
+		elseif(isset($_POST['cancel']))
+			url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
+
+		$this->template->body = new View('admin/confirm');
 	}
 }
