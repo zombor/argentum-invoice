@@ -73,4 +73,26 @@ class Non_hourly_Controller extends Website_Controller {
 			}
 		}
 	}
+
+	/**
+	 *  Deletes a ticket
+	 */
+	public function delete($non_hourly_id)
+	{
+		$non_hourly = new Non_Hourly_Model($non_hourly_id);
+
+		if ( ! $non_hourly->id)
+			Event::run('system.404');
+
+		if (isset($_POST['confirm']))
+		{
+			$non_hourly->delete();
+			Event::run('argentum.non_hourly_delete', $non_hourly);
+			url::redirect('non_hourly/view_project/'.$non_hourly->project_id);
+		}
+		elseif(isset($_POST['cancel']))
+			url::redirect('non_hourly/view_project/'.$non_hourly->project_id);
+
+		$this->template->body = new View('admin/confirm');
+	}
 }

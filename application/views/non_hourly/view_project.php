@@ -14,7 +14,7 @@
 			<td><?=$non_hourly->quantity?></td>
 			<td><?=$non_hourly->description?></td>
 			<td><?=$non_hourly->cost?></td>
-			<td><?=$non_hourly->invoiced ? html::anchor('invoice/view/'.$non_hourly->invoice_id, $non_hourly->invoice_id) : html::anchor('admin/non_hourly/edit/'.$non_hourly->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Non Hourly')))?></td>
+			<td><?=$non_hourly->invoiced ? html::anchor('invoice/view/'.$non_hourly->invoice_id, $non_hourly->invoice_id) : html::anchor('admin/non_hourly/edit/'.$non_hourly->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Non Hourly')))?> <?= ! $non_hourly->invoiced ? html::anchor('admin/non_hourly/delete/'.$non_hourly->id, html::image(array('src' => 'images/icons/cross.png', 'alt' => 'Delete Non-Hourly')), array('class' => 'delete_non_hourly colorbox')) : ''?></td>
 		</tr><?php endforeach;?>
 	</tbody>
 </table>
