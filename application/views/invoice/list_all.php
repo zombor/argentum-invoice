@@ -51,8 +51,8 @@
 		<?php endforeach;?>
 		<tr class="total_row">
 			<td colspan="2"></td>
-			<td>$<?=number_format($invoice_subtotal, 2)?></td>
-			<td>$<?=number_format($invoice_tax, 2)?></td>
+			<td>$<?=number_format($total_subtotal, 2)?></td>
+			<td>$<?=number_format($total_tax, 2)?></td>
 			<td>$<?=number_format($total_income, 2)?></td>
 			<td>$<?=number_format($total_paid, 2)?></td>
 			<?php if (Auth::instance()->logged_in('admin')):?><td></td><?php endif;?>
