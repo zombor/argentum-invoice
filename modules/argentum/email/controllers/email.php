@@ -299,6 +299,7 @@ class Email_Controller extends Website_Controller {
 			try
 			{
 				$settings->save();
+				Kohana::config_clear('email');
 				$this->template->body->status = TRUE;
 				$this->template->body->settings = $settings;
 			}

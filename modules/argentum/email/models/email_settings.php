@@ -30,7 +30,7 @@ class Email_Settings_Model extends Auto_Modeler {
 	public function __construct()
 	{
 		$this->data['driver'] = Kohana::config('email.driver');
-		
+
 		if ($this->data['driver'] == 'smtp')
 		{
 			$this->data['hostname'] = Kohana::config('email.options.hostname');
