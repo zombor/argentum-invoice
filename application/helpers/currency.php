@@ -18,6 +18,9 @@ class currency_Core {
 	 */
 	public static function convert($from, $to, $amount = 1)
 	{
+		if ($from == $to)
+			return $amount;
+
 		$googleQuery = $amount . ' ' . $from . ' in ' . $to;
 		$googleQuery = urlEncode( $googleQuery );
 		$askGoogle = file_get_contents( 'http://www.google.com/search?q=' . $googleQuery );
