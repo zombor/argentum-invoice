@@ -16,7 +16,6 @@
 <h2><?=$title?></h2>
 <?=$errors?>
 <?=form::open()?>
-<?=form::hidden('id', $user->id)?>
 <ul>
 	<li>
 		<?=form::label('username', 'Username')?>

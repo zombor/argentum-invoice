@@ -31,11 +31,11 @@ class User_Controller extends Website_Controller
 			->set('user', $user = new User_Model)
 			->set('user_roles', array());
 
-		if (request::method() == 'post')
+		if ($_POST)
 		{
 			$user->set_fields($this->input->post());
 			$user->password = $this->input->post('password');
-			try 
+			try
 			{
 				$user->save();
 
@@ -43,7 +43,7 @@ class User_Controller extends Website_Controller
 					$user->roles = $role_id;
 
 				url::redirect('admin/user/all');
-			} 
+			}
 			catch (Kohana_User_Exception $e)
 			{
 				$this->template->body->errors = $e;
@@ -75,7 +75,7 @@ class User_Controller extends Website_Controller
 		foreach ($user->find_related('roles') as $user_role)
 			$user_roles[] = $user_role->id;
 
-		if (request::method() == 'post')
+		if ($_POST)
 		{
 			$user->set_fields($this->input->post());
 			$user->password = $this->input->post('password');
