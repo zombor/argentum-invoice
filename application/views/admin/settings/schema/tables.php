@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `<?=Kohana::config('database.default.table_prefix')?>
   `mailing_country` varchar(25) NOT NULL,
   `mailing_zip_code` char(10) NOT NULL,
   `email_address` varchar(75) NOT NULL,
-  `phone_number` char(12) NOT NULL,
+  `phone_number` char(15) NOT NULL,
   `tax_rate` decimal(5,2) NOT NULL,
   `currency_id` mediumint(9) NOT NULL,
   PRIMARY KEY  (`id`),
