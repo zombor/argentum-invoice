@@ -5,7 +5,7 @@
 	<li><strong>Contact</strong> <?=$client->contact_full_name()?> (<?=html::mailto($client->email_address)?>)</li>
 	<li><strong>Address</strong>
 	<?=$client->mailing_address?><br />
-	<?=$client->mailing_city, $client->mailing_state?> 
+	<?=$client->mailing_city, ',&nbsp;'.$client->mailing_state?><br />
 	<?=$client->mailing_zip_code?>
 	</li>
 	<li><strong>Phone Number</strong> <?=$client->phone_number?></li>
