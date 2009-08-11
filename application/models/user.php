@@ -18,8 +18,8 @@ class User_Model extends Auto_Modeler_ORM {
 	                        'last_name' => '',
 	                        'password' => '',
 	                        'email' => '',
-	                        'last_login' => '',
-	                        'logins' => '');
+	                        'last_login' => 0,
+	                        'logins' => 0);
 
 	protected $rules = array('username' => array('required'),
 	                         'email' => array('required', 'email'),
