@@ -39,7 +39,7 @@ class Ticket_Model extends Auto_Modeler_ORM
 			{
 				$total+=($time->end_time-$time->start_time)/60/60;
 			}
-			return $total;
+			return round($total, 2);
 		}
 		else
 			return parent::__get($key);
