@@ -127,12 +127,18 @@ ul.submenu li {
 	-o-border-radius: 0.35em;
 }
 
-#project_form #new_client h4 { 
+#new_client h4 { 
 	font-weight: bold;
 }
 
-#project_form #new_client input, #project_form #client_mailing_address {
+#new_client label {
 	width: 150px;
+	display: inline-block;
+}
+
+#new_client input, #new_client #client_mailing_address {
+	width: 150px;
+	margin-bottom: .25em;
 }
 
 #client_list {
@@ -231,8 +237,9 @@ table.tickets li {
 
 input, select, textarea {
 	border: 2px solid #0B5A55;
-	-moz-border-radius: 0.7em;
-	-webkit-border-radius: 0.7em;
-	-khtml-border-radius: 0.7em;
-	-o-border-radius: 0.7em;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-o-border-radius: 5px;
+	padding: 2px 5px;
 }

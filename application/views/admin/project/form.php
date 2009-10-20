@@ -22,21 +22,17 @@
 <div id="new_client"<?php if ($project->client_id == 'new'):?> style="display:block;"<?php endif;?>>
 <h4>New Client Information</h4>
 <ul>
-	<li><label for="company_name">Company Name:</label> <?=form::input('client[company_name]', $client->company_name)?></li>
-	<li><label for="contact_first_name">Contact First Name:</label> <?=form::input('client[contact_first_name]', $client->contact_first_name)?></li>
-	<li><label for="contact_first_name">Contact Last Name:</label> <?=form::input('client[contact_last_name]', $client->contact_last_name)?></li>
-	<li><label for="email_address">Email Address:</label> <?=form::input('client[email_address]', $client->email_address)?></li>
-	<li class="clear"><label for="client_mailing_address">Mailing Address:</label>
-		<?=form::textarea(array('name' => 'client[mailing_address]', 
-					'value' => $client->mailing_address,
-					'id' => 'client_mailing_address'))?></li>
-	<li><label for="mailing_city">Mailing City:</label> <?=form::input('client[mailing_city]', $client->mailing_city)?></li>
-	<li><label for="mailing_state">Mailing State/Province:</label> <?=form::input('client[mailing_state]', $client->mailing_state)?></li>
-	<li><label for="mailing_country">Mailing Country:</label> <?=form::input('client[mailing_country]', $client->mailing_country)?></li>
-	<li><label for="mailing_zip_code">Mailing Zip Code:</label> <?=form::input('client[mailing_zip_code]', $client->mailing_zip_code)?></li>
-	<li><label for="mailing_country">Mailing Country:</label> <?=form::input('mailing_country', $client->mailing_country)?></li>
-	<li><label for="phone_number">Phone Number:</label> <?=form::input('client[phone_number]', $client->phone_number)?></li>
-	<li><label for="tax_exempt">Tax Rate:</label> <?=form::input('client[tax_rate]',$client->tax_rate)?></li>
+	<li><label for="company_name">Company Name:</label> <input name="client[company_name]" value="<?=$client->company_name?>" id="company_name" /></li>
+	<li><label for="contact_first_name">Contact First Name:</label> <input name="client[contact_first_name]" value="<?=$client->contact_first_name?>" id="contact_first_name" /></li>
+	<li><label for="contact_last_name">Contact Last Name:</label> <input name="client[contact_last_name]" value="<?=$client->contact_last_name?>" id="contact_last_name" /></li>
+	<li><label for="email_address">Email Address:</label> <input name="client[email_address]" value="<?=$client->email_address?>" id="email_address" /></li>
+	<li class="clear"><label for="client_mailing_address">Mailing Address:</label><textarea name="client[mailing_address]" id="client_mailing_address"><?=$client->mailing_address?></textarea></li>
+	<li><label for="mailing_city">Mailing City:</label> <input name="client[mailing_city]" value="<?=$client->mailing_city?>" id="mailing_city" /></li>
+	<li><label for="mailing_state">Mailing State/Province:</label> <input name="client[mailing_state]" value="<?=$client->mailing_state?>" id="mailing_state" /></li>
+	<li><label for="mailing_country">Mailing Country:</label> <input name="client[mailing_country]" value="<?=$client->mailing_country?>" id="mailing_country" /></li>
+	<li><label for="mailing_zip_code">Mailing Zip Code:</label> <input name="client[mailing_zip_code]" value="<?=$client->mailing_zip_code?>" id="mailing_zip_code" /></li>
+	<li><label for="phone_number">Phone Number:</label> <input name="client[phone_number]" value="<?=$client->phone_number?>" id="phone_number" /></li>
+	<li><label for="tax_rate">Tax Rate:</label> <input name="client[tax_rate]" value="<?=$client->tax_rate?>" id="tax_rate" /></li>
 	<li><label for="currency_id">Currency:</label> <?=form::dropdown('client[currency_id]', Auto_Modeler_ORM::factory('currency')->select_list('id', 'name'), $client->currency_id)?></li>
 </ul>
 </div>	
