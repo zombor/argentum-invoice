@@ -12,7 +12,7 @@
         <?=html::anchor('invoice/list_all/'.$this->uri->segment(3, date('Y')).'/'.$i, date('F', mktime(0, 0, 0, $i, 1, 1)), array('class' => $this->uri->segment(4, date('n')) == $i ? 'current' : '')) ?>
 <?php endfor; ?></p>
 <table class="invoice_list">
-	<tbody>
+	<thead>
 		<tr>
 			<th>Invoice ID</th>
 			<th>Client</th>
@@ -22,7 +22,9 @@
 			<th>Total Paid</th><?php if (Auth::instance()->logged_in('admin')):?>
 			<td>Admin</td><?php endif;?>
 		</tr>
-		<?php foreach ($invoices as $invoice):?><tr<?php if ($invoice->total_income() > $invoice->total_paid()):?> class="unpaid"<?php endif;?>>
+	</thead>
+	<tbody>
+		<?php foreach ($invoices as $invoice):?><tr>
 			<?php
 				$invoice_income = $invoice->total_income();
 				$invoice_paid = $invoice->total_paid();
@@ -34,11 +36,11 @@
 				$total_tax+=$invoice_tax;
 			?>
 			<td><?=html::anchor('invoice/view/'.$invoice->id, $invoice->id)?></td>
-			<td><?=$invoice->client->company_name?></td>
+			<td><?=html::anchor('client/view/'.$invoice->client_id, $invoice->client->company_name)?></td>
 			<td>$<?=number_format($invoice_subtotal, 2)?></td>
 			<td>$<?=number_format($invoice_tax, 2)?></td>
 			<td>$<?=number_format($invoice_income, 2)?></td>
-			<td>$<?=number_format($invoice_paid, 2)?></td>
+			<td>$<?=number_format($invoice_paid, 2)?> <?php if ($invoice->total_income() > $invoice->total_paid()):?> <img src="<?=url::base()?>images/icons/exclamation.png" alt="Unpaid" title="Unpaid" /><?php else:?> <img src="<?=url::base()?>images/icons/accept.png" alt="Paid" title="Paid" /><?php endif;?></td>
 			<?php
 				
 			?>
@@ -49,6 +51,8 @@
 			<?php endif;?>
 		</tr>
 		<?php endforeach;?>
+	</tbody>
+	<tfoot>
 		<tr class="total_row">
 			<td colspan="2"></td>
 			<td>$<?=number_format($total_subtotal, 2)?></td>
@@ -57,5 +61,5 @@
 			<td>$<?=number_format($total_paid, 2)?></td>
 			<?php if (Auth::instance()->logged_in('admin')):?><td></td><?php endif;?>
 		</tr>
-	</tbody>
+	</tfoot>
 </table>
