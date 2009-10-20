@@ -62,7 +62,7 @@
 					Attn: <?=$invoice->client->contact_first_name?> <?=$invoice->client->contact_last_name?><br />
 					<?=$invoice->client->company_name?><br />
 					<?=$invoice->client->mailing_address?><br />
-					<?=$invoice->client->mailing_city?>, <?=$invoice->client->mailing_state?> <?=$invoice->client->mailing_zip?>
+					<?=$invoice->client->mailing_city?><?php if($invoice->client->mailing_city):?>,<?php endif;?> <?=$invoice->client->mailing_state?> <?=$invoice->client->mailing_zip?>
 				</td>
 			</tr>
 		</tbody>

@@ -104,7 +104,7 @@ ul.submenu li {
 	width: 190px; display: inline-block;
 }
 
-#project_form #notes, #ticket_form #description, #non_hourly_form #description {
+#project_form #notes, #ticket_form #description, #non_hourly_form #description, textarea#comments {
 	width: 350px;
 	height: 100px;
 }
@@ -227,4 +227,12 @@ table.tickets li {
 
 .form_delete, .form_delete input {
 	display: inline;
+}
+
+input, select, textarea {
+	border: 2px solid #0B5A55;
+	-moz-border-radius: 0.7em;
+	-webkit-border-radius: 0.7em;
+	-khtml-border-radius: 0.7em;
+	-o-border-radius: 0.7em;
 }

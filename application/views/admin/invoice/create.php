@@ -64,7 +64,7 @@
 			<td><?=$non_hourly->id?></td>
 			<td colspan="3"><?=$non_hourly->description?></td>
 			<td><?=$non_hourly->quantity?></td>
-			<td><?=number_format($non_hourly->cost, 2)?></td>
+			<td>$<?=number_format($non_hourly->cost, 2)?></td>
 		</tr><?php endforeach;?>
 		<?php endforeach;?>
 	</tbody>

@@ -4,8 +4,8 @@
 </ul>
 
 <h3>Create Invoice</h3>
-<?=form::open('admin/invoice/create', array('method' => 'get'))?>
+<?=form::open('admin/invoice/create', array('method' => 'get', 'id' => 'choose_invoice_client'))?>
 <p>Choose a client to create an invoice for:</p>
-<p><?=form::dropdown('client_id', Auto_Modeler_ORM::factory('client')->select_list('id', 'company_name'))?></p>
+<p><?=form::dropdown('client_id', array('---' => '-- Choose A Client --')+Auto_Modeler_ORM::factory('client')->select_list('id', 'company_name'))?></p>
 <p><?=form::submit('create', 'Start Creation Process')?></p>
 <?=form::close()?>

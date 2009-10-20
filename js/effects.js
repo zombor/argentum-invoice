@@ -10,4 +10,13 @@ $(document).ready(function() {
 	});
 
 	$('#create_ticket, #add_nonhourly, .edit_ticket, .add_time, .view_ticket, .colorbox').colorbox();
+
+	$('form#choose_invoice_client').submit(function()
+	{
+		if ($(this).find('#client_id').val() == '---')
+		{
+			alert('Please select a client!');
+			return false;
+		}
+	});
 });
