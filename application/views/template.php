@@ -13,6 +13,7 @@
 		<?=html::script('js/lib/colorbox')?>
 		<?=html::script('js/lib/livequery')?>
 		<?=html::script('js/lib/form')?>
+		<?=html::script('js/lib/jquery.tablesorter.min')?>
 		<?=html::script('js/effects')?>
 		<?php if (Auth::instance()->logged_in()) page::render('javascript')?>
 	</head>

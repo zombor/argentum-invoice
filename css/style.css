@@ -15,14 +15,51 @@ table.invoice_list {
 	margin-top: .5em;
 }
 
-table.invoice_list tr.unpaid {
-	background-color: red;
-	color: white;
+table.invoice_list th {
+	font-weight: bold;
+}
+
+table.invoice_list td {
+	border-bottom: 1px solid #555;
+	padding: 5px 3px;
 }
 
 table.invoice_list tr.total_row td {
 	border-top: 1px dashed black;
 	font-weight: bold;
+}
+
+table.invoice_list td.money {
+	text-align: right;
+}
+
+table.invoice_list tr.alt td {
+	background-color: #FBE5FF;
+}
+
+table.invoice_list tr:hover td {
+	background-color: #E5E9FF;
+}
+
+table.invoice_list th { 
+	background-image: url(../images/icons/bg.gif);
+	cursor: pointer;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-position: center left;
+	padding-left: 20px;
+	border-right: 1px solid #dad9c7;
+	margin-left: -1px;
+}
+
+table.invoice_list th.headerSortUp {
+	background-image: url(../images/icons/asc.gif);
+	background-color: #E5FFFF;
+}
+
+table.invoice_list th.headerSortDown {
+	background-image: url(../images/icons/desc.gif);
+	background-color: #E5FFFF;
 }
 
 ul.submenu {
@@ -243,3 +280,4 @@ input, select, textarea {
 	-o-border-radius: 5px;
 	padding: 2px 5px;
 }
+

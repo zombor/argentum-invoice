@@ -20,11 +20,11 @@
 			<th>Tax</th>
 			<th>Total Income</th>
 			<th>Total Paid</th><?php if (Auth::instance()->logged_in('admin')):?>
-			<td>Admin</td><?php endif;?>
+			<th>Admin</th><?php endif;?>
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($invoices as $invoice):?><tr>
+		<?php foreach ($invoices as $invoice):?><tr class="<?=text::alternate('alt', '')?>">
 			<?php
 				$invoice_income = $invoice->total_income();
 				$invoice_paid = $invoice->total_paid();
@@ -37,13 +37,10 @@
 			?>
 			<td><?=html::anchor('invoice/view/'.$invoice->id, $invoice->id)?></td>
 			<td><?=html::anchor('client/view/'.$invoice->client_id, $invoice->client->company_name)?></td>
-			<td>$<?=number_format($invoice_subtotal, 2)?></td>
-			<td>$<?=number_format($invoice_tax, 2)?></td>
-			<td>$<?=number_format($invoice_income, 2)?></td>
-			<td>$<?=number_format($invoice_paid, 2)?> <?php if ($invoice->total_income() > $invoice->total_paid()):?> <img src="<?=url::base()?>images/icons/exclamation.png" alt="Unpaid" title="Unpaid" /><?php else:?> <img src="<?=url::base()?>images/icons/accept.png" alt="Paid" title="Paid" /><?php endif;?></td>
-			<?php
-				
-			?>
+			<td class="money">$<?=number_format($invoice_subtotal, 2)?></td>
+			<td class="money">$<?=number_format($invoice_tax, 2)?></td>
+			<td class="money">$<?=number_format($invoice_income, 2)?></td>
+			<td class="money">$<?=number_format($invoice_paid, 2)?> <?php if ($invoice->total_income() > $invoice->total_paid()):?> <img src="<?=url::base()?>images/icons/exclamation.png" alt="Unpaid" title="Unpaid" /><?php else:?> <img src="<?=url::base()?>images/icons/accept.png" alt="Paid" title="Paid" /><?php endif;?></td>
 			<?php if (Auth::instance()->logged_in('admin')):?><td>
 				<?=html::anchor('admin/invoice/post_payment/'.$invoice->id, html::image(array('src' => 'images/icons/money_add.png', 'alt' => 'Post Payment', 'title' => 'Post Payment')), array('class' => 'colorbox'))?>
 				<?=html::anchor('admin/invoice/view_payments/'.$invoice->id, html::image(array('src' => 'images/icons/money.png', 'alt' => 'View Payments', 'title' => 'View Payments')), array('class' => 'colorbox'))?>
