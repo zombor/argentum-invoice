@@ -39,12 +39,12 @@ class login {
 		$auth = new Auth();
 		$uri = new URI();
 
-		if ($uri->segment(1) != 'user' AND $uri->segment(1) != 'invoice' AND ! $auth->logged_in('login'))
+		if (Router::$controller != 'user' AND Router::$method != 'login' AND ! $auth->logged_in())
 		{
 			$_SESSION['requested_page'] = $uri->string();
 			url::redirect('user/login');
 		}
-		else if ($uri->segment(1) == 'user' AND ! empty($_SERVER['HTTP_REFERER']))
+		else if (Router::$controller == 'user' AND ! empty($_SERVER['HTTP_REFERER']))
 		{
 			// Make sure they can read cookies.
 			if ( ! cookie::get(Kohana::config('session.name'), FALSE))
