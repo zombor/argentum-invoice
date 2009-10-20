@@ -35,7 +35,7 @@
 				$total_subtotal+=$invoice_subtotal;
 				$total_tax+=$invoice_tax;
 			?>
-			<td><?=html::anchor('invoice/view/'.$invoice->id, $invoice->id)?></td>
+			<td><a href="<?=url::base(TRUE)?>invoice/view/<?=$invoice->id?>.html"><img src="<?=url::base()?>images/icons/zoom.png" alt="View Invoice" title="View Invoice" /> <?=$invoice->id?></a></td>
 			<td><?=html::anchor('client/view/'.$invoice->client_id, $invoice->client->company_name)?></td>
 			<td class="money">$<?=number_format($invoice_subtotal, 2)?></td>
 			<td class="money">$<?=number_format($invoice_tax, 2)?></td>
