@@ -96,8 +96,9 @@ $config['extension_prefix'] = 'MY_';
  */
 $config['modules'] = array
 (
-	MODPATH.'auth',      // Authentication
-	MODPATH.'auto_modeler',      // Auto Modler Library
+	MODPATH.'argentum_core', // Argentum Core Files
+	MODPATH.'auth',          // Authentication
+	MODPATH.'auto_modeler',  // Auto Modler Library
 	// MODPATH.'forge',     // Form generation
 	// MODPATH.'kodoc',     // Self-generating documentation
 	// MODPATH.'media',     // Media caching and compression
