@@ -79,6 +79,19 @@ class Invoice_Controller extends Website_Controller {
 		}
 	}
 
+	public function edit($invoice_id)
+	{
+		if ( ! $_POST)
+		{
+			$this->template->body = new View('admin/invoice/edit');
+			$this->template->body->invoice = new Invoice_Model($invoice_id);
+		}
+		else
+		{
+			
+		}
+	}
+
 	/**
 	 * Adds a payment to an invoice
 	 */
