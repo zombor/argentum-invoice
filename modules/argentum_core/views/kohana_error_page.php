@@ -3,32 +3,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
 	<head>
 		<meta http-equiv="content-language" content="en" />
-		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<title><?=$error?></title>
-		<?=html::stylesheet(array('css/reset', 'css/style', 'css/print'), array('', '', 'print'))?>
+		<meta http-equiv="content-type" content="charset=utf-8" />
+		<title><?=$title?></title>
+		<?=html::stylesheet(array('css/reset', 'css/layout', 'css/style', 'css/print'),
+		                    array('', '', '', 'print'))?>
 
-		<?=html::script('js/jquery')?>
-		<?=html::script('js/jquery.livequery')?>
-		<?=html::script('js/effects')?>
 	</head>
 	<body>
-		<div id="wrapper">
-			<div id="header" class="clear">
-				<?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?>
+		<div id="body">
+			<div id="header">
+					<?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?>
+			</div>
+			<div id="navigation">
 				<ul id="nav">
 					<li><?=html::anchor('', 'Home')?></li>
-					<li><?=html::anchor('client', 'Clients')?></li>
-					<li><?=html::anchor('project', 'Projects')?></li>
-					<li><?=html::anchor('invoice', 'Invoices')?></li>
-					<li class="small"><?=html::anchor('user/logout', 'Logout')?></li>
 				</ul>
-				<div id="quicksearch">
+			</div>
+			<div id="quicksearch">
 				<?=form::open('project/search', array('method' => 'get'))?>
 					<p><?=form::input('term')?> <?=form::submit('submit', 'Search Projects')?></p>
 				<?=form::close()?>
-				</div>
 			</div>
-			<div id="body" class="clear">
+			<div class="clear">
+				&nbsp;
+			</div>
+			<div id="content">
 				<h2><?=$message?></h2>
 				<p><?=Kohana::lang('core.error_file_line', $file, $line)?></p>
 			</div>
