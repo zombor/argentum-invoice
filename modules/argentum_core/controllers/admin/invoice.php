@@ -81,14 +81,50 @@ class Invoice_Controller extends Website_Controller {
 
 	public function edit($invoice_id)
 	{
+		Auth::instance()->logged_in('admin') OR Event::run('system.404');
+		$invoice = new Invoice_Model($invoice_id);
+
+		if ( ! $invoice->id)
+			Event::run('system.404');
+
 		if ( ! $_POST)
 		{
 			$this->template->body = new View('admin/invoice/edit');
-			$this->template->body->invoice = new Invoice_Model($invoice_id);
+			$this->template->body->invoice = $invoice;
 		}
 		else
 		{
+			$tickets = arr::remove('tickets', $_POST);
+			$non_hourlies = arr::remove('non_hourly', $_POST);
 			
+			$invoice->set_fields($_POST);
+			
+			try
+			{
+				$invoice->save();
+
+				foreach ($tickets as $ticket_id)
+				{
+					$ticket = new Ticket_Model($ticket_id);
+					$ticket->invoiced = FALSE;
+					$ticket->invoice_id = NULL;
+					$ticket->save();
+				}
+
+				foreach ( (array) $non_hourlies as $non_hourly_id)
+				{
+					$non_hourly = new Ticket_Model($non_hourly_id);
+					$non_hourly->invoiced = FALSE;
+					$non_hourly->invoice_id = NULL;
+					$non_hourly->save();
+				}
+			}
+			catch (Kohana_User_Exception $e)
+			{
+				
+			}
+
+			url::redirect('invoice/list_all');
 		}
 	}
 

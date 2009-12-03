@@ -48,7 +48,7 @@
 			<td><?=number_format($ticket->total_time, 2)?></td>
 			<td>$<?=number_format($ticket->rate, 2)?></td>
 			<td>$<?=number_format($ticket->total_time*$ticket->rate, 2)?><?php $total_cost+=$ticket->total_time*$ticket->rate?></td>
-		</tr><?php endforeach;?>
+		</tr><?php endforeach;?> 
 		<?php endforeach;?>
 		<tr>
 			<td colspan="7"><h3>Non-hourly to be billed:</h3></td>
