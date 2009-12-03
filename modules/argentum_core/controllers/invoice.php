@@ -69,6 +69,17 @@ class Invoice_Controller extends Website_Controller {
 		$dompdf->stream($invoice_id.'.pdf');
 	}
 
+	public function details($invoice_id = NULL)
+	{
+		$invoice = new Invoice_Model($invoice_id);
+
+		if ( ! $invoice->id)
+			Event::run('system.404');
+
+		$this->template->body = new View('invoice/details');
+		$this->template->body->invoice = $invoice;
+	}
+
 	/**
 	 * Emails a PDF version of a invoice to client contacts
 	 * @param int $invoice_id

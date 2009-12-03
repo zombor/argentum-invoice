@@ -1,6 +1,6 @@
 <h2>Edit Invoice #<?=$invoice->id?></h2>
 <?=form::open()?>
-	<h3>Invoice Details</h3>
+	<?php if (count($invoice->find_related('tickets'))):?><h3>Invoice Details</h3>
 	<ul>
 		<li><label for="title">Title:</label> <input name="title" id="title" value="<?=$invoice->title?>" /></li>
 		<li><label for="comments">Comments:</label> <textarea name="comments" id="comments"><?=$invoice->title?></textarea></li>
@@ -31,12 +31,12 @@
 				<td>$<?=number_format($ticket->total_time*$ticket->rate, 2)?></td>
 			</tr><?php endforeach;?> 
 		</tbody>
-	</table>
-	<h3>Unbill Non-Hourly Items</h3>
+	</table><?php endif;?> 
+	<?php if (count($invoice->find_related('non_hourly'))):?><h3>Unbill Non-Hourly Items</h3>
 	<table id="invoice_form">
 		<thead>
 			<tr>
-				<th>Bill</th>
+				<th>Un-Bill</th>
 				<th>Nonhourly ID</th>
 				<th colspan="3">Description</th>
 				<th>Quantity</th>
@@ -52,6 +52,6 @@
 				<td>$<?=number_format($non_hourly->cost, 2)?></td>
 			</tr><?php endforeach;?> 
 		</tbody>
-	</table>
+	</table><?php endif;?> 
 	<p><input type="submit" value="Edit Invoice" /></p>
 </form>

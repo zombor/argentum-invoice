@@ -44,6 +44,7 @@
 			<?php if (Auth::instance()->logged_in('admin')):?><td>
 				<?=html::anchor('admin/invoice/post_payment/'.$invoice->id, html::image(array('src' => 'images/icons/money_add.png', 'alt' => 'Post Payment', 'title' => 'Post Payment')), array('class' => 'colorbox'))?>
 				<?=html::anchor('admin/invoice/view_payments/'.$invoice->id, html::image(array('src' => 'images/icons/money.png', 'alt' => 'View Payments', 'title' => 'View Payments')), array('class' => 'colorbox'))?>
+				<?=html::anchor('invoice/details/'.$invoice->id, html::image(array('src' => 'images/icons/eye.png', 'alt' => 'View Invoice Details', 'title' => 'View Invoice Details')))?>
 				<?php if ( ! $invoice_paid):?><?=html::anchor('admin/invoice/edit/'.$invoice->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Invoice', 'title' => 'Edit Invoice')))?>
 				<?php endif;?> 
 			</td>
