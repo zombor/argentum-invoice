@@ -1,0 +1,1 @@
+<h3><?=html::anchor('email/invoice/'.$invoice->id, 'Email PDF', array('class' => 'download_pdf'))?></h3>

@@ -35,7 +35,17 @@ $(document).ready(function() {
 		{
 			$('span.total_cost').html(number_format(total_cost-this_cost, 2));
 		}
-	})
+	});
+
+	$('form#invoice_email').submit(function()
+	{
+		var checked = parseInt($(this).find('input.to:checked').size());
+		if (checked == 0)
+		{
+			alert('You must select recipients.');
+			return false;
+		}
+	});
 });
 
 function number_format (number, decimals, dec_point, thousands_sep)

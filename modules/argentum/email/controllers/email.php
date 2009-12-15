@@ -278,6 +278,83 @@ class Email_Controller extends Website_Controller {
 		View::factory('system_settings_display')->render(TRUE);
 	}
 
+	public function _invoice_view()
+	{
+		View::factory('emails/invoice/invoice_view')->set(array('invoice' => Event::$data))->render(TRUE);
+	}
+
+	/**
+	 * Emails a PDF version of a invoice to client contacts
+	 * @param int $invoice_id
+	 */
+	public function invoice($invoice_id = NULL)
+	{
+		$invoice = new Invoice_Model($invoice_id);
+
+		if ( ! $invoice->id)
+			Event::run('system.404');
+
+		if ( ! $_POST)
+		{
+			$this->template->body = View::factory('emails/invoice/email')->bind('invoice', $invoice);
+		}
+		else
+		{
+			$this->template->body = new View('invoice/email_success');
+			$to = array();
+
+			require Kohana::find_file('vendor/dompdf', 'dompdf_config.inc');
+
+			$html = View::factory('invoice/templates/'.$invoice->template_name.'/pdf')->set(array('invoice' => new Invoice_Model($invoice_id)));
+			$dompdf = new DOMPDF();
+			$dompdf->load_html($html);
+			$dompdf->render();
+			$pdf = $dompdf->output();
+
+			// Send the email
+			$swift = email::connect();
+			$message = new Swift_Message($this->input->post('subject', 'Invoice #'.$invoice->id),
+		                             View::factory('emails/invoice/email_content')->set(array('invoice' => $invoice))->render(),
+		                             'text/html');
+
+			$message->attach(new Swift_Message_Part(View::factory('emails/invoice/email_content')->set(array('invoice' => $invoice))->render(), 'text/html'));
+			$message->attach(new Swift_Message_Attachment($pdf, $invoice->id.'.pdf', 'application/pdf'));
+
+			$recipients = new Swift_RecipientList();
+
+			foreach ($this->input->post('contacts_to', array()) as $contact_id)
+			{
+				$contact = new Contact_Model($contact_id);
+				$recipients->addTo($contact->email, $contact->first_name.' '.$contact->last_name);
+				$to[] = $contact;
+			}
+
+			foreach ($this->input->post('contacts_cc', array()) as $contact_id)
+			{
+				$contact = new Contact_Model($contact_id);
+				$recipients->addCc($contact->email, $contact->first_name.' '.$contact->last_name);
+				$to[] = $contact;
+			}
+
+			foreach ($this->input->post('users_bcc', array()) as $user_id)
+			{
+				$user = new User_Model($user_id);
+				$recipients->addBcc($user->email, $user->first_name.' '.$user->last_name);
+				$to[] = $contact;
+			}
+
+			try
+			{
+				$this->template->body->to = $to;
+				$swift->send($message, $recipients, $_SESSION['auth_user']->email);
+			}
+			catch (Swift_ConnectionException $e)
+			{
+				throw new Kohana_User_Exception('swift.general_error', $e->getMessage());
+			}
+		}
+	}
+
 	/**
 	 * Form for processing general application email preferences
 	 */

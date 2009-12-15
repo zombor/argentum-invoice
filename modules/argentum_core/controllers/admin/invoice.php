@@ -67,12 +67,10 @@ class Invoice_Controller extends Website_Controller {
 			$this->template->body->client = $client;
 
 			// Find all the invoice templates
-			$d = dir(APPPATH.'views/invoice/templates/');
 			$directories = array();
-			while (($entry = $d->read()) !== FALSE)
+			foreach (Kohana::list_files('views/invoice/templates/') as $directory)
 			{
-				// Don't include hidden folders
-				if ($entry[0] != '.') $directories[$entry] = ucfirst(str_replace('_', ' ', $entry));
+				$directories[basename($directory)] = ucfirst(str_replace('_', ' ', basename($directory)));
 			}
 
 			$this->template->body->templates = $directories;

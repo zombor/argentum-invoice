@@ -47,6 +47,10 @@ class send_email {
 			Event::add('argentum.ticket_update', array('Email_Controller', '_ticket_update'));
 			Event::add('argentum.ticket_delete', array('Email_Controller', '_ticket_delete'));
 		}
+		elseif (Router::$controller == 'invoice' AND Router::$method == 'view')
+		{
+			Event::add('argentum.invoice_view', array('Email_Controller', '_invoice_view'));
+		}
 	}
 }
 

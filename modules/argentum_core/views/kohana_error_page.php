@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="content-language" content="en" />
 		<meta http-equiv="content-type" content="charset=utf-8" />
-		<title><?=$title?></title>
+		<title>Argentum Invoice Error</title>
 		<?=html::stylesheet(array('css/reset', 'css/layout', 'css/style', 'css/print'),
 		                    array('', '', '', 'print'))?>
 

@@ -106,4 +106,4 @@
 	</table>
 </div>
 <h3><?=html::anchor('invoice/view_pdf/'.$invoice->id, 'Download PDF', array('class' => 'download_pdf'))?></h3>
-<h3><?=html::anchor('invoice/email/'.$invoice->id, 'Email PDF', array('class' => 'download_pdf'))?></h3>
+<?php Event::run('argentum.invoice_view', $invoice)?>
