@@ -1,4 +1,6 @@
-
+strong {
+	font-weight: bold;
+}
 
 a, a:link, a:active {
 	color: #2E98C4;
@@ -9,6 +11,14 @@ a, a:link, a:active {
 td, th {
 	padding-left: .5em;
 	padding-right: .5em;
+}
+
+table.tickets tfoot td {
+	border-top: 1px solid #ccc;
+}
+
+td.hours {
+	text-align: right;
 }
 
 table.invoice_list {
