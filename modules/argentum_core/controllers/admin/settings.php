@@ -106,9 +106,9 @@ class Settings_Controller extends Website_Controller
 		}
 		else
 		{
-			unset($_POST['go']);
 			try
 			{
+				unset($_POST['go']);
 				// First unset everything
 				$db->query('UPDATE `'.Kohana::config('database.default.table_prefix').'modules` SET `active` = 0');
 
@@ -122,11 +122,14 @@ class Settings_Controller extends Website_Controller
 					{
 						Kohana::config_set('core.modules', array_merge(Kohana::config('core.modules'), array(MODPATH.'argentum/'.$field)));
 						$class = ucfirst($field).'_Install';
-						include Kohana::find_file('libraries', $field.'_install');
+						if ($path = Kohana::find_file('libraries', $field.'_install'))
+						{
+							include $path;
 
-						// Run the installer
-						$install = new $class;
-						$install->run_install();
+							// Run the installer
+							$install = new $class;
+							$install->run_install();
+						}
 					}
 
 					$module->active = TRUE;
@@ -155,12 +158,15 @@ class Settings_Controller extends Website_Controller
 	public function uninstall_module($module)
 	{
 		Kohana::config_set('core.modules', array_merge(Kohana::config('core.modules'), array(MODPATH.'argentum/'.$module)));
-		$class = ucfirst($module).'_Install';
-		include Kohana::find_file('libraries', $module.'_install');
+		if ($path = Kohana::find_file('libraries', $module.'_install'))
+		{
+			include $path;
 
-		// Run the uninstaller
-		$install = new $class;
-		$install->uninstall();
+			// Run the uninstaller
+			$class = ucfirst($module).'_Install';
+			$install = new $class;
+			$install->uninstall();
+		}
 
 		$module = new Module_Model($module);
 

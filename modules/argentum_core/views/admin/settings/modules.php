@@ -20,5 +20,5 @@
 		<td><?=html::anchor('admin/settings/uninstall_module/'.$module->name, 'Uninstall')?></td>
 	</tr><?php endforeach;?>
 </table>
-<p><?=form::submit('go', 'Activate/Install Selected Modules')?></p>
+<p><input type="submit" name="go" value="Activate/Install Selected Modules" /></p>
 <?=form::close()?>
