@@ -11,7 +11,7 @@
 class Ticket_Model extends Auto_Modeler_ORM
 {
 	protected $table_name = 'tickets';
-	
+
 	protected $data = array('id' => NULL,
 	                        'user_id' => NULL,
 	                        'created_by' => '',
@@ -23,8 +23,9 @@ class Ticket_Model extends Auto_Modeler_ORM
 	                        'billable' => TRUE,
 	                        'invoiced' => FALSE,
 	                        'invoice_id' => NULL,
-	                        'operation_type_id' => 1,
-	                        'rate' => 0);
+	                        'operation_type_id' => NULL,
+	                        'rate' => 0,
+	                        'physical' => FALSE);
 
 	protected $rules = array('project_id' => array('required', 'numeric'),
 	                         'description' => array('required'),

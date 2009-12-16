@@ -291,3 +291,6 @@ input, select, textarea {
 	padding: 2px 5px;
 }
 
+li.rate {
+	display: none;
+}

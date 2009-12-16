@@ -270,7 +270,7 @@ class Settings_Controller extends Website_Controller
 						}
 					}
 
-					/*$constriants = View::factory('admin/settings/schema/constraints')->render();
+					$constriants = View::factory('admin/settings/schema/constraints')->render();
 					$query = '';
 					foreach (explode("\n", $constriants) as $sql)
 					{
@@ -283,7 +283,7 @@ class Settings_Controller extends Website_Controller
 								$query = '';
 							}
 						}
-					}*/
+					}
 
 					$data = View::factory('admin/settings/schema/data')->render();
 					$query = '';

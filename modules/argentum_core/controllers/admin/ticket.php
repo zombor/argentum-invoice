@@ -29,11 +29,13 @@ class Ticket_Controller extends Website_Controller {
 			$ticket->creation_date = time();
 			$ticket->user_id = $_POST['user_id'] == '' ? NULL : $this->input->post('user_id');
 			$ticket->created_by = $_SESSION['auth_user']->id;
-			
+
 			try
 			{
-				$ticket->save();
-				$ticket->rate = $ticket->operation_type->rate;
+				if ( ! $ticket->rate)
+					$ticket->rate = $ticket->operation_type->rate;
+				else
+					$ticket->operation_type_id = NULL;
 				$ticket->save();
 
 				// Run any ticket creation events

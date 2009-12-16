@@ -9,7 +9,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#create_ticket, #add_nonhourly, .edit_ticket, .add_time, .view_ticket, .colorbox').colorbox();
+	$('#create_ticket, #add_nonhourly, .edit_ticket, .add_time, .view_ticket, .colorbox').colorbox({scrolling: false});
 
 	$('form#choose_invoice_client').submit(function()
 	{
@@ -44,6 +44,20 @@ $(document).ready(function() {
 		{
 			alert('You must select recipients.');
 			return false;
+		}
+	});
+
+	$('input[name=physical]').livequery('click', function()
+	{
+		if ($(this).is(':checked'))
+		{
+			$('li.rate').css('display', 'block');
+			$('li.operation').css('display', 'none');
+		}
+		else
+		{
+			$('li.rate').css('display', 'none');
+			$('li.operation').css('display', 'block');
 		}
 	});
 });

@@ -9,7 +9,7 @@
 			<th>Creation Date</th>
 			<th>Description</th>
 			<th>Operation</th>
-			<th>Total Hours</th>
+			<th>Total Hours / Cost</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -19,8 +19,8 @@
 			<td><?=$ticket->user_id == NULL ? 'Unassigned' : $ticket->user->username?></td>
 			<td><?=date('m/d/Y', $ticket->creation_date)?></td>
 			<td><?=Markdown($ticket->description)?></td>
-			<td><?=$ticket->operation_type->name?></td>
-			<td class="hours"><?=number_format($ticket->total_time, 2)?></td>
+			<td><?=$ticket->operation_type_id ? $ticket->operation_type->name : ''?></td>
+			<td class="hours"><?=number_format($ticket->operation_type_id ? $ticket->total_time : $ticket->rate, 2)?></td>
 			<td><?=html::anchor('admin/time/add/'.$ticket->id, html::image(array('src' => 'images/icons/time_add.png', 'alt' => 'Add Time')), array('class' => 'add_time'))?> <?=html::anchor('admin/ticket/edit/'.$ticket->id, html::image(array('src' => 'images/icons/pencil.png', 'alt' => 'Edit Ticket')), array('class' => 'edit_ticket'))?> <?=html::anchor('admin/ticket/delete/'.$ticket->id, html::image(array('src' => 'images/icons/cross.png', 'alt' => 'Delete Ticket')), array('class' => 'delete_ticket colorbox'))?>
 			    <?php Event::run('argentum.active_ticket_item_display', $ticket); $total_hours+=$ticket->total_time;?></td>
 	</tr><?php endforeach;?>
