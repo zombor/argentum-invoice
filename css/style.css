@@ -17,7 +17,7 @@ table.tickets tfoot td {
 	border-top: 1px solid #ccc;
 }
 
-td.hours {
+td.hours, th.hours {
 	text-align: right;
 }
 

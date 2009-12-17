@@ -32,10 +32,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 		$total_income = 0;
 		// Find all the tickets and get the total cost of them
 		foreach ($this->find_related('tickets') as $ticket)
-			$total_income+=$ticket->rate*$ticket->total_time;
-
-		foreach ($this->find_related('non_hourly') as $non_hourly)
-			$total_income+=$non_hourly->cost;
+			$total_income+=$ticket->operation_type_id ? $ticket->rate*$ticket->total_time : $ticket->rate;
 
 		// Do a currency conversion if the client has a different currency
 		if ($convert AND $this->currency->name != Kohana::config('argentum.default_currency'))
@@ -102,13 +99,23 @@ class Invoice_Model extends Auto_Modeler_ORM
 
 		foreach ($this->find_related('tickets') as $ticket)
 		{
-			if ( ! isset($return[$ticket->operation_type->id.'_'.$ticket->rate]))
-				$return[$ticket->operation_type->id.'_'.$ticket->rate] = array('id'   => $ticket->operation_type->id,
-				                                                               'name' => $ticket->operation_type->name,
-				                                                               'rate' => $ticket->rate,
-				                                                               'time' => $ticket->total_time);
+			if ($ticket->operation_type_id)
+			{
+				if ( ! isset($return[$ticket->operation_type->id.'_'.$ticket->rate]))
+					$return[$ticket->operation_type->id.'_'.$ticket->rate] = array('id'   => $ticket->operation_type->id,
+					                                                               'name' => $ticket->operation_type->name,
+					                                                               'rate' => $ticket->rate,
+					                                                               'time' => $ticket->total_time);
+				else
+					$return[$ticket->operation_type->id.'_'.$ticket->rate]['time']+=$ticket->total_time;
+			}
 			else
-				$return[$ticket->operation_type->id.'_'.$ticket->rate]['time']+=$ticket->total_time;
+			{
+				$return['physical'][] = array('id'   => NULL,
+					                          'name' => $ticket->description,
+					                          'rate' => $ticket->rate,
+					                          'time' => NULL);
+			}
 		}
 
 		return $return;

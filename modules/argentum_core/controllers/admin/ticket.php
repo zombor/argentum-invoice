@@ -61,7 +61,7 @@ class Ticket_Controller extends Website_Controller {
 	{
 		$ticket = new Ticket_Model($id);
 		
-		$this->template->body = new View('admin/ticket/edit');
+		$this->template->body = new View('admin/ticket/edit'.($ticket->operation_type_id ? '' : '_physical'));
 		$this->template->body->errors = '';
 		$this->template->body->ticket = $ticket;
 

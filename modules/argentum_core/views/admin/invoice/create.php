@@ -45,32 +45,12 @@
 			<td><?=$ticket->id?></td>
 			<td><?=$ticket->user == NULL ? 'Unassigned' : $ticket->user->username ?></td>
 			<td><?=$ticket->description?></td>
-			<td><?=number_format($ticket->total_time, 2)?></td>
-			<td>$<?=number_format($ticket->rate, 2)?></td>
-			<td>$<?=number_format($ticket->total_time*$ticket->rate, 2)?><?php $total_cost+=$ticket->total_time*$ticket->rate?></td>
+			<td><?=$ticket->operation_type_id ? number_format($ticket->total_time, 2) : ''?></td>
+			<td><?=Auto_Modeler_ORM::factory('currency', Kohana::config('argentum.default_currency'))->symbol?> <?=number_format($ticket->rate, 2)?></td>
+			<td><?=Auto_Modeler_ORM::factory('currency', Kohana::config('argentum.default_currency'))->symbol?> <?=number_format($ticket->operation_type_id ? $ticket->total_time*$ticket->rate : $ticket->rate, 2)?>
+				<?php $total_cost+=$ticket->operation_type_id ? $ticket->total_time*$ticket->rate : $ticket->rate?></td>
 		</tr><?php endforeach;?> 
-		<?php endforeach;?>
-		<tr>
-			<td colspan="7"><h3>Non-hourly to be billed:</h3></td>
-		</tr>
-		<tr>
-			<th>Bill</th>
-			<th>Nonhourly ID</th>
-			<th colspan="3">Description</th>
-			<th>Quantity</th>
-			<th>Cost</th>
-		</tr>
-		<?php foreach ($projects['non_hourly'] as $project_id => $non_hourlies):?><tr>
-			<th colspan="7" class="project">Project: <?=Auto_Modeler_ORM::factory('project', $project_id)->name?></th>
-		</tr>
-		<?php foreach ($non_hourlies as $non_hourly):?><tr>
-			<td><?=form::checkbox(array('name' => 'non_hourly['.$non_hourly->id.']', 'value' => $non_hourly->id, 'checked' => TRUE, 'rel' => $non_hourly->cost))?></td>
-			<td><?=$non_hourly->id?></td>
-			<td colspan="3"><?=$non_hourly->description?></td>
-			<td><?=$non_hourly->quantity?></td>
-			<td>$<?=number_format($non_hourly->cost, 2)?><?php $total_cost+=$non_hourly->cost?></td>
-		</tr><?php endforeach;?>
-		<?php endforeach;?>
+		<?php endforeach;?> 
 	</tbody>
 	<tfoot>
 		<tr>
