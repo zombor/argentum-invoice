@@ -18,7 +18,8 @@ class Invoice_Model extends Auto_Modeler_ORM
 	                        'comments' => '',
 	                        'client_id' => '',
 	                        'currency_id' => '',
-	                        'conversion_rate' => '');
+	                        'conversion_rate' => '',
+	                        'due_date' => 0);
 
 	/**
 	 * Calculates the total income for this invoice

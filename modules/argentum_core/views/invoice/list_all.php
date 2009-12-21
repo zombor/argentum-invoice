@@ -19,7 +19,8 @@
 			<th>Subtotal</th>
 			<th>Tax</th>
 			<th>Total Income</th>
-			<th>Total Paid</th><?php if (Auth::instance()->logged_in('admin')):?>
+			<th>Total Paid</th>
+			<th>Status</th><?php if (Auth::instance()->logged_in('admin')):?>
 			<th>Admin</th><?php endif;?>
 		</tr>
 	</thead>
@@ -41,6 +42,11 @@
 			<td class="money">$<?=number_format($invoice_tax, 2)?></td>
 			<td class="money">$<?=number_format($invoice_income, 2)?></td>
 			<td class="money">$<?=number_format($invoice_paid, 2)?> <?php if ($invoice->total_income() > $invoice->total_paid()):?> <img src="<?=url::base()?>images/icons/exclamation.png" alt="Unpaid" title="Unpaid" /><?php else:?> <img src="<?=url::base()?>images/icons/accept.png" alt="Paid" title="Paid" /><?php endif;?></td>
+			<td><?php if ($invoice->total_income() > $invoice->total_paid() AND $invoice->due_date > time()):?>
+				Due In <?=floor(($invoice->due_date - time()) / 60 /60 /24)?> Days
+			<?php elseif ($invoice->total_income() > $invoice->total_paid()):?>
+				<span class="due_date">Overdue By <?=abs(floor(($invoice->due_date - time()) / 60 /60 /24))?> Days!</span>
+			<?php endif;?></td>
 			<?php if (Auth::instance()->logged_in('admin')):?><td>
 				<?=html::anchor('admin/invoice/post_payment/'.$invoice->id, html::image(array('src' => 'images/icons/money_add.png', 'alt' => 'Post Payment', 'title' => 'Post Payment')), array('class' => 'colorbox'))?>
 				<?=html::anchor('admin/invoice/view_payments/'.$invoice->id, html::image(array('src' => 'images/icons/money.png', 'alt' => 'View Payments', 'title' => 'View Payments')), array('class' => 'colorbox'))?>
@@ -59,6 +65,7 @@
 			<td>$<?=number_format($total_tax, 2)?></td>
 			<td>$<?=number_format($total_income, 2)?></td>
 			<td>$<?=number_format($total_paid, 2)?></td>
+			<td></td>
 			<?php if (Auth::instance()->logged_in('admin')):?><td></td><?php endif;?>
 		</tr>
 	</tfoot>

@@ -51,3 +51,6 @@ $lang['username']['required'] = 'Username is required';
 $lang['username']['alpha_dash'] = 'Database Name must contain only alphanumeric and dash characters';
 $lang['password']['required'] = 'Password is required';
 $lang['password']['standard_text'] = 'Password must not contain any special characters';
+
+$lang['default_invoice_net_days']['required'] = 'Default invoice net days is required';
+$lang['default_invoice_net_days']['numeric'] = 'Default invoice net days must be numeric';

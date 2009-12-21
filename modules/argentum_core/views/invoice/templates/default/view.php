@@ -56,7 +56,8 @@
 				<td class="company">
 					Remit Payment To: <?=Kohana::config('argentum.company_name')?><br />
 					<?=Kohana::config('argentum.company_address')?><br />
-					<?=Kohana::config('argentum.company_city')?>, <?=Kohana::config('argentum.company_state')?> <?=Kohana::config('argentum.company_zip')?>
+					<?=Kohana::config('argentum.company_city')?>, <?=Kohana::config('argentum.company_state')?> <?=Kohana::config('argentum.company_zip')?><br /><br />
+					<span class="due_date">Due Date: <?=date('F j, Y', $invoice->due_date)?></span>
 				</td>
 				<td class="client">
 					Attn: <?=$invoice->client->contact_first_name?> <?=$invoice->client->contact_last_name?><br />

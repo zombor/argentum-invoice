@@ -8,5 +8,6 @@ $config['company_zip'] = '53140';
 
 $config['default_currency'] = 1;
 $config['default_country'] = 'USA';
+$config['default_invoice_net_days'] = 30;
 
 $config['installed'] = FALSE;

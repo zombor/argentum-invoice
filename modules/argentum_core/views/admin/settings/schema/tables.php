@@ -110,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `<?=Kohana::config('database.default.table_prefix')?>
   `template_name` varchar(50) NOT NULL,
   `currency_id` mediumint(9) NOT NULL,
   `conversion_rate` float NOT NULL,
+  `due_date` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `client_id` (`client_id`),
   KEY `currency_id` (`currency_id`)

@@ -294,3 +294,7 @@ input, select, textarea {
 li.rate {
 	display: none;
 }
+
+.due_date {
+	color: red;
+}

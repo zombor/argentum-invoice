@@ -27,7 +27,8 @@ class Settings_Model extends Auto_Modeler
 	                         'company_city' => array('required'),
 	                         'company_state' => array('required'),
 	                         'company_zip' => array('numeric'),
-	                         'default_currency' => array('required'));
+	                         'default_currency' => array('required'),
+	                         'default_invoice_net_days' => array('required', 'numeric'));
 
 	// Overloading the constructor to load from the config file
 	public function __construct()
@@ -38,6 +39,7 @@ class Settings_Model extends Auto_Modeler
 		$this->data['company_state'] = Kohana::config('argentum.company_state');
 		$this->data['company_zip'] = Kohana::config('argentum.company_zip');
 		$this->data['default_currency'] = Kohana::config('argentum.default_currency');
+		$this->data['default_invoice_net_days'] = Kohana::config('argentum.default_invoice_net_days');
 	}
 
 	// Overload the save method to save to a file instead of the database

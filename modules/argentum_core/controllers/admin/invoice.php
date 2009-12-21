@@ -25,6 +25,7 @@ class Invoice_Controller extends Website_Controller {
 			$invoice->client_id = $this->input->post('client_id');
 			$invoice->template_name = $this->input->post('template_name');
 			$invoice->currency_id = $this->input->post('currency_id');
+			$invoice->due_date = strtotime($this->input->post('due_date', time()+(Kohana::config('argentum.default_invoice_net_days')*60*60*24)));
 			$invoice->conversion_rate = currency::convert(Auto_Modeler_ORM::factory('currency',
 			                                                 Kohana::config('argentum.default_currency'))->name,
 			                                              Auto_Modeler_ORM::factory('currency',
