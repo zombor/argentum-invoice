@@ -79,7 +79,7 @@
 			<?php foreach ($invoice->find_operation_types() as $operation_type_id => $operation_type):?><tr class="<?=text::alternate('even', 'uneven')?>">
 <?php if ($operation_type_id == 'physical'):?>
 				<?php foreach ($operation_type as $physical):?><td></td>
-				<td><?=$physical['name']?></td>
+				<td><?=markdown($physical['name'])?></td>
 				<td></td>
 				<td><?=$invoice->currency->symbol?><?=number_format($physical['rate']*$invoice->conversion_rate, 2)?></td>
 				<?php endforeach?> 
