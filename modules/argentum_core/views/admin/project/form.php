@@ -14,6 +14,7 @@
 			<?=form::textarea(array('name' => 'project[notes]', 
 						'value' => $project->notes,
 						'id' => "notes"))?></li>
+		<?php Event::run('argentum.project_form', $project)?>
 		<li><?=form::submit('submit', $title.' Project')?></li>
 	</ul>
 	<?form::close()?>

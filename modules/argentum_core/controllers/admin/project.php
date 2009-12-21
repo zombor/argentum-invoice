@@ -49,7 +49,8 @@ class Project_Controller extends Website_Controller {
 
 				$project->save();
 
-				Event::run('argentum.project_create', $project);
+				$event_data = array('project' => $project, 'post' => $_POST);
+				Event::run('argentum.project_create', $event_data);
 
 				url::redirect('project/view/'.$project->id);
 			}
@@ -96,6 +97,9 @@ class Project_Controller extends Website_Controller {
 					$client = $project->client;
 
 				$project->save();
+
+				$event_data = array('project' => $project, 'post' => $_POST);
+				Event::run('argentum.project_edit_submit', $event_data);
 
 				if ($project->complete)
 				{

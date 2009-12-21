@@ -75,4 +75,27 @@ class Project_Model extends Auto_Modeler_ORM
 		$sql = 'SELECT p.*, (SELECT COUNT(*) FROM '.Kohana::config('database.default.table_prefix').'tickets AS t WHERE t.project_id = p.id AND t.complete = 0) AS ticket_count FROM '.Kohana::config('database.default.table_prefix').'projects AS p ORDER BY ticket_count DESC LIMIT 5';
 		return $this->db->query($sql)->result(TRUE, 'Project_Model');
 	}
+
+	// Finds a project's total cost
+	public function total_cost($convert = FALSE)
+	{
+		if ( ! $this->data['id'])
+			return 0;
+
+		$total_cost = 0;
+		// Find all the tickets and get the total cost of them
+		foreach ($this->find_related('tickets') as $ticket)
+		{
+			$total_cost+=$ticket->operation_type_id ? $ticket->rate*$ticket->total_time : $ticket->rate;
+
+			if ($this->taxable)
+				$total_cost+=($ticket->project->client->tax_rate/100)*$ticket->operation_type_id ? $ticket->rate*$ticket->total_time : $ticket->rate;
+		}
+
+		// Do a currency conversion if the client has a different currency
+		if ($convert AND $this->currency->name != Kohana::config('argentum.default_currency'))
+			$total_cost*=$this->conversion_rate;
+
+		return $total_cost;
+	}
 }

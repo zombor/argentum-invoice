@@ -53,7 +53,7 @@ class Invoice_Model extends Auto_Modeler_ORM
 		foreach ($this->find_related('tickets') as $ticket)
 		{
 			if ($ticket->project->taxable)
-				$total+=($ticket->project->client->tax_rate/100)*$ticket->total_time*$ticket->rate;
+				$total+=($ticket->project->client->tax_rate/100)*$ticket->operation_type_id ? $ticket->rate*$ticket->total_time : $ticket->rate;
 		}
 
 		// Do a currency conversion if the client has a different currency

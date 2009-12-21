@@ -1,0 +1,1 @@
+<li><label for="project_budget">Project Budget:</label> <?=form::input('project_budget', $project_budget->amount)?></li>

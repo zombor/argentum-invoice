@@ -6,3 +6,4 @@
 	<li>Project Client: <?=html::anchor('client/view/'.$project->client->short_name, $project->client->company_name)?></li>
 	<li>Project Notes: <?=$project->notes?></li>
 </ul>
+<?php Event::run('argentum.project_display', $project)?>
