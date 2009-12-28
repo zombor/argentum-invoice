@@ -62,11 +62,12 @@ class Invoice_Controller extends Website_Controller {
 
 		require Kohana::find_file('vendor/dompdf', 'dompdf_config.inc');
 
-		$html = View::factory('invoice/templates/'.$invoice->template_name.'/pdf')->set(array('invoice' => new Invoice_Model($invoice_id)));
+		$html = View::factory('invoice/templates/'.$invoice->template_name.'/pdf')->set(array('invoice' => $invoice));
 		$dompdf = new DOMPDF();
 		$dompdf->load_html($html);
 		$dompdf->render();
 		$dompdf->stream($invoice_id.'.pdf');
+		die;
 	}
 
 	public function details($invoice_id = NULL)
