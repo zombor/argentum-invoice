@@ -300,7 +300,7 @@ class Email_Controller extends Website_Controller {
 		}
 		else
 		{
-			$this->template->body = new View('invoice/email_success');
+			$this->template->body = new View('emails/invoice/email_success');
 			$to = array();
 
 			require Kohana::find_file('vendor/dompdf', 'dompdf_config.inc');
