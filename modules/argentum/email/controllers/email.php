@@ -15,8 +15,8 @@ class Email_Controller extends Website_Controller {
 	 */
 	public function _project_create()
 	{
-		Email_Controller::send_mail('Project Created - ID:'.Event::$data->id.', '.Event::$data->name,
-		                 View::factory('emails/project_create')->set(array('project' => Event::$data)),
+		Email_Controller::send_mail('Project Created - ID:'.Event::$data['project']->id.', '.Event::$data['project']->name,
+		                 View::factory('emails/project_create')->set(array('project' => Event::$data['project'])),
 		                 'project_create');
 	}
 
