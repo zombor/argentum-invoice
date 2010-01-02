@@ -72,6 +72,7 @@ class budget {
 
 		$project_budget = new Project_Budget_Model($project->id);
 		$project_budget->amount = $post['project_budget'];
+		$project_budget->project_id = $project->id;
 		$project_budget->save();
 	}
 }
