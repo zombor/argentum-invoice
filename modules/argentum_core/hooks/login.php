@@ -39,7 +39,7 @@ class login {
 		$auth = new Auth();
 		$uri = new URI();
 
-		if (Router::$controller != 'user' AND Router::$method != 'login' AND ! $auth->logged_in())
+		if ( (Router::$controller != 'user' OR (Router::$controller == 'user' AND Router::$method != 'login') ) AND ! $auth->logged_in())
 		{
 			$_SESSION['requested_page'] = $uri->string();
 			url::redirect('user/login');
