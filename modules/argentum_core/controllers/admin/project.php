@@ -4,11 +4,11 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-
-class Project_Controller extends Website_Controller {
+include Kohana::find_file('controllers', 'admin/admin_website');
+class Project_Controller extends Admin_Website_Controller {
 
 	/**
 	 * Creates a new project
@@ -16,15 +16,12 @@ class Project_Controller extends Website_Controller {
 	public function add()
 	{
 		$project = new Project_Model();
-		if ( ! $_POST) // Display the form
-		{
-			$this->template->body = new View('admin/project/form');
-			$this->template->body->errors = '';
-			$this->template->body->project = $project;
-			$this->template->body->title = 'Add';
-			$this->template->body->client = new Client_Model();
-		}
-		else
+		$this->template->content = $this->view = new View('admin/project/form');
+		$this->view->title = 'Add';
+		$this->view->errors = '';
+		$this->view->client = new Client_Model();
+
+		if ($_POST)
 		{
 			$project->set_fields($this->input->post('project'));
 			$project->taxable = $this->input->post('taxable', FALSE);
@@ -56,13 +53,13 @@ class Project_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/project/form');
-				$this->template->body->project = $project;
-				$this->template->body->errors = $e;
-				$this->template->body->title = 'Add';
-				$this->template->body->client = $client;
+				$this->view->project = $project;
+				$this->view->errors = $e;
+				$this->view->client = $client;
 			}
 		}
+
+		$this->view->project = $project;
 	}
 
 	/**
@@ -71,15 +68,12 @@ class Project_Controller extends Website_Controller {
 	public function edit($id)
 	{
 		$project = new Project_Model($id);
-		if ( ! $_POST) // Display the form
-		{
-			$this->template->body = new View('admin/project/form');
-			$this->template->body->errors = '';
-			$this->template->body->project = $project;
-			$this->template->body->title = 'Update';
-			$this->template->body->client = new Client_Model();
-		}
-		else
+		$this->template->content = $this->view = new View('admin/project/form');
+		$this->view->errors = '';
+		$this->view->title = 'Update';
+		$this->view->client = new Client_Model();
+
+		if ($_POST)
 		{
 			$project->set_fields($this->input->post('project'));
 			$project->taxable = $this->input->post('taxable', FALSE);
@@ -101,35 +95,16 @@ class Project_Controller extends Website_Controller {
 				$event_data = array('project' => $project, 'post' => $_POST);
 				Event::run('argentum.project_edit_submit', $event_data);
 
-				if ($project->complete)
-				{
-					// Send an email to all users who are set to receive emails on new projects
-					$swift = email::connect();
-					$message = new Swift_Message('New Project Created- ID:'.$project->id.', '.$project->title, View::factory('emails/project_creation')->set(array('project' => $project)));
-					$recipients = new Swift_RecipientList();
-
-					foreach (Auto_Modeler_ORM::factory('user')->fetch_some(array('email_project_create' => TRUE)) as $user)
-					{
-						$recipients->addTo($user->email, $user->first_name.' '.$user->last_name);
-					}
-
-					if ($swift->send($message, $recipients, $_SESSION['auth_user']->email))
-						url::redirect('project/view/'.$project->id);
-					else
-						throw new Kohana_User_Exception('swift.general_error');
-				}
-				else
-					url::redirect('project/view/'.$project->id);
+				url::redirect('project/view/'.$project->id);
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/project/form');
-				$this->template->body->project = $project;
-				$this->template->body->errors = $e;
-				$this->template->body->title = 'Update';
-				$this->template->body->client = $client;
+				$this->view->errors = $e;
+				$this->view->client = $client;
 			}
 		}
+
+		$this->view->project = $project;
 	}
 
 	/**

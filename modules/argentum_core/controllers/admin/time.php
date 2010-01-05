@@ -4,11 +4,11 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-
-class Time_Controller extends Website_Controller {
+include Kohana::find_file('controllers', 'admin/admin_website');
+class Time_Controller extends Admin_Website_Controller {
 
 	/**
 	 *  Creates a new time block on a ticket
@@ -20,9 +20,8 @@ class Time_Controller extends Website_Controller {
 
 		if ( ! $_POST) // Display the form
 		{
-			$this->template->body = new View('admin/time/add');
-			$this->template->body->errors = '';
-			$this->template->body->time = $time;
+			$this->view->errors = '';
+			$this->view->time = $time;
 		}
 		else
 		{
@@ -47,10 +46,9 @@ class Time_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/time/add');
-				$this->template->body->time = $time;
-				$this->template->body->errors = $e;
-				$this->template->body->set($this->input->post());
+				$this->view->time = $time;
+				$this->view->errors = $e;
+				$this->view->set($this->input->post());
 			}
 		}
 	}

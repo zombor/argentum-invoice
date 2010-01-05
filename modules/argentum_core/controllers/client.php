@@ -4,7 +4,7 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
 
@@ -12,8 +12,7 @@ class Client_Controller extends Website_Controller {
 
 	public function index()
 	{
-		$this->template->body = new View('client/index');
-		$this->template->body->clients = Auto_Modeler_ORM::factory('client')->fetch_all('company_name');
+		$this->view->clients = Auto_Modeler_ORM::factory('client')->fetch_all('company_name');
 	}
 
 	/**
@@ -26,8 +25,7 @@ class Client_Controller extends Website_Controller {
 		if ( ! $client->id)
 			Event::run('system.404');
 
-		$this->template->body = new View('client/view');
-		$this->template->body->client = $client;
+		$this->view->client = $client;
 	}
 
 	/**
@@ -37,7 +35,6 @@ class Client_Controller extends Website_Controller {
 	{
 		$term = $this->input->get('term');
 		$results = Auto_Modeler_ORM::factory('client')->search($term);
-		$this->template->body = new View('client/search');
-		$this->template->body->results = $results;
+		$this->view->results = $results;
 	}
 }

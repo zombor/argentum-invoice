@@ -4,11 +4,11 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-
-class Contact_Controller extends Website_Controller {
+include Kohana::find_file('controllers', 'admin/admin_website');
+class Contact_Controller extends Admin_Website_Controller {
 
 	public function create()
 	{
@@ -29,11 +29,11 @@ class Contact_Controller extends Website_Controller {
 		}
 		catch (Kohana_User_Exception $e)
 		{
-			$this->template->body = new View('admin/contact/form');
-			$this->template->body->contact = $contact;
-			$this->template->body->errors = ! $_POST ? NULL : $e;
-			$this->template->body->title = 'Create';
-			$this->template->body->clients = Auto_Modeler_ORM::factory('client')->fetch_all();
+			$this->template->content = $this->view = new View('admin/contact/form');
+			$this->view->title = 'Create Client';
+			$this->view->contact = $contact;
+			$this->view->errors = ! $_POST ? NULL : $e;
+			$this->view->clients = Auto_Modeler_ORM::factory('client')->fetch_all();
 		}
 	}
 
@@ -59,11 +59,11 @@ class Contact_Controller extends Website_Controller {
 		}
 		catch (Kohana_User_Exception $e)
 		{
-			$this->template->body = new View('admin/contact/form');
-			$this->template->body->contact = $contact;
-			$this->template->body->errors = ! $_POST ? NULL : $e;
-			$this->template->body->title = 'Update';
-			$this->template->body->clients = Auto_Modeler_ORM::factory('client')->fetch_all();
+			$this->template->content = $this->view = new View('admin/contact/form');
+			$this->view->contact = $contact;
+			$this->view->errors = ! $_POST ? NULL : $e;
+			$this->view->title = 'Update';
+			$this->view->clients = Auto_Modeler_ORM::factory('client')->fetch_all();
 		}
 	}
 }

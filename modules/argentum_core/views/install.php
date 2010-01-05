@@ -22,7 +22,7 @@
 				&nbsp;
 			</div>
 			<div id="content" style="margin-top: 25px;">
-				<?=$body?>
+				<?=$content?>
 			</div>
 			<div id="footer">
 				&copy; 2009 Argentum Team

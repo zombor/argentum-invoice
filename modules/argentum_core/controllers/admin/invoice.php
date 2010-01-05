@@ -4,18 +4,18 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-
-class Invoice_Controller extends Website_Controller {
+include Kohana::find_file('controllers', 'admin/admin_website');
+class Invoice_Controller extends Admin_Website_Controller {
 
 	/**
 	 * Creates an invoice for a client
 	*/
 	public function create()
 	{
-		if (request::method() == 'post' AND ($this->input->post('tickets')) OR $this->input->post('non_hourly'))
+		if ($_POST AND $this->input->post('tickets'))
 		{
 			$invoice = new Invoice_Model();
 
@@ -44,16 +44,6 @@ class Invoice_Controller extends Website_Controller {
 					$ticket->save();
 				}
 
-			// Assign all the tickets to this invoice
-			if ($this->input->post('non_hourly'))
-				foreach ($this->input->post('non_hourly') as $non_hourly_id)
-				{
-					$non_hourly = new Non_hourly_Model($non_hourly_id);
-					$non_hourly->invoiced = TRUE;
-					$non_hourly->invoice_id = $invoice->id;
-					$non_hourly->save();
-				}
-
 			// Redirect to the invoice
 			url::redirect('invoice/view/'.$invoice->id);
 		}
@@ -61,11 +51,9 @@ class Invoice_Controller extends Website_Controller {
 		{
 			$client = new Client_Model($this->input->get('client_id'));
 
-			$this->template->body = new View('admin/invoice/create');
-
 			// Load all the unbill items for this client
-			$this->template->body->projects = Auto_Modeler_ORM::factory('project')->find_unbilled($client->id);
-			$this->template->body->client = $client;
+			$this->view->projects = Auto_Modeler_ORM::factory('project')->find_unbilled($client->id);
+			$this->view->client = $client;
 
 			// Find all the invoice templates
 			$directories = array();
@@ -74,7 +62,7 @@ class Invoice_Controller extends Website_Controller {
 				$directories[basename($directory)] = ucfirst(str_replace('_', ' ', basename($directory)));
 			}
 
-			$this->template->body->templates = $directories;
+			$this->view->templates = $directories;
 		}
 	}
 
@@ -88,16 +76,15 @@ class Invoice_Controller extends Website_Controller {
 
 		if ( ! $_POST)
 		{
-			$this->template->body = new View('admin/invoice/edit');
-			$this->template->body->invoice = $invoice;
+			$this->view->invoice = $invoice;
 		}
 		else
 		{
 			$tickets = arr::remove('tickets', $_POST);
 			$non_hourlies = arr::remove('non_hourly', $_POST);
-			
+
 			$invoice->set_fields($_POST);
-			
+
 			try
 			{
 				$invoice->save();
@@ -109,19 +96,8 @@ class Invoice_Controller extends Website_Controller {
 					$ticket->invoice_id = NULL;
 					$ticket->save();
 				}
-
-				foreach ( (array) $non_hourlies as $non_hourly_id)
-				{
-					$non_hourly = new Ticket_Model($non_hourly_id);
-					$non_hourly->invoiced = FALSE;
-					$non_hourly->invoice_id = NULL;
-					$non_hourly->save();
-				}
 			}
-			catch (Kohana_User_Exception $e)
-			{
-				
-			}
+			catch (Kohana_User_Exception $e) {}
 
 			url::redirect('invoice/list_all');
 		}
@@ -133,8 +109,9 @@ class Invoice_Controller extends Website_Controller {
 	public function post_payment($invoice_id)
 	{
 		$invoice_payment = new Invoice_Payment_Model();
+		$this->view->errors = '';
 
-		if (request::method() == 'post')
+		if ($_POST)
 		{
 			$invoice_payment->set_fields($this->input->post());
 			$invoice_payment->date = $this->input->post('date');
@@ -147,19 +124,14 @@ class Invoice_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/invoice/post_payment');
-				$this->template->body->errors = $e;
-				$this->template->body->invoice_payment = $invoice_payment;
-				$this->template->body->invoice_id = $this->uri->segment(4);
+				$this->view->errors = $e;
+				$this->view->invoice_payment = $invoice_payment;
+				$this->view->invoice_id = $this->uri->segment(4);
 			}
 		}
-		else
-		{
-			$this->template->body = new View('admin/invoice/post_payment');
-			$this->template->body->errors = '';
-			$this->template->body->invoice_payment = $invoice_payment;
-			$this->template->body->invoice_id = $this->uri->segment(4);
-		}
+
+		$this->view->invoice_payment = $invoice_payment;
+		$this->view->invoice_id = $this->uri->segment(4);
 	}
 
 	/**
@@ -167,9 +139,8 @@ class Invoice_Controller extends Website_Controller {
 	 */
 	public function view_payments($invoice_id)
 	{
-		$this->template->body = new View('admin/invoice/view_payments');
-		$this->template->body->invoice_payments = Auto_Modeler_ORM::factory('invoice_payment')->fetch_where(array('invoice_id' => $invoice_id));
-		$this->template->body->invoice_id = $invoice_id;
+		$this->view->invoice_payments = Auto_Modeler_ORM::factory('invoice_payment')->fetch_where(array('invoice_id' => $invoice_id));
+		$this->view->invoice_id = $invoice_id;
 	}
 
 	/**

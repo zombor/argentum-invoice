@@ -1,11 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 2.11.6
--- http://www.phpmyadmin.net
+-- Argentum Database Dump
 --
--- Host: localhost
--- Generation Time: Dec 05, 2008 at 10:55 PM
--- Server version: 5.0.54
--- PHP Version: 5.2.6-pl2-gentoo
+-- Host: <?=Kohana::config('database.default.connection.host')?> 
+-- Generation Time: <?=date('M d, Y \a\t h:i A')?>
 
 --
 -- Database: `argentum`

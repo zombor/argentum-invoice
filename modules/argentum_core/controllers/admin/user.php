@@ -4,18 +4,18 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-
-class User_Controller extends Website_Controller
+include Kohana::find_file('controllers', 'admin/admin_website');
+class User_Controller extends Admin_Website_Controller
 {
 	/**
 	 * lists all users
 	 */
 	public function all()
 	{
-		$this->template->bind('body', $view = View::factory('admin/user/all'));
+		$this->template->bind('content', $view = View::factory('admin/user/all'));
 		$view->users = Auto_Modeler_ORM::factory('user')->fetch_all();
 	}
 
@@ -24,7 +24,7 @@ class User_Controller extends Website_Controller
 	 */
 	public function add()
 	{
-		$this->template->body = View::factory('admin/user/form')
+		$this->template->content = $this->view = View::factory('admin/user/form')
 			->set('title', 'Add User')
 			->set('roles', Auto_Modeler_ORM::factory('role')->fetch_all('name'))
 			->set('errors', '')
@@ -46,8 +46,8 @@ class User_Controller extends Website_Controller
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body->errors = $e;
-				$this->template->body->user_roles = $this->input->post('roles');
+				$this->view->errors = $e;
+				$this->view->user_roles = $this->input->post('roles');
 			}
 		}
 	}
@@ -63,7 +63,7 @@ class User_Controller extends Website_Controller
 		if ( ! $user->id)
 			Event::run('system.404');
 
-		$this->template->body = $view = View::factory('admin/user/form')
+		$this->template->content = $this->view = View::factory('admin/user/form')
 			->set('title', 'Edit User: '.$user->username)
 			->set('errors', '')
 			->set('roles', $roles = Auto_Modeler_ORM::factory('role')->fetch_all('name'))
@@ -90,11 +90,11 @@ class User_Controller extends Website_Controller
 					$user->roles = $role_id;
 
 				url::redirect('admin/user/all');
-			} 
+			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body->errors = $e;
-				$this->template->body->user_roles = $this->input->post('roles', array());
+				$this->view->errors = $e;
+				$this->view->user_roles = $this->input->post('roles', array());
 			}
 		}
 	}
@@ -105,15 +105,12 @@ class User_Controller extends Website_Controller
 	public function settings()
 	{
 		$user = $_SESSION['auth_user'];
-		$this->template->body = new View('admin/user/settings');
 
-		if ( ! $_POST)
-		{
-			$this->template->body->user = $user;
-			$this->template->body->errors = '';
-			$this->template->body->status = NULL;
-		}
-		else
+		$this->view->user = $user;
+		$this->view->errors = '';
+		$this->view->status = NULL;
+
+		if ($_POST)
 		{
 			$user->set_fields($this->input->post('user'));
 
@@ -121,9 +118,7 @@ class User_Controller extends Website_Controller
 			{
 				$user->save();
 				$_SESSION['auth_user'] = $user;
-				$this->template->body->user = $user;
-				$this->template->body->errors = '';
-				$this->template->body->status = TRUE;
+				$this->view->status = TRUE;
 
 				$email_settings = $this->input->post('email');
 				$data = array('user' => $user, 'settings' => $email_settings);
@@ -131,10 +126,10 @@ class User_Controller extends Website_Controller
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body->errors = $e;
-				$this->template->body->user = $user;
-				$this->template->body->status = FALSE;
+				$this->view->errors = $e;
+				$this->view->status = FALSE;
 			}
 		}
+		$this->view->user = $user;
 	}
 }

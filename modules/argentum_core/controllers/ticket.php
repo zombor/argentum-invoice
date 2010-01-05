@@ -4,7 +4,7 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
 
@@ -16,9 +16,8 @@ class Ticket_Controller extends Website_Controller {
 	*/
 	public function active($project_id)
 	{
-		$this->template->body = new View('ticket/active');
-		$this->template->body->tickets = Auto_Modeler_ORM::factory('ticket')->fetch_where(array('project_id' => $project_id, 'complete' => FALSE));
-		$this->template->body->project = new Project_Model($project_id);
+		$this->view->tickets = Auto_Modeler_ORM::factory('ticket')->fetch_where(array('project_id' => $project_id, 'complete' => FALSE));
+		$this->view->project = new Project_Model($project_id);
 	}
 
 	/**
@@ -27,9 +26,8 @@ class Ticket_Controller extends Website_Controller {
 	*/
 	public function closed($project_id)
 	{
-		$this->template->body = new View('ticket/closed');
-		$this->template->body->tickets = Auto_Modeler_ORM::factory('ticket')->fetch_where(array('project_id' => $project_id, 'complete' => TRUE, 'invoiced' => FALSE));
-		$this->template->body->project = new Project_Model($project_id);
+		$this->view->tickets = Auto_Modeler_ORM::factory('ticket')->fetch_where(array('project_id' => $project_id, 'complete' => TRUE, 'invoiced' => FALSE));
+		$this->view->project = new Project_Model($project_id);
 	}
 
 	/**
@@ -38,9 +36,8 @@ class Ticket_Controller extends Website_Controller {
 	*/
 	public function invoiced($project_id)
 	{
-		$this->template->body = new View('ticket/invoiced');
-		$this->template->body->tickets = Auto_Modeler_ORM::factory('ticket')->fetch_where(array('project_id' => $project_id, 'complete' => TRUE, 'invoiced' => TRUE));
-		$this->template->body->project = new Project_Model($project_id);
+		$this->view->tickets = Auto_Modeler_ORM::factory('ticket')->fetch_where(array('project_id' => $project_id, 'complete' => TRUE, 'invoiced' => TRUE));
+		$this->view->project = new Project_Model($project_id);
 	}
 
 	/**
@@ -49,7 +46,6 @@ class Ticket_Controller extends Website_Controller {
 	*/
 	public function view($id)
 	{
-		$this->template->body = new View('ticket/view');
-		$this->template->body->ticket = new Ticket_Model($id);
+		$this->view->ticket = new Ticket_Model($id);
 	}
 }

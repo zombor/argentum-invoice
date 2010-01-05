@@ -4,11 +4,11 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-
-class Ticket_Controller extends Website_Controller {
+include Kohana::find_file('controllers', 'admin/admin_website');
+class Ticket_Controller extends Admin_Website_Controller {
 
 	/**
 	 *  Creates a new ticket for a project
@@ -18,9 +18,8 @@ class Ticket_Controller extends Website_Controller {
 		$ticket = new Ticket_Model();
 		$ticket->project_id = $project_id;
 
-		$this->template->body = new View('admin/ticket/add');
-		$this->template->body->errors = '';
-		$this->template->body->ticket = $ticket;
+		$this->view->errors = '';
+		$this->view->ticket = $ticket;
 
 		// If we have post data, make a ticket
 		if ($_POST)
@@ -42,14 +41,14 @@ class Ticket_Controller extends Website_Controller {
 				Event::run('argentum.ticket_create', $ticket);
 
 				if (request::is_ajax())
-					$this->template->body = View::factory('ticket/view')->bind('ticket', $ticket);
+					$this->template->content = $this->view = View::factory('ticket/view')->bind('ticket', $ticket);
 				else
 					url::redirect('ticket/active/'.$ticket->project_id);
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body->ticket = $ticket;
-				$this->template->body->errors = $e;
+				$this->view->ticket = $ticket;
+				$this->view->errors = $e;
 			}
 		}
 	}
@@ -60,10 +59,10 @@ class Ticket_Controller extends Website_Controller {
 	public function edit($id)
 	{
 		$ticket = new Ticket_Model($id);
-		
-		$this->template->body = new View('admin/ticket/edit'.($ticket->operation_type_id ? '' : '_physical'));
-		$this->template->body->errors = '';
-		$this->template->body->ticket = $ticket;
+
+		$this->template->content = $this->view = new View('admin/ticket/edit'.($ticket->operation_type_id ? '' : '_physical'));
+		$this->view->errors = '';
+		$this->view->ticket = $ticket;
 
 		if ($_POST)
 		{
@@ -72,30 +71,30 @@ class Ticket_Controller extends Website_Controller {
 			$ticket->complete = $this->input->post('complete', FALSE);
 			$ticket->billable = $this->input->post('billable', FALSE);
 
-			if ($ticket->complete)
-			{
-				$ticket->close_date = time();
-
-				// Run any events for closing tickets
-				Event::run('argentum.ticket_close', $ticket);
-			}
-
 			try
 			{
 				$ticket->save();
 
-				// Run any ticekt update events
+				if ($ticket->complete)
+				{
+					$ticket->close_date = time();
+
+					// Run any events for closing tickets
+					Event::run('argentum.ticket_close', $ticket);
+				}
+
+				// Run any ticket update events
 				Event::run('argentum.ticket_update', $ticket);
 
 				if (request::is_ajax())
-					$this->template->body = View::factory('ticket/view')->bind('ticket', $ticket);
+					$this->template->content = $this->view = View::factory('ticket/view')->bind('ticket', $ticket);
 				else
 					url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body->ticket = $ticket;
-				$this->template->body->errors = $e;
+				$this->view->ticket = $ticket;
+				$this->view->errors = $e;
 			}
 		}
 	}
@@ -119,6 +118,6 @@ class Ticket_Controller extends Website_Controller {
 		elseif(isset($_POST['cancel']))
 			url::redirect('ticket/'.($ticket->complete ? 'closed' : 'active').'/'.$ticket->project_id);
 
-		$this->template->body = new View('admin/confirm');
+		$this->template->content = $this->view = new View('admin/confirm');
 	}
 }

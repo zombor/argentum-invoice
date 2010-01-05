@@ -43,7 +43,7 @@
 				&nbsp;
 			</div>
 			<div id="content">
-				<?=$body?>
+				<?=$content?>
 				<?php if (Auth::instance()->logged_in()) Event::run('argentum.body_display')?>
 			</div>
 			<div id="footer">

@@ -4,16 +4,13 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
 
 class Invoice_Controller extends Website_Controller {
 
-	public function index()
-	{
-		$this->template->body = new View('invoice/index');
-	}
+	public function index() {}
 
 	/**
 	 * Displays all invoices
@@ -30,8 +27,7 @@ class Invoice_Controller extends Website_Controller {
 		$start_date = mktime(0, 0, 0, ($month == NULL ? 1 : $month), 1, $year);
 		$end_date = $month == NULL ? mktime(23, 59, 59, 12, 31, $year) : mktime(0, 0, 0, $month, date('t', mktime(0, 0, 0, $month, 1, $year)), $year);
 
-		$this->template->body = new View('invoice/list_all');
-		$this->template->body->invoices = Auto_Modeler_ORM::factory('invoice')->find_invoices_by_date($start_date, $end_date);
+		$this->view->invoices = Auto_Modeler_ORM::factory('invoice')->find_invoices_by_date($start_date, $end_date);
 	}
 
 	/**
@@ -45,8 +41,8 @@ class Invoice_Controller extends Website_Controller {
 		if ( ! $invoice->id)
 			Event::run('system.404');
 
-		$this->template->body = new View('invoice/templates/'.$invoice->template_name.'/view');
-		$this->template->body->invoice = new Invoice_Model($invoice_id);
+		$this->template->content = $this->view = new View('invoice/templates/'.$invoice->template_name.'/view');
+		$this->view->invoice = new Invoice_Model($invoice_id);
 	}
 
 	/**
@@ -77,7 +73,6 @@ class Invoice_Controller extends Website_Controller {
 		if ( ! $invoice->id)
 			Event::run('system.404');
 
-		$this->template->body = new View('invoice/details');
-		$this->template->body->invoice = $invoice;
+		$this->view->invoice = $invoice;
 	}
 }

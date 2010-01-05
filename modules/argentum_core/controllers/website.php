@@ -4,7 +4,7 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
 
@@ -24,12 +24,16 @@ abstract class Website_Controller extends Template_Controller {
 		else
 		{
 			$this->template->title = 'ArgentumInvoice';
-
-			//$this->profiler = new Profiler;
 		}
 
 		if (Kohana::config('argentum.installed') AND (Router::$controller != 'settings' OR Router::$method != 'install'))
-			$this->session = new Session;
+		{
+			$view_name = Router::$controller.'/'.Router::$method;
+			if (Kohana::find_file('views', $view_name))
+				$this->template->content = $this->view = new View($view_name);
+			else
+				$this->template->content = $this->view = new View('no_view');
+		}
 		else
 			$this->template->set_filename('install');
 		include_once Kohana::find_file('vendor', 'Markdown');

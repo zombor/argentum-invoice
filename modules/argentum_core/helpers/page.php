@@ -4,7 +4,7 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
 
@@ -53,10 +53,10 @@ class page_Core {
 			switch ($type)
 			{
 				case 'stylesheet':
-					echo '<link rel="stylesheet" type="text/css" href="'.url::base(TRUE).$file.'" />';
+					echo '<link rel="stylesheet" type="text/css" href="'.url::base().$file.'" />';
 					break;
 				case 'javascript':
-					echo '<script type="text/javascript" src="'.url::base(TRUE).$file.'"></script>';
+					echo '<script type="text/javascript" src="'.url::base().$file.'"></script>';
 					break;
 			}
 		}

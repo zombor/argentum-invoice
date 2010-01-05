@@ -4,11 +4,11 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-
-class Settings_Controller extends Website_Controller
+include Kohana::find_file('controllers', 'admin/admin_website');
+class Settings_Controller extends Admin_Website_Controller
 {
 	/**
 	 * Custom constructor so we can make sure only admins can make changes
@@ -25,10 +25,7 @@ class Settings_Controller extends Website_Controller
 	/**
 	 * Displays the application settings list
 	 */
-	public function index()
-	{
-		$this->template->body = new View('admin/settings/index');
-	}
+	public function index() {}
 
 	/**
 	 * Updates main application settings
@@ -36,13 +33,12 @@ class Settings_Controller extends Website_Controller
 	public function application()
 	{
 		$settings = new Settings_Model();
-		$this->template->body = new View('admin/settings/application');
-		$this->template->body->settings = $settings;
-		$this->template->body->errors = '';
+		$this->view->settings = $settings;
+		$this->view->errors = '';
 
 		if ( ! $_POST)
 		{
-			$this->template->body->status = NULL;
+			$this->view->status = NULL;
 		}
 		else
 		{
@@ -55,9 +51,9 @@ class Settings_Controller extends Website_Controller
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body->errors = $e;
-				$this->template->body->settings = $settings;
-				$this->template->body->status = FALSE;
+				$this->view->errors = $e;
+				$this->view->settings = $settings;
+				$this->view->status = FALSE;
 			}
 		}
 	}
@@ -68,7 +64,6 @@ class Settings_Controller extends Website_Controller
 	public function modules()
 	{
 		$settings = new Settings_Model();
-		$this->template->body = new View('admin/settings/modules');
 		$db = new Database();
 
 		// Update the module list in the database
@@ -101,8 +96,8 @@ class Settings_Controller extends Website_Controller
 
 		if ( ! $_POST)
 		{
-			$this->template->body->status = NULL;
-			$this->template->body->modules = $directories;
+			$this->view->status = NULL;
+			$this->view->modules = $directories;
 		}
 		else
 		{
@@ -141,13 +136,13 @@ class Settings_Controller extends Website_Controller
 				foreach (Auto_Modeler_ORM::factory('module')->fetch_all() as $module)
 					$directories[$module->name] = $module;
 
-				$this->template->body->status = TRUE;
-				$this->template->body->modules = $directories;
+				$this->view->status = TRUE;
+				$this->view->modules = $directories;
 			}
 			catch (Kohana_Database_Exception $e)
 			{
-				$this->template->body->status = FALSE;
-				$this->template->body->modules = $directories;
+				$this->view->status = FALSE;
+				$this->view->modules = $directories;
 			}
 		}
 	}
@@ -182,12 +177,12 @@ class Settings_Controller extends Website_Controller
 		switch ($step)
 		{
 			case 1:
-				$this->template->body = new View('admin/settings/install/1');
-				
+				$this->template->content = $this->view = new View('admin/settings/install/1');
+
 				// Check for writable files
 				$configs = array('database.php' => is_writable(APPPATH.'config/database.php'),
 				                 'argentum.php' => is_writable(APPPATH.'config/argentum.php'));
-				$this->template->body->configs = $configs;
+				$this->view->configs = $configs;
 				break;
 			case 2:
 				// Validate the input
@@ -200,8 +195,8 @@ class Settings_Controller extends Website_Controller
 				if ( ! $post->validate())
 				{
 					$this->install(1);
-					$this->template->body->set($this->input->post());
-					$this->template->body->errors = View::factory('form_errors')->set(array('errors' => $post->errors('form_errors')));
+					$this->view->set($this->input->post());
+					$this->view->errors = View::factory('form_errors')->set(array('errors' => $post->errors('form_errors')));
 					return;
 				}
 
@@ -227,8 +222,8 @@ class Settings_Controller extends Website_Controller
 					{
 						$post->add_error('database', 'invalid_settings');
 						$this->install(1);
-						$this->template->body->set($this->input->post());
-						$this->template->body->errors = View::factory('form_errors')->set(array('errors' => $post->errors('form_errors')));
+						$this->view->set($this->input->post());
+						$this->view->errors = View::factory('form_errors')->set(array('errors' => $post->errors('form_errors')));
 						return;
 					}
 					$db->query('DROP TABLE `argentum_test`');
@@ -239,13 +234,13 @@ class Settings_Controller extends Website_Controller
 					Kohana::log('error', $e);
 					$post->add_error('database', 'invalid_settings');
 					$this->install(1);
-					$this->template->body->set($this->input->post());
-					$this->template->body->errors = View::factory('form_errors')->set(array('errors' => $post->errors('form_errors')));
+					$this->view->set($this->input->post());
+					$this->view->errors = View::factory('form_errors')->set(array('errors' => $post->errors('form_errors')));
 					return;
 				}
 
-				$this->template->body = new View('admin/settings/install/2');
-				$this->template->body->user = new User_Model();
+				$this->template->content = $this->view = new View('admin/settings/install/2');
+				$this->view->user = new User_Model();
 				break;
 			case 3:
 				// Install the Databases
@@ -320,7 +315,7 @@ class Settings_Controller extends Website_Controller
 					$this->template->body->user = new User_Model();
 				}
 
-				$this->template->body = new View('admin/settings/install/3');
+				$this->template->content = $this->view = new View('admin/settings/install/3');
 
 				break;
 			case 4:
@@ -330,13 +325,13 @@ class Settings_Controller extends Website_Controller
 				try
 				{
 					$settings->save();
-					$this->template->body = new View('admin/settings/install/4');
+					$this->template->content = $this->view = new View('admin/settings/install/4');
 				}
 				catch (Kohana_User_Exception $e)
 				{
 					$this->install(3);
-					$this->template->body->errors = $e;
-					$this->template->body->set($this->input->post());
+					$this->view->errors = $e;
+					$this->view->set($this->input->post());
 				}
 				break;
 		}
@@ -349,10 +344,9 @@ class Settings_Controller extends Website_Controller
 	{
 		$db = Database::instance();
 
-		$tables_to_dump = array('client', 'contact', 'currency', 'invoice', 'invoice_payment', 'module', 'non_hourly', 'operation_type', 'project', 'role', 'ticket', 'time', 'user');
+		$tables_to_dump = array('client', 'contact', 'currency', 'invoice', 'invoice_payment', 'module', 'operation_type', 'project', 'role', 'ticket', 'time', 'user');
 
 		// Add the table structure
-		//die(Kohana::find_file('views', 'admin/settings/schema/tables', TRUE, 'sql'));
 		$sql = View::factory('admin/settings/schema/tables')->render()."\n";
 		// Add the constraints
 		$sql.= View::factory('admin/settings/schema/constraints')->render()."\n";

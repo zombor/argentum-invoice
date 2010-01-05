@@ -4,10 +4,11 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-class Client_Controller extends Website_Controller {
+include Kohana::find_file('controllers', 'admin/admin_website');
+class Client_Controller extends Admin_Website_Controller {
 
 	/**
 	 *  Creates a new client in the database
@@ -18,10 +19,10 @@ class Client_Controller extends Website_Controller {
 		$client->currency_id = Kohana::config('argentum.default_currency');
 		$client->mailing_country = Kohana::config('argentum.default_country');
 
-		$this->template->body = new View('admin/client/form');
-		$this->template->body->errors = '';
-		$this->template->body->client = $client;
-		$this->template->body->title = 'Add';
+		$this->template->content = $this->view = new View('admin/client/form');
+		$this->view->errors = '';
+		$this->view->client = $client;
+		$this->view->title = 'Add';
 
 		if ($_POST)
 		{
@@ -34,8 +35,8 @@ class Client_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body->errors = $e;
-				$this->template->body->client = $client;
+				$this->view->errors = $e;
+				$this->view->client = $client;
 			}
 		}
 	}
@@ -47,10 +48,10 @@ class Client_Controller extends Website_Controller {
 	{
 		$client = new Client_Model($short_name);
 
-		$this->template->body = new View('admin/client/form');
-		$this->template->body->errors = '';
-		$this->template->body->client = $client;
-		$this->template->body->title = 'Update';
+		$this->template->content = $this->view = new View('admin/client/form');
+		$this->view->errors = '';
+		$this->view->client = $client;
+		$this->view->title = 'Update';
 
 		if ($_POST)
 		{
@@ -63,8 +64,8 @@ class Client_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body->client = $client;
-				$this->template->body->errors = $e;
+				$this->view->client = $client;
+				$this->view->errors = $e;
 			}
 		}
 	}

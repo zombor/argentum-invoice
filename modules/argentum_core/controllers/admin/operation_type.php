@@ -4,19 +4,18 @@
  *
  * @package    Argentum
  * @author     Argentum Team
- * @copyright  (c) 2008-2009 Argentum Team
+ * @copyright  (c) 2008-2010 Argentum Team
  * @license    http://www.argentuminvoice.com/license.txt
  */
-
-class Operation_type_Controller extends Website_Controller {
+include Kohana::find_file('controllers', 'admin/admin_website');
+class Operation_type_Controller extends Admin_Website_Controller {
 
 	/**
 	 * Displays all operation types
 	 */
 	public function all()
 	{
-		$this->template->body = new View('admin/operation_type/all');
-		$this->template->body->operation_types = Auto_Modeler_ORM::factory('operation_type')->fetch_all('name');
+		$this->view->operation_types = Auto_Modeler_ORM::factory('operation_type')->fetch_all('name');
 	}
 
 	/**
@@ -25,14 +24,11 @@ class Operation_type_Controller extends Website_Controller {
 	public function add()
 	{
 		$operation_type = new Operation_type_Model();
-		if ( ! $_POST) // Display the form
-		{
-			$this->template->body = new View('admin/operation_type/form');
-			$this->template->body->errors = '';
-			$this->template->body->operation_type = $operation_type;
-			$this->template->body->action = 'Add';
-		}
-		else
+		$this->template->content = $this->view = new View('admin/operation_type/form');
+		$this->view->action = 'Add';
+		$this->view->errors = '';
+
+		if ($_POST)
 		{
 			$operation_type->set_fields($this->input->post());
 
@@ -43,12 +39,12 @@ class Operation_type_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/operation_type/form');
 				$this->template->body->operation_type = $operation_type;
 				$this->template->body->errors = $e;
-				$this->template->body->action = 'Add';
 			}
 		}
+
+		$this->view->operation_type = $operation_type;
 	}
 
 	/**
@@ -57,14 +53,11 @@ class Operation_type_Controller extends Website_Controller {
 	public function edit($id)
 	{
 		$operation_type = new Operation_type_Model($id);
-		if ( ! $_POST) // Display the form
-		{
-			$this->template->body = new View('admin/operation_type/form');
-			$this->template->body->errors = '';
-			$this->template->body->operation_type = $operation_type;
-			$this->template->body->action = 'Edit';
-		}
-		else
+		$this->template->content = $this->view = new View('admin/operation_type/form');
+		$this->view->errors = '';
+		$this->view->action = 'Edit';
+
+		if ($_POST)
 		{
 			$operation_type->set_fields($this->input->post());
 
@@ -75,12 +68,11 @@ class Operation_type_Controller extends Website_Controller {
 			}
 			catch (Kohana_User_Exception $e)
 			{
-				$this->template->body = new View('admin/operation_type/form');
-				$this->template->body->operation_type = $operation_type;
 				$this->template->body->errors = $e;
-				$this->template->body->action = 'Edit';
 			}
 		}
+
+		$this->view->operation_type = $operation_type;
 	}
 
 	/**
