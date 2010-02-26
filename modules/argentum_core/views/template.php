@@ -20,7 +20,7 @@
 	<body>
 		<div id="body">
 			<div id="header">
-					<?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?>
+				<a href="<?=url::base(TRUE)?>"><?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?></a>
 			</div>
 			<div id="navigation">
 				<ul id="nav">
