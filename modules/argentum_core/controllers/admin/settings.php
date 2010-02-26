@@ -188,10 +188,10 @@ class Settings_Controller extends Admin_Website_Controller
 				// Validate the input
 				$post = Validation::factory($_POST)
 				                    ->pre_filter('trim')
-				                    ->add_rules('host', 'required', 'standard_text')
+				                    ->add_rules('host', 'required')
 				                    ->add_rules('database', 'required', 'alpha_dash')
 				                    ->add_rules('username', 'required', 'alpha_dash')
-				                    ->add_rules('password', 'required', 'standard_text');
+				                    ->add_rules('password', 'required');
 				if ( ! $post->validate())
 				{
 					$this->install(1);
