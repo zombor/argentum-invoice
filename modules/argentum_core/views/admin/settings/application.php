@@ -10,6 +10,7 @@
 	<li><label for="company_state">Company State:</label> <?=form::input('company_state', $settings->company_state)?></li>
 	<li><label for="company_zip">Company ZIP:</label> <?=form::input('company_zip', $settings->company_zip)?></li>
 	<li><label for="default_currency">Default Currency:</label> <?=form::dropdown('default_currency', Auto_Modeler_ORM::factory('currency')->select_list('id', array('name', 'symbol')), $settings->default_currency, 'disabled="disabled"')?></li>
+	<li><label for="default_invoice_net_days">Default Invoice Net Days:</label> <?=form::input('default_invoice_net_days', $settings->default_invoice_net_days)?></li>
 	<li><?=form::submit('update', 'Update Settings')?></li>
 </ul>
 <?=form::close()?>
