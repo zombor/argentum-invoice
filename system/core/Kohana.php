@@ -1207,23 +1207,26 @@ final class Kohana {
 			{
 				$items = (array) glob($path.'*');
 
-				if ( ! empty($items))
+				foreach ($items as $index => $item)
 				{
-					foreach ($items as $index => $item)
+					if (empty($item))
 					{
-						$files[] = $item = str_replace('\\', '/', $item);
+						continue;
+					}
 
-						// Handle recursion
-						if (is_dir($item) AND $recursive == TRUE)
-						{
-							// Filename should only be the basename
-							$item = pathinfo($item, PATHINFO_BASENAME);
+					$files[] = $item = str_replace('\\', '/', $item);
 
-							// Append sub-directory search
-							$files = array_merge($files, self::list_files($directory, TRUE, $path.$item));
-						}
+					// Handle recursion
+					if (is_dir($item) AND $recursive == TRUE)
+					{
+						// Filename should only be the basename
+						$item = pathinfo($item, PATHINFO_BASENAME);
+
+						// Append sub-directory search
+						$files = array_merge($files, self::list_files($directory, TRUE, $path.$item));
 					}
 				}
+				
 			}
 		}
 
