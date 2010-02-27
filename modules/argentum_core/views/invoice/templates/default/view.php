@@ -76,19 +76,20 @@
 				<th>Hourly Rate</th>
 				<th>Total Cost</th>
 			</tr>
-			<?php foreach ($invoice->find_operation_types() as $operation_type_id => $operation_type):?><tr class="<?=text::alternate('even', 'uneven')?>">
+			<?php foreach ($invoice->find_operation_types() as $operation_type_id => $operation_type):?>
 <?php if ($operation_type_id == 'physical'):?>
-				<?php foreach ($operation_type as $physical):?><td></td>
-				<td><?=markdown($physical['name'])?></td>
-				<td></td>
-				<td><?=$invoice->currency->symbol?><?=number_format($physical['rate']*$invoice->conversion_rate, 2)?></td>
-				<?php endforeach?> 
-<?php else:?>
+				<?php foreach ($operation_type as $physical):?><tr class="<?=text::alternate('even', 'uneven')?>">
+					<td></td>
+					<td><?=markdown($physical['name'])?></td>
+					<td></td>
+					<td><?=$invoice->currency->symbol?><?=number_format($physical['rate']*$invoice->conversion_rate, 2)?></td>
+				</tr><?php endforeach?> 
+<?php else:?><tr class="<?=text::alternate('even', 'uneven')?>">
 <td><?=number_format($operation_type['time'], 2)?></td>
 				<td><?=$operation_type['name']?></td>
 				<td><?=$invoice->currency->symbol?><?=number_format($operation_type['rate']*$invoice->conversion_rate, 2)?></td>
 				<td><?=$invoice->currency->symbol?><?=number_format($operation_type['rate']*$operation_type['time']*$invoice->conversion_rate, 2)?></td>
-			<?php endif;?></tr><?php endforeach;?>
+			</tr><?php endif;?><?php endforeach;?> 
 			<tr class="subtotal">
 				<td colspan="2"></td>
 				<td>Subtotal</td>
