@@ -32,7 +32,10 @@ abstract class Website_Controller extends Template_Controller {
 			if (Kohana::find_file('views', $view_name))
 				$this->template->content = $this->view = new View($view_name);
 			else
+			{
+				Kohana::log('info', 'No view found: '.$view_name);
 				$this->template->content = $this->view = new View('no_view');
+			}
 		}
 		else
 			$this->template->set_filename('install');

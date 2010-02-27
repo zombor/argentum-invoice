@@ -2,6 +2,10 @@ strong {
 	font-weight: bold;
 }
 
+em {
+	font-style: italic;
+}
+
 a, a:link, a:active {
 	color: #2E98C4;
 	text-decoration: none;
@@ -297,4 +301,13 @@ li.rate {
 
 .due_date {
 	color: red;
+}
+
+div#invoice_email h3 {
+	margin-bottom: 0;
+	margin-top: .5em;
+}
+
+ul.email_list li label {
+	float: none;
 }

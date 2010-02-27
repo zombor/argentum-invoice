@@ -296,7 +296,7 @@ class Email_Controller extends Website_Controller {
 
 		if ( ! $_POST)
 		{
-			$this->template->body = View::factory('emails/invoice/email')->bind('invoice', $invoice);
+			$this->view->invoice = $invoice;
 		}
 		else
 		{
