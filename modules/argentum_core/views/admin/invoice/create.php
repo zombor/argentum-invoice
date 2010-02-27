@@ -21,8 +21,10 @@
 <p><?=form::textarea('comments')?></p>
 <h3>Invoice Currency:</h3>
 <p><?=form::dropdown('currency_id', Auto_Modeler_ORM::factory('currency')->select_list('id', 'name'), $client->currency_id)?></p>
-<h3>Invoice Template:</h3>
+<?php if (count($templates) > 1):?><h3>Invoice Template:</h3>
 <p><?=form::dropdown('template_name', $templates)?></p>
+<?php else:?>
+<input type="hidden" name="template_name" value="<?=key($templates)?>" /><?php endif;?> 
 <h3>Invoice Due Date:</h3>
 <p><input name="due_date" id="due_date" value="<?=date('m/d/Y', time()+(Kohana::config('argentum.default_invoice_net_days')*60*60*24))?>" /></p>
 <h3>Tickets to be billed:</h3>
