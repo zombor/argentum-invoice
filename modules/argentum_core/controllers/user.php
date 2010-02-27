@@ -24,6 +24,10 @@ class User_Controller extends Website_Controller {
 		{
 			url::redirect(arr::remove('requested_page', $_SESSION));
 		}
+		elseif ($_POST)
+		{
+			$_SESSION['message'] = 'Invalid username or password.';
+		}
 	}
 
 	/**
