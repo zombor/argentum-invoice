@@ -23,21 +23,21 @@
 				<a href="<?=url::base(TRUE)?>"><?=html::image(array('src' => 'images/argentum_logo_tagline.png', 'alt' => 'Argentum', 'class' => 'clear'))?></a>
 			</div>
 			<div id="navigation">
-				<ul id="nav">
+				<?php if (Auth::instance()->logged_in()):?><ul id="nav">
 					<li><?=html::anchor('', 'Home')?></li>
 					<li><?=html::anchor('client', 'Clients')?></li>
 					<li><?=html::anchor('project', 'Projects')?></li>
 					<li><?=html::anchor('invoice', 'Invoices')?></li>
-					<?php if (Auth::instance()->logged_in()) Event::run('argentum.nav_links_display')?>
+					<?php Event::run('argentum.nav_links_display')?>
 					<li class="small"><?=html::anchor('user/index', 'My Account')?></li><?php if (Auth::instance()->logged_in('admin')):?>
 					<li class="small"><?=html::anchor('admin/settings', 'Settings')?></li><?php endif; ?>
 					<li class="small"><?=html::anchor('user/logout', 'Logout')?></li>
-				</ul>
+				</ul><?php endif;?>
 			</div>
 			<div id="quicksearch">
-				<?=form::open('project/search', array('method' => 'get'))?>
+				<?php if (Auth::instance()->logged_in()):?><?=form::open('project/search', array('method' => 'get'))?>
 					<p><?=form::input('term')?> <?=form::submit('submit', 'Search Projects')?></p>
-				<?=form::close()?>
+				</form><?php endif;?>
 			</div>
 			<div class="clear">
 				&nbsp;
